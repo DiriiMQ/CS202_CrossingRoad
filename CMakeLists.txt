@@ -31,8 +31,23 @@ if (APPLE)
 endif()
 #######################################RAYLIB#######################################
 
+########################### ADD THIS PART #####################################
+include(FetchContent)
+FetchContent_Declare(
+        json
+        URL https://github.com/nlohmann/json/releases/download/v3.10.5/json.tar.xz
+)
+FetchContent_GetProperties(json)
+if(NOT json_POPULATED)
+    FetchContent_Populate(json)
+    add_subdirectory(${json_SOURCE_DIR} ${json_BINARY_DIR} EXCLUDE_FROM_ALL)
+endif()
+########################### ADD THIS PART #####################################
+
 include_directories(${CMAKE_SOURCE_DIR}/source ${CMAKE_SOURCE_DIR}/external)
 add_executable(crossing_road main.cpp
         external/raygui.h
+        source/Window.cpp
+        source/Window.h
 )
-target_link_libraries(${PROJECT_NAME} raylib)
+target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json raylib)
