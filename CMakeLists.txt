@@ -49,5 +49,11 @@ add_executable(crossing_road main.cpp
         external/raygui.h
         source/Window.cpp
         source/Window.h
+        source/screen/BaseScreen.cpp
+        source/screen/BaseScreen.h
+        source/screen/ScreenManager.cpp
+        source/screen/ScreenManager.h
+        source/screen/MenuScreen.cpp
+        source/screen/MenuScreen.h
 )
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json raylib)
