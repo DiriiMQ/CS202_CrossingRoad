@@ -25,9 +25,10 @@ if (NOT raylib_FOUND) # If there's none, fetch and build raylib
 endif()
 
 if (APPLE)
-    target_link_libraries(${PROJECT_NAME} "-framework IOKit")
-    target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
-    target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
+    set(CMAKE_CXX_FLAGS "-framework Cocoa -framework OpenGL -framework IOKit")
+#    target_link_libraries(${PROJECT_NAME} "-framework IOKit")
+#    target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
+#    target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
 endif()
 #######################################RAYLIB#######################################
 
