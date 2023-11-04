@@ -56,5 +56,10 @@ add_executable(crossing_road main.cpp
         source/screen/ScreenManager.h
         source/screen/MenuScreen.cpp
         source/screen/MenuScreen.h
+        source/assetsLib/ConfigIO.cpp
+        source/assetsLib/ConfigIO.h
+        source/screen/ImportScreens.h
+        source/assetsLib/TexturesIO.cpp
+        source/assetsLib/TexturesIO.h
 )
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json raylib)

@@ -1,0 +1,20 @@
+{
+    "SCREEN": {
+        "FRAMES_ANIMATION_SPEED": 10,
+        "FRAMES_PER_SECOND": 120,
+        "SIZE": {
+            "HEIGHT": 768,
+            "WIDTH": 1366
+        },
+        "TEST": null,
+        "TITLE": "Crossy Road"
+    },
+    "TEXTURES": {
+        "SLIME": {
+            "Idle": {
+                "NUM_FRAMES": 8,
+                "PATH": "../assets/slime/idle.png"
+            }
+        }
+    }
+}
