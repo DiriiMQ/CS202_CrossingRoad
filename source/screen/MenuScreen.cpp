@@ -17,7 +17,7 @@ void MenuScreen::draw() {
 
     // for testing
     static int cnt = 0, curr = 0;
-    if (cnt++ > 8) {
+    if (cnt++ > 5) {
         cnt = 0;
         curr = (curr + 1) % 8;
     }
