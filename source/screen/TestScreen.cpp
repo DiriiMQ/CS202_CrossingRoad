@@ -5,12 +5,37 @@
 #include "TestScreen.h"
 
 void TestScreen::handleInput() {
-    for(Road *road: roads) {
-        road->handleInput();
+    for(BaseGameObject *block: map) {
+        block->handleInput();
     }
 }
 
 void TestScreen::update() {
+
+}
+
+void TestScreen::Update(const Message message) {
+    if(message == Message::BLOCK_OUT_OF_SCREEN) {
+        cout << "UPDATE CALLED!" << endl;
+        int randomNumber = rand();
+        BaseGameObject *block;
+
+        if (randomNumber % 2 == 0) {
+            block = new Road(-100, 0, 3);
+        } else {
+            block = new NonRoad(-100, 0);
+        }
+        block->Attach(this);
+        map.push_back(block);
+
+        map.erase(map.begin());
+    }
+}
+
+void TestScreen::Observe() {
+    for (BaseGameObject *subject: map) {
+        subject->Attach(this);
+    }
 
 }
 
@@ -19,8 +44,8 @@ void TestScreen::draw() {
     if(GuiButton(buttonRect, "Back!")) {
         screenManager->backScreen();
     }
-    for(Road *road: roads) {
-        road->draw();
+    for(BaseGameObject *block: map) {
+        block->draw();
     }
 }
 
@@ -39,14 +64,24 @@ void TestScreen::unload() {
 
 void TestScreen::init() {
     cout << "Test Screen inti Called" << endl;
-    Road *testRoad = new Road(-100, 500, 1);
-    roads.push_back(testRoad);
+    for (int i = 0; i < 20; i++) {
+        int randnum = rand();
+        if (randnum % 2 == 0) {
+            Road *roadBlock = new Road(-100, 48 * (19 - i), 1);
+            map.push_back(roadBlock);
+        } else {
+            NonRoad *nonRoadBlock = new NonRoad(-100, 48 * (19 - i));
+            map.push_back(nonRoadBlock);
+
+        }
+    }
+    Observe();
 
     this->test = new AnimatedTexture("../assets/slime/Jump.png", 13);
 }
 
 TestScreen::~TestScreen() {
-    for(Road *road: roads)
+    for(BaseGameObject *road: map)
         delete road;
 };
 

@@ -1,26 +1,25 @@
 //
-// Created by LENOVO on 11/16/2023.
+// Created by LENOVO on 11/17/2023.
 //
 
-#ifndef CROSSING_ROAD_OBSTACLE_H
-#define CROSSING_ROAD_OBSTACLE_H
-#include "raylib.h"
+#ifndef CROSSING_ROAD_BASEGAMEOBJECT_H
+#define CROSSING_ROAD_BASEGAMEOBJECT_H
 #include "Observer.h"
 #include <list>
+#include "Message.h"
+#include <iostream>
 
-class Obstacle : public ISubject {
+using namespace std;
+
+class BaseGameObject : public ISubject {
+protected:
     int x, y;
-    int width = 50, height = 30; // Will be updated to sprite later
-    bool isMoving;
-    int direction; // 1 for right -1 for left
     std::list<IObserver *> list_observer_;
 
 public:
-    Obstacle(int x, int y, int direction) : x(x), y(y), isMoving(true), direction(direction) {}
-
-    void draw();
-    void handleInput();
-    void update();
+    BaseGameObject(int x, int y) : x(x), y(y) {};
+    virtual void draw() = 0;
+    virtual void handleInput() = 0;
 
     void Attach(IObserver *observer) override {
         list_observer_.push_back(observer);
@@ -36,7 +35,8 @@ public:
             ++iterator;
         }
     }
+
 };
 
 
-#endif //CROSSING_ROAD_OBSTACLE_H
+#endif //CROSSING_ROAD_BASEGAMEOBJECT_H

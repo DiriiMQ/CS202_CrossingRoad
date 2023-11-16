@@ -3,12 +3,11 @@
 //
 
 #include "Obstacle.h"
-#include <iostream>
 using namespace std;
 
 void Obstacle::handleInput() {
     if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
-        y += 50;
+        y += 48;
     }
 }
 
@@ -16,7 +15,9 @@ void Obstacle::draw() {
     DrawRectangle(x, y, width, height, RED);
 
     if (isMoving) {
-        cout << "X: " << x << endl;
         x += direction;
+    }
+    if(x > 1366 + 50) { // TODO: Load from config file
+        Notify();
     }
 }

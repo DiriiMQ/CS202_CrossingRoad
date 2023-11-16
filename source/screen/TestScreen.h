@@ -7,11 +7,15 @@
 #include "BaseScreen.h"
 #include "assetsLib/TexturesIO.h"
 #include "gameObjects/Road.h"
+#include "gameObjects/BaseGameObject.h"
+#include "gameObjects/NonRoad.h"
+#include "gameObjects/Observer.h"
+#include "gameObjects/Message.h"
 
-class TestScreen : public BaseScreen {
+class TestScreen : public BaseScreen, public IObserver {
 private:
     AnimatedTexture *test{};
-    vector<Road*> roads;
+    vector<BaseGameObject*> map;
     bool hasInit = false;
 
 public:
@@ -21,6 +25,10 @@ public:
 
     void handleInput() override;
     void update() override;
+    void Update(const Message message) override;
+    void Observe();
+
+
     void draw() override;
 
     void load() override;
