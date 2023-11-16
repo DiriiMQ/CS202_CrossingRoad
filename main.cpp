@@ -5,6 +5,8 @@
 #include "_raygui.h"
 
 int main() {
+    srand(time(0));
+
     Window window;
     window.run();
 //    BasicConfigInstance *config = BasicConfigInstance::getInstance();

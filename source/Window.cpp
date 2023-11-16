@@ -28,9 +28,9 @@ void Window::presetWindow() {
 }
 
 void Window::presetScreens() {
-    this->screenManager.setScreen(&this->menuScreen);
-
     this->menuScreen.setScreenManager(&this->screenManager);
+    this->screenManager.setScreen(&this->menuScreen);
+//    this->menuScreen.init();
 }
 
 void Window::run() {

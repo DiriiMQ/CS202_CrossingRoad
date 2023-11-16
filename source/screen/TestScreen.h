@@ -1,23 +1,22 @@
 //
-// Created by dirii on 30/10/23.
+// Created by LENOVO on 11/14/2023.
 //
 
-#ifndef CROSSING_ROAD_MENUSCREEN_H
-#define CROSSING_ROAD_MENUSCREEN_H
-
+#ifndef CROSSING_ROAD_TESTSCREEN_H
+#define CROSSING_ROAD_TESTSCREEN_H
 #include "BaseScreen.h"
 #include "assetsLib/TexturesIO.h"
-#include "TestScreen.h"
+#include "gameObjects/Road.h"
 
-class MenuScreen : public BaseScreen {
+class TestScreen : public BaseScreen {
 private:
     AnimatedTexture *test{};
+    vector<Road*> roads;
     bool hasInit = false;
-    TestScreen testScreen;
 
 public:
-    MenuScreen() = default;
-    ~MenuScreen();
+    TestScreen() = default;
+    ~TestScreen();
     void init();
 
     void handleInput() override;
@@ -29,4 +28,4 @@ public:
 };
 
 
-#endif //CROSSING_ROAD_MENUSCREEN_H
+#endif //CROSSING_ROAD_TESTSCREEN_H
