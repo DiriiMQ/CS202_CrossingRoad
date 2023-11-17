@@ -29,7 +29,7 @@ public:
 
 class AnimatedTexture: public TextureIO {
 private:
-    int frames;
+    int frames = 0;
 
 public:
     AnimatedTexture() = default;
