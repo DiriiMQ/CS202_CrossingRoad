@@ -28,10 +28,10 @@ public:
     void Detach(IObserver *observer) override {
         list_observer_.remove(observer);
     }
-    void Notify() override {
+    void Notify(Message message=Message::BLOCK_OUT_OF_SCREEN) override {
         std::list<IObserver *>::iterator iterator = list_observer_.begin();
         while (iterator != list_observer_.end()) {
-            (*iterator)->Update(Message::BLOCK_OUT_OF_SCREEN);
+            (*iterator)->updateMessage(message);
             ++iterator;
         }
     }

@@ -5,7 +5,6 @@
 #include "Road.h"
 
 Road::Road(int x, int y, int numObstacles) : BaseGameObject(x, y) {
-    int direction = 1; // will be random
 
     for(int i = 0; i < numObstacles; i++) {
         int randomX = rand() % 500;
@@ -16,6 +15,7 @@ Road::Road(int x, int y, int numObstacles) : BaseGameObject(x, y) {
 }
 
 void Road::handleInput() {
+    // TODO: Update screen speed;
     if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
         y += stepSize;
     }
@@ -36,12 +36,12 @@ void Road::draw() {
     }
 }
 
-void Road::Update(const Message message) {
+void Road::updateMessage(const Message message) {
     if(message == Message::BLOCK_OUT_OF_SCREEN) {
-        int randomX = rand() % 500;
+        int randomX = rand() % 20;
         cout << randomX << endl;
-
-        Obstacle *obs = new Obstacle(randomX, y, 1);
+        // TODO: update last x = last obstacle.x - randomX
+        Obstacle *obs = new Obstacle( randomX, y, 1);
         obs ->Attach(this);
         obstacles.push_back(obs);
 

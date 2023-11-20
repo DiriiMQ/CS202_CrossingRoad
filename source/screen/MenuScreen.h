@@ -7,13 +7,13 @@
 
 #include "BaseScreen.h"
 #include "assetsLib/TexturesIO.h"
-#include "TestScreen.h"
+#include "GameScreen.h"
 
 class MenuScreen : public BaseScreen {
 private:
     AnimatedTexture *test{};
     bool hasInit = false;
-    TestScreen testScreen;
+    GameScreen testScreen;
 
 public:
     MenuScreen() = default;

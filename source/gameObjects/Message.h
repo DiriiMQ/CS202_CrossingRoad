@@ -7,8 +7,8 @@
 
 enum class Message {
     BLOCK_OUT_OF_SCREEN,
-    LATER_1,
-    LATER_2,
+    TRAFFIC_LIGHT_RED,
+    TRAFFIC_LIGHT_GREEN,
     LATER_3,
 };
 

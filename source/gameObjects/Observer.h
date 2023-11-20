@@ -11,7 +11,7 @@
 class IObserver {
 public:
     virtual ~IObserver() {};
-    virtual void Update(const Message message) = 0;
+    virtual void updateMessage(const Message message) = 0;
 };
 
 class ISubject {
@@ -19,7 +19,7 @@ public:
     virtual ~ISubject() {};
     virtual void Attach(IObserver *observer) = 0;
     virtual void Detach(IObserver *observer) = 0;
-    virtual void Notify() = 0;
+    virtual void Notify(Message mesage) = 0;
 };
 
 

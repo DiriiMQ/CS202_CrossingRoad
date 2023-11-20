@@ -10,7 +10,6 @@
 class NonRoad : public BaseGameObject {
 private:
     int stepSize = 48;
-
 public:
     NonRoad(int x, int y) : BaseGameObject(x, y) {};
     void draw() override;

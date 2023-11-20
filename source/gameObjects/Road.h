@@ -1,7 +1,7 @@
 //
 // Created by LENOVO on 11/16/2023.
 //
-
+#pragma once
 #ifndef CROSSING_ROAD_ROAD_H
 #define CROSSING_ROAD_ROAD_H
 #include "BaseGameObject.h"
@@ -10,12 +10,15 @@
 #include <vector>
 #include <iostream>
 
+
 using namespace std;
 
 class Road : public BaseGameObject, public IObserver {
 private:
     int stepSize = 48;
     vector<Obstacle*> obstacles;
+    //Aseprite roadSprite = LoadAseprite("assets/1_lane.aseprite");
+    int direction = 1;
 public:
 
     Road(int x, int y, int numObstacles = 5);
@@ -23,8 +26,7 @@ public:
     void draw() override;
     void handleInput() override;
 
-    void Update(const Message message);
-
+    void updateMessage(const Message message) override;
 };
 
 
