@@ -9,6 +9,7 @@
 #include "Obstacle.h"
 #include <vector>
 #include <iostream>
+#include "screen/Position.h"
 
 using namespace std;
 
@@ -17,13 +18,15 @@ private:
     int stepSize = 48;
     vector<Obstacle*> obstacles;
 public:
-
+   
     Road(int x, int y, int numObstacles = 5);
     ~Road();
     void draw() override;
     void handleInput() override;
 
     void Update(const Message message);
+    void updateMainPos(MainPos mainPos) override;
+    
 
 };
 

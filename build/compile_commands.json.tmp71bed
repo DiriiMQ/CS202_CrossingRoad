@@ -1,0 +1,118 @@
+[
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DJSON_DIAGNOSTICS=0 -DJSON_USE_IMPLICIT_CONVERSIONS=1 -DPLATFORM_DESKTOP @CMakeFiles/crossing_road.dir/includes_CXX.rsp -g -o CMakeFiles\\crossing_road.dir\\main.cpp.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\main.cpp",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/main.cpp",
+  "output": "CMakeFiles/crossing_road.dir/main.cpp.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DJSON_DIAGNOSTICS=0 -DJSON_USE_IMPLICIT_CONVERSIONS=1 -DPLATFORM_DESKTOP @CMakeFiles/crossing_road.dir/includes_CXX.rsp -g -o CMakeFiles\\crossing_road.dir\\source\\Window.cpp.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\source\\Window.cpp",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/source/Window.cpp",
+  "output": "CMakeFiles/crossing_road.dir/source/Window.cpp.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DJSON_DIAGNOSTICS=0 -DJSON_USE_IMPLICIT_CONVERSIONS=1 -DPLATFORM_DESKTOP @CMakeFiles/crossing_road.dir/includes_CXX.rsp -g -o CMakeFiles\\crossing_road.dir\\source\\screen\\BaseScreen.cpp.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\source\\screen\\BaseScreen.cpp",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/source/screen/BaseScreen.cpp",
+  "output": "CMakeFiles/crossing_road.dir/source/screen/BaseScreen.cpp.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DJSON_DIAGNOSTICS=0 -DJSON_USE_IMPLICIT_CONVERSIONS=1 -DPLATFORM_DESKTOP @CMakeFiles/crossing_road.dir/includes_CXX.rsp -g -o CMakeFiles\\crossing_road.dir\\source\\screen\\ScreenManager.cpp.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\source\\screen\\ScreenManager.cpp",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/source/screen/ScreenManager.cpp",
+  "output": "CMakeFiles/crossing_road.dir/source/screen/ScreenManager.cpp.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DJSON_DIAGNOSTICS=0 -DJSON_USE_IMPLICIT_CONVERSIONS=1 -DPLATFORM_DESKTOP @CMakeFiles/crossing_road.dir/includes_CXX.rsp -g -o CMakeFiles\\crossing_road.dir\\source\\screen\\MenuScreen.cpp.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\source\\screen\\MenuScreen.cpp",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/source/screen/MenuScreen.cpp",
+  "output": "CMakeFiles/crossing_road.dir/source/screen/MenuScreen.cpp.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DJSON_DIAGNOSTICS=0 -DJSON_USE_IMPLICIT_CONVERSIONS=1 -DPLATFORM_DESKTOP @CMakeFiles/crossing_road.dir/includes_CXX.rsp -g -o CMakeFiles\\crossing_road.dir\\source\\assetsLib\\ConfigIO.cpp.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\source\\assetsLib\\ConfigIO.cpp",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/source/assetsLib/ConfigIO.cpp",
+  "output": "CMakeFiles/crossing_road.dir/source/assetsLib/ConfigIO.cpp.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DJSON_DIAGNOSTICS=0 -DJSON_USE_IMPLICIT_CONVERSIONS=1 -DPLATFORM_DESKTOP @CMakeFiles/crossing_road.dir/includes_CXX.rsp -g -o CMakeFiles\\crossing_road.dir\\source\\assetsLib\\TexturesIO.cpp.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\source\\assetsLib\\TexturesIO.cpp",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/source/assetsLib/TexturesIO.cpp",
+  "output": "CMakeFiles/crossing_road.dir/source/assetsLib/TexturesIO.cpp.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DJSON_DIAGNOSTICS=0 -DJSON_USE_IMPLICIT_CONVERSIONS=1 -DPLATFORM_DESKTOP @CMakeFiles/crossing_road.dir/includes_CXX.rsp -g -o CMakeFiles\\crossing_road.dir\\source\\screen\\TestScreen.cpp.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\source\\screen\\TestScreen.cpp",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/source/screen/TestScreen.cpp",
+  "output": "CMakeFiles/crossing_road.dir/source/screen/TestScreen.cpp.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DJSON_DIAGNOSTICS=0 -DJSON_USE_IMPLICIT_CONVERSIONS=1 -DPLATFORM_DESKTOP @CMakeFiles/crossing_road.dir/includes_CXX.rsp -g -o CMakeFiles\\crossing_road.dir\\source\\screen\\GameScreen.cpp.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\source\\screen\\GameScreen.cpp",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/source/screen/GameScreen.cpp",
+  "output": "CMakeFiles/crossing_road.dir/source/screen/GameScreen.cpp.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DJSON_DIAGNOSTICS=0 -DJSON_USE_IMPLICIT_CONVERSIONS=1 -DPLATFORM_DESKTOP @CMakeFiles/crossing_road.dir/includes_CXX.rsp -g -o CMakeFiles\\crossing_road.dir\\source\\gameObjects\\Road.cpp.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\source\\gameObjects\\Road.cpp",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/source/gameObjects/Road.cpp",
+  "output": "CMakeFiles/crossing_road.dir/source/gameObjects/Road.cpp.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DJSON_DIAGNOSTICS=0 -DJSON_USE_IMPLICIT_CONVERSIONS=1 -DPLATFORM_DESKTOP @CMakeFiles/crossing_road.dir/includes_CXX.rsp -g -o CMakeFiles\\crossing_road.dir\\source\\gameObjects\\Obstacle.cpp.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\source\\gameObjects\\Obstacle.cpp",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/source/gameObjects/Obstacle.cpp",
+  "output": "CMakeFiles/crossing_road.dir/source/gameObjects/Obstacle.cpp.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DJSON_DIAGNOSTICS=0 -DJSON_USE_IMPLICIT_CONVERSIONS=1 -DPLATFORM_DESKTOP @CMakeFiles/crossing_road.dir/includes_CXX.rsp -g -o CMakeFiles\\crossing_road.dir\\source\\gameObjects\\NonRoad.cpp.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\source\\gameObjects\\NonRoad.cpp",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/source/gameObjects/NonRoad.cpp",
+  "output": "CMakeFiles/crossing_road.dir/source/gameObjects/NonRoad.cpp.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DJSON_DIAGNOSTICS=0 -DJSON_USE_IMPLICIT_CONVERSIONS=1 -DPLATFORM_DESKTOP @CMakeFiles/crossing_road.dir/includes_CXX.rsp -g -o CMakeFiles\\crossing_road.dir\\source\\gameObjects\\MainChar.cpp.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\source\\gameObjects\\MainChar.cpp",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/source/gameObjects/MainChar.cpp",
+  "output": "CMakeFiles/crossing_road.dir/source/gameObjects/MainChar.cpp.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build",
+  "command": "C:\\msys64\\ucrt64\\bin\\g++.exe -DGRAPHICS_API_OPENGL_33 -DJSON_DIAGNOSTICS=0 -DJSON_USE_IMPLICIT_CONVERSIONS=1 -DPLATFORM_DESKTOP @CMakeFiles/crossing_road.dir/includes_CXX.rsp -g -o CMakeFiles\\crossing_road.dir\\source\\screen\\CharScreen.cpp.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\source\\screen\\CharScreen.cpp",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/source/screen/CharScreen.cpp",
+  "output": "CMakeFiles/crossing_road.dir/source/screen/CharScreen.cpp.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build/_deps/raylib-build/raylib",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS @CMakeFiles/raylib.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=gnu99 -o CMakeFiles\\raylib.dir\\rcore.c.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\build\\_deps\\raylib-src\\src\\rcore.c",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build/_deps/raylib-src/src/rcore.c",
+  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rcore.c.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build/_deps/raylib-build/raylib",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS @CMakeFiles/raylib.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=gnu99 -o CMakeFiles\\raylib.dir\\rmodels.c.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\build\\_deps\\raylib-src\\src\\rmodels.c",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build/_deps/raylib-src/src/rmodels.c",
+  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rmodels.c.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build/_deps/raylib-build/raylib",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS @CMakeFiles/raylib.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=gnu99 -o CMakeFiles\\raylib.dir\\rshapes.c.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\build\\_deps\\raylib-src\\src\\rshapes.c",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build/_deps/raylib-src/src/rshapes.c",
+  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rshapes.c.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build/_deps/raylib-build/raylib",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS @CMakeFiles/raylib.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=gnu99 -o CMakeFiles\\raylib.dir\\rtext.c.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\build\\_deps\\raylib-src\\src\\rtext.c",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build/_deps/raylib-src/src/rtext.c",
+  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rtext.c.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build/_deps/raylib-build/raylib",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS @CMakeFiles/raylib.dir/includes_C.rsp -fno-strict-aliasing -Werror=implicit-function-declaration -Werror=pointer-arith  -g -std=gnu99 -o CMakeFiles\\raylib.dir\\rtextures.c.obj -c C:\\Users\\KHANHVINH\\Documents\\GitHub\\CS202_CrossingRoad\\build\\_deps\\raylib-src\\src\\rtextures.c",
+  "file": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build/_deps/raylib-src/src/rtextures.c",
+  "output": "_deps/raylib-build/raylib/CMakeFiles/raylib.dir/rtextures.c.obj"
+},
+{
+  "directory": "C:/Users/KHANHVINH/Documents/GitHub/CS202_CrossingRoad/build/_deps/raylib-build/raylib",
+  "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe -DGRAPHICS_API_OPENGL_33 -DPLATFORM_DESKTOP -D_CRT_SECURE_NO_WARNINGS @CMakeFiles/raylib.dir/inclu

@@ -7,7 +7,7 @@
 
 enum class Message {
     BLOCK_OUT_OF_SCREEN,
-    LATER_1,
+    COLLISION,
     LATER_2,
     LATER_3,
 };

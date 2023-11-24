@@ -27,6 +27,10 @@ void MenuScreen::draw() {
     if(GuiButton(buttonRect, "Click Me!")) {
         screenManager->setScreen(&testScreen);
     }
+    Rectangle buttonRect2 {500, 50, 200, 100};
+    if(GuiButton(buttonRect2, "Test Me!")) {
+        screenManager->setScreen(&charScreen);
+    }
 }
 
 void MenuScreen::load() {
@@ -45,6 +49,7 @@ void MenuScreen::unload() {
 void MenuScreen::init() {
     this->test = new AnimatedTexture("../assets/slime/Attack_1.png", 4);
     this->testScreen.setScreenManager(this->screenManager);
+    this->charScreen.setScreenManager(this->screenManager);
 }
 
 MenuScreen::~MenuScreen() {

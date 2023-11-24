@@ -11,9 +11,11 @@
 class Obstacle : public ISubject {
     int x, y;
     int width = 50, height = 30; // Will be updated to sprite later
-    bool isMoving;
+    bool isMoving=true;
     int direction; // 1 for right -1 for left
     std::list<IObserver *> list_observer_;
+    Vector2 mainPos;
+    Vector2 mainSize=(Vector2) {50,50};
 
 public:
     Obstacle(int x, int y, int direction) : x(x), y(y), isMoving(true), direction(direction) {}
@@ -36,6 +38,9 @@ public:
             ++iterator;
         }
     }
+    bool checkCollision(Vector2 mainPos,Vector2 mainSize);
+    void getPos(Vector2 mainPos,Vector2 mainSize);
+   
 };
 
 

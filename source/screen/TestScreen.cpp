@@ -3,15 +3,29 @@
 //
 
 #include "TestScreen.h"
-
+void TestScreen::NotifyMainPos(MainPos mainPos)
+{
+     for (BaseGameObject *subject: map) {
+        
+       
+            subject->updateMainPos(mainPos);
+       
+    }
+}
 void TestScreen::handleInput() {
     for(BaseGameObject *block: map) {
         block->handleInput();
     }
+    mainChar.handleInput();
+    mainPos.pos=mainChar.getPos();
+   
 }
 
 void TestScreen::update() {
-
+    mainPos.pos=mainChar.getPos();
+    mainPos.size=(Vector2){50,50};
+    NotifyMainPos(mainPos);
+    
 }
 
 void TestScreen::Update(const Message message) {
@@ -36,6 +50,7 @@ void TestScreen::Observe() {
     for (BaseGameObject *subject: map) {
         subject->Attach(this);
     }
+    mainChar.Attach(this);
 
 }
 
@@ -47,6 +62,7 @@ void TestScreen::draw() {
     for(BaseGameObject *block: map) {
         block->draw();
     }
+    mainChar.draw();
 }
 
 void TestScreen::load() {
@@ -84,4 +100,5 @@ TestScreen::~TestScreen() {
     for(BaseGameObject *road: map)
         delete road;
 };
+
 

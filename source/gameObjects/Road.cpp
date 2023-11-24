@@ -13,6 +13,7 @@ Road::Road(int x, int y, int numObstacles) : BaseGameObject(x, y) {
         obs->Attach(this);
         obstacles.push_back(obs);
     }
+    
 }
 
 void Road::handleInput() {
@@ -54,3 +55,10 @@ Road::~Road() {
         delete obs;
     }
 };
+void Road::updateMainPos(MainPos mainPos)
+{
+    for (Obstacle *obs: obstacles)
+    {
+        obs->getPos(mainPos.pos,mainPos.size);
+    }
+}
