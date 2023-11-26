@@ -21,6 +21,7 @@ private:
     bool hasInit = false;
     MainChar mainChar;
     MainPos mainPos;
+    Rectangle mainPosRec;
 
 public:
     TestScreen() = default;

@@ -29,7 +29,8 @@ public:
         return false;
     }
     Vector2 getPos();
-    void updateMainPos(MainPos mainPos) override {};
+    void updateMainPos(Rectangle mainPosRec) override {};
+    Rectangle returnMainPos();
     
 };
 

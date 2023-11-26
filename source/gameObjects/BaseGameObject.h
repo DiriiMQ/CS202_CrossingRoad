@@ -20,7 +20,7 @@ protected:
     
 
 public:
-   
+   BaseGameObject () {};
     BaseGameObject(int x, int y) : x(x), y(y) {};
     virtual void draw() = 0;
     virtual void handleInput() = 0;
@@ -43,7 +43,8 @@ public:
     {
         return false;
     }
-    virtual void updateMainPos(MainPos mainPos) = 0;
+    virtual void updateMainPos(Rectangle mainPosRect) = 0;
+    
 };
 
 

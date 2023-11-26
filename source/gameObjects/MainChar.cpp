@@ -37,4 +37,9 @@ Vector2 MainChar::getPos()
     return position;
     
 }
+Rectangle MainChar::returnMainPos()
+{
+    Rectangle rect1 = { float (x),float (y), 50, 50 };
+    return rect1;
+}
 

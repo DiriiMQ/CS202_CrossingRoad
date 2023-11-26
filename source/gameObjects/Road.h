@@ -25,7 +25,8 @@ public:
     void handleInput() override;
 
     void Update(const Message message);
-    void updateMainPos(MainPos mainPos) override;
+    void updateMainPos(Rectangle mainPosRect) override;
+   
     
 
 };

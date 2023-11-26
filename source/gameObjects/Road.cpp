@@ -55,10 +55,11 @@ Road::~Road() {
         delete obs;
     }
 };
-void Road::updateMainPos(MainPos mainPos)
+void Road::updateMainPos(Rectangle mainPosRect)
 {
     for (Obstacle *obs: obstacles)
     {
-        obs->getPos(mainPos.pos,mainPos.size);
+       // obs->getPos(mainPos.pos,mainPos.size);
+       obs->updateMainPos(mainPosRect);
     }
 }

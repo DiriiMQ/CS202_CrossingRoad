@@ -7,7 +7,7 @@ using namespace std;
 
 void Obstacle::handleInput() {
     if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
-        if (!checkCollision(mainPos,mainSize))
+        if (!checkCollision())
         y += 48;
     }
 }
@@ -16,7 +16,7 @@ void Obstacle::draw() {
     DrawRectangle(x, y, width, height, RED);
     isMoving=true;
     if (isMoving) {
-        if (!checkCollision(mainPos,mainSize))
+        if (!checkCollision())
         {
             x += direction;
         }
@@ -26,12 +26,15 @@ void Obstacle::draw() {
         Notify();
     }
 }
-void Obstacle::getPos(Vector2 mainPos,Vector2 mainSize)
+void Obstacle::updateMainPos(Rectangle mainPosRect) 
 {
-    this->mainPos=mainPos;    
+    this->mainPosRect=mainPosRect;
 }
-bool Obstacle::checkCollision(Vector2 mainPos,Vector2 mainSize)
+
+bool Obstacle::checkCollision()
 {
     
-    return (((this->x+50>=mainPos.x)&&(this->x+50<=mainPos.x+50))&& ((this->y+30>mainPos.y)&&(this->y+30<mainPos.y+50)));
+    //return (((this->x+50>=mainPos.x)&&(this->x+50<=mainPos.x+50))&& ((this->y+30>mainPos.y)&&(this->y+30<mainPos.y+50)));
+    Rectangle rect1 = {float (x),float (y),50,30};
+    return CheckCollisionRecs(rect1,mainPosRect);
 }

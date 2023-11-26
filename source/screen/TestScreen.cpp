@@ -8,7 +8,7 @@ void TestScreen::NotifyMainPos(MainPos mainPos)
      for (BaseGameObject *subject: map) {
         
        
-            subject->updateMainPos(mainPos);
+            subject->updateMainPos(mainPosRec);
        
     }
 }
@@ -18,6 +18,7 @@ void TestScreen::handleInput() {
     }
     mainChar.handleInput();
     mainPos.pos=mainChar.getPos();
+    mainPosRec=mainChar.returnMainPos();
    
 }
 

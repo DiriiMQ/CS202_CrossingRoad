@@ -6,16 +6,18 @@
 #define CROSSING_ROAD_OBSTACLE_H
 #include "raylib.h"
 #include "Observer.h"
+#include "BaseGameObject.h"
 #include <list>
 
-class Obstacle : public ISubject {
+class Obstacle : public ISubject, public BaseGameObject {
     int x, y;
     int width = 50, height = 30; // Will be updated to sprite later
     bool isMoving=true;
     int direction; // 1 for right -1 for left
     std::list<IObserver *> list_observer_;
-    Vector2 mainPos;
-    Vector2 mainSize=(Vector2) {50,50};
+    //Vector2 mainPos;
+   // Vector2 mainSize=(Vector2) {50,50};
+    Rectangle mainPosRect;
 
 public:
     Obstacle(int x, int y, int direction) : x(x), y(y), isMoving(true), direction(direction) {}
@@ -38,8 +40,10 @@ public:
             ++iterator;
         }
     }
-    bool checkCollision(Vector2 mainPos,Vector2 mainSize);
-    void getPos(Vector2 mainPos,Vector2 mainSize);
+    bool checkCollision();
+    //void getPos(Vector2 mainPos,Vector2 mainSize);
+    void updateMainPos(Rectangle mainPosRect);
+
    
 };
 

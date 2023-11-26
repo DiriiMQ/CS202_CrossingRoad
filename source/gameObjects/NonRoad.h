@@ -15,7 +15,8 @@ public:
     NonRoad(int x, int y) : BaseGameObject(x, y) {};
     void draw() override;
     void handleInput() override;
-    void updateMainPos(MainPos mainPos) override {};
+    void updateMainPos(Rectangle mainPosRect) override {};
+    
 
 };
 
