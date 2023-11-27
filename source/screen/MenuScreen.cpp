@@ -47,6 +47,7 @@ void MenuScreen::init() {
     this->testScreen.setScreenManager(this->screenManager);
 
     this->testAseprite = new Aseprite("../assets/animal/Cat.aseprite");
+
 }
 
 MenuScreen::~MenuScreen() {
