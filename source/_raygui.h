@@ -7,9 +7,9 @@
 
 // NOTE: This file is only for raygui implementation purposes because RAYGUI_IMPLEMENTATION should be called only once
 // This file is used in main.cpp for implementing raygui
-#define RAYGUI_IMPLEMENTATION
 
 #include "raylib.h"
+#define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
 #define RAYLIB_ASEPRITE_IMPLEMENTATION
 #include "raylib-aseprite.h"
