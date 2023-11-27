@@ -45,6 +45,8 @@ void MenuScreen::unload() {
 void MenuScreen::init() {
     this->test = new AnimatedTexture("../assets/slime/Attack_1.png", 4);
     this->testScreen.setScreenManager(this->screenManager);
+
+    this->testAseprite = new Aseprite("../assets/animal/Cat.aseprite");
 }
 
 MenuScreen::~MenuScreen() {

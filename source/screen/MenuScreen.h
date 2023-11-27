@@ -8,12 +8,14 @@
 #include "BaseScreen.h"
 #include "assetsLib/TexturesIO.h"
 #include "GameScreen.h"
+#include "raylib-aseprite.h"
 
 class MenuScreen : public BaseScreen {
 private:
     AnimatedTexture *test{};
     bool hasInit = false;
     GameScreen testScreen;
+    Aseprite* testAseprite;
 
 public:
     MenuScreen() = default;
