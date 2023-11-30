@@ -7,5 +7,5 @@ target_include_directories(raylib_aseprite INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
 install(FILES
         raylib-aseprite.h
         cute_aseprite.h
-        DESTINATION external
+        DESTINATION include
 )

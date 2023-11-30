@@ -4,6 +4,7 @@
 #pragma once
 #include "Obstacle.h"
 #include "temp.cpp"
+#include "raylib-aseprite.h"
 
 using namespace std;
 
