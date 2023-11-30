@@ -1,20 +1,20 @@
 //
-// Created by LENOVO on 11/17/2023.
+// Created by LENOVO on 11/30/2023.
 //
 
-#include "NonRoad.h"
+#include "River.h"
 
-void NonRoad::handleInput() {
+void River::handleInput() {
 
     if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
         y += stepSize;
     }
 }
 
-void NonRoad::draw() {
+void River::draw() {
     y += screenSpeed;
 
-    DrawRectangle(x, y, 1500, 50, GREEN);
+    DrawRectangle(x, y, 1500, 50, BLUE);
     if(y > 768 + 48 * 3) { // TODO: Load from config file.
         BaseGameObject::Notify();
     }

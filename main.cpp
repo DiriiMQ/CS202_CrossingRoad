@@ -3,6 +3,7 @@
 #include "Window.h"
 #include "assetsLib/ConfigIO.h"
 #include "_raygui.h"
+#define RAYLIB_ASEPRITE_IMPLEMENTATION
 
 int main() {
     srand(time(0));

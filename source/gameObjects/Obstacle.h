@@ -1,46 +1,35 @@
 //
 // Created by LENOVO on 11/16/2023.
 //
-
+#pragma once
 #ifndef CROSSING_ROAD_OBSTACLE_H
 #define CROSSING_ROAD_OBSTACLE_H
+
 #include "raylib.h"
 #include "Observer.h"
 #include "BaseGameObject.h"
 #include <list>
-#include "_raygui.h"
-//#include "raylib-aseprite.h"
-//#include "cute_aseprite.h"
+#include "raylib-aseprite.h"
 
-class Obstacle : public ISubject, public BaseGameObject {
+class Obstacle : public BaseGameObject {
     int width = 50, height = 30; // Will be updated to sprite later
     bool isMoving; // remove
     int direction; // 1 for right -1 for left . 0 not moving
     std::list<IObserver *> list_observer_;
+    Aseprite *sprite;
 
 public:
-    Obstacle(int x, int y, int direction) : BaseGameObject(x, y), isMoving(true), direction(direction) {}
+    Obstacle(double x, double y, int direction) : BaseGameObject(x, y), isMoving(true), direction(direction), sprite(nullptr) {}
 
+    void initObstacle();
     void draw();
     void handleInput();
 
     bool checkCollision(Rectangle mainCharacter);
 
-    void Attach(IObserver *observer) override {
-        list_observer_.push_back(observer);
-    }
-
-    void Detach(IObserver *observer) override {
-        list_observer_.remove(observer);
-    }
-    void Notify(Message message=Message::BLOCK_OUT_OF_SCREEN) override {
-        std::list<IObserver *>::iterator iterator = list_observer_.begin();
-        while (iterator != list_observer_.end()) {
-            (*iterator)->updateMessage(message);
-            ++iterator;
-        }
+    ~Obstacle() {
+        delete sprite;
     }
 };
-
 
 #endif //CROSSING_ROAD_OBSTACLE_H

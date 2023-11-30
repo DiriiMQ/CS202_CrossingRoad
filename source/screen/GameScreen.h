@@ -11,12 +11,14 @@
 #include "gameObjects/NonRoad.h"
 #include "gameObjects/Observer.h"
 #include "gameObjects/Message.h"
+#include "gameObjects/River.h"
 
 class GameScreen : public BaseScreen, public IObserver {
 private:
     AnimatedTexture *test{};
     vector<BaseGameObject*> map; // only road and nonroad, maybe river later
     bool hasInit = false;
+    void randomNewBlock();
 
 public:
     GameScreen() = default;

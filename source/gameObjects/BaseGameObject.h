@@ -13,11 +13,12 @@ using namespace std;
 
 class BaseGameObject : public ISubject {
 protected:
-    int x, y;
+    double x, y;
+    double screenSpeed = 0.1;
     std::list<IObserver *> list_observer_;
 
 public:
-    BaseGameObject(int x, int y) : x(x), y(y) {};
+    BaseGameObject(double x, double y) : x(x), y(y) {};
     virtual void draw() = 0;
     virtual void handleInput() = 0;
 
@@ -36,6 +37,9 @@ public:
         }
     }
 
+    double getY() {
+        return y;
+    }
 };
 
 

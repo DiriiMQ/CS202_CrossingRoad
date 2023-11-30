@@ -1,7 +1,6 @@
 //
 // Created by dirii on 26/10/23.
 //
-
 #ifndef CROSSING_ROAD__RAYGUI_H
 #define CROSSING_ROAD__RAYGUI_H
 
@@ -11,6 +10,7 @@
 
 #include "raylib.h"
 #include "raygui.h"
+
 #define RAYLIB_ASEPRITE_IMPLEMENTATION
 #include "raylib-aseprite.h"
 #define CUTE_ASEPRITE_IMPLEMENTATION

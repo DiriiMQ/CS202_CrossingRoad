@@ -92,7 +92,6 @@
 
 		https://github.com/RandyGaul/cute_headers/issues
 */
-
 #ifndef CUTE_ASEPRITE_H
 #define CUTE_ASEPRITE_H
 

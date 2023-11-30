@@ -28,7 +28,6 @@
 *     3. This notice may not be removed or altered from any source distribution.
 *
 **********************************************************************************************/
-
 #ifndef INCLUDE_RAYLIB_ASEPRITE_H_
 #define INCLUDE_RAYLIB_ASEPRITE_H_
 

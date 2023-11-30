@@ -14,20 +14,29 @@ void GameScreen::update() {
 
 }
 
+void GameScreen::randomNewBlock() {
+    int randomNumber = rand();
+
+    BaseGameObject *block;
+
+    if (randomNumber % 100 > 60) {
+        block = new Road(-100.0, map[map.size() - 1]->getY()-48, 3);
+    }
+    else if(randomNumber % 100 > 40) {
+        block = new River(-100.0, map[map.size() - 1]->getY()-48);
+    }
+    else {
+        block = new NonRoad(-100.0, map[map.size() - 1]->getY()-48);
+    }
+    block->Attach(this);
+    map.push_back(block);
+
+}
+
 void GameScreen::updateMessage(const Message message) {
     if(message == Message::BLOCK_OUT_OF_SCREEN) {
         cout << "UPDATE CALLED!" << endl;
-        int randomNumber = rand();
-        BaseGameObject *block;
-
-        if (randomNumber % 2 == 0) {
-            block = new Road(-100, 0, 3);
-        } else {
-            block = new NonRoad(-100, 0);
-        }
-        block->Attach(this);
-        map.push_back(block);
-
+        randomNewBlock();
         map.erase(map.begin());
     }
 }
@@ -64,15 +73,23 @@ void GameScreen::unload() {
 
 void GameScreen::init() {
     cout << "Test Screen inti Called" << endl;
+
+
     for (int i = 0; i < 20; i++) {
         int randnum = rand();
-        if (randnum % 2 == 0) {
-            Road *roadBlock = new Road(-100, 48 * (19 - i), 1);
+        double x_direction = -100;
+        double y_direction = 48 * (19 - i);
+        if ((randnum % 100 > 60 && i > 10) || i == 10) {
+            Road *roadBlock = new Road(x_direction, y_direction, 5);
             map.push_back(roadBlock);
-        } else {
-            NonRoad *nonRoadBlock = new NonRoad(-100, 48 * (19 - i));
+        }
+        else if (randnum % 100 > 40 && i > 10) {
+            River *riverBlock = new River(x_direction, y_direction);
+            map.push_back(riverBlock);
+        }
+        else {
+            NonRoad *nonRoadBlock = new NonRoad(x_direction, y_direction);
             map.push_back(nonRoadBlock);
-
         }
     }
     Observe();

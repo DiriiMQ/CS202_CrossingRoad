@@ -10,7 +10,6 @@
 #include <vector>
 #include <iostream>
 
-
 using namespace std;
 
 class Road : public BaseGameObject, public IObserver {
@@ -19,9 +18,10 @@ private:
     vector<Obstacle*> obstacles;
     //Aseprite roadSprite = LoadAseprite("assets/1_lane.aseprite");
     int direction = 1;
+
 public:
 
-    Road(int x, int y, int numObstacles = 5);
+    Road(double x, double y, int numObstacles = 5);
     ~Road();
     void draw() override;
     void handleInput() override;

@@ -1,4 +1,4 @@
-add_library(raylib_aseprite INTERFACE)
+add_library(raylib_aseprite INTERFACE ../source/gameObjects/River.h)
 
 # Include Directory
 target_include_directories(raylib_aseprite INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/)
@@ -7,5 +7,5 @@ target_include_directories(raylib_aseprite INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}
 install(FILES
         raylib-aseprite.h
         cute_aseprite.h
-        DESTINATION include
+        DESTINATION external
 )
