@@ -9,6 +9,7 @@
 #include "assetsLib/TexturesIO.h"
 #include "GameScreen.h"
 #include "CharScreen.h"
+#include <string>
 
 class MenuScreen : public BaseScreen {
 private:

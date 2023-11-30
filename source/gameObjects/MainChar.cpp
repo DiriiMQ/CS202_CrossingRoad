@@ -13,22 +13,27 @@ bool eventTriggered(double interval)
 }
 void MainChar::draw()
 {
-    DrawRectangle(x, y, 50, 50, BLUE);
+//    y += screenSpeed;
+    DrawRectangle(x, y, width, height, YELLOW);
 }
 void MainChar::handleInput()
 {
-    
-    
+
     if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) {
         if (eventTriggered(0.15))
-        x -= stepSize;
-        cout<<getPos().x<<" "<<getPos().y<<endl;
+            x -= stepSizeX;
+//        cout<<getPos().x<<" "<<getPos().y<<endl;
     }
-    if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT))
+    else if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT))
     {
         if (eventTriggered(0.15))
-        x += stepSize;
-        cout<<getPos().x<<" "<<getPos().y<<endl;
+            x += stepSizeX;
+//        cout<<getPos().x<<" "<<getPos().y<<endl;
+    }
+    else if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
+        if (eventTriggered(0.15))
+            y = 626;
+//        cout<<getPos().x<<" "<<getPos().y<<endl;
     }
 }
 Vector2 MainChar::getPos()
@@ -39,7 +44,7 @@ Vector2 MainChar::getPos()
 }
 Rectangle MainChar::returnMainPos()
 {
-    Rectangle rect1 = { float (x),float (y), 50, 50 };
+    Rectangle rect1 = { float (x),float (y), width, height};
     return rect1;
 }
 

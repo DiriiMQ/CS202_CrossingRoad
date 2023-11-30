@@ -26,11 +26,13 @@ void Road::handleInput() {
 
     for(Obstacle *obs: obstacles) {
         obs->handleInput();
+//        if(!isMoving)
+//            obs->setMove(false);
     }
 }
 
 void Road::draw() {
-    y += screenSpeed;
+//    y += screenSpeed;
 
     DrawRectangle(x, y, 1500, 50, BLACK);
 //    Aseprite tempObj = LoadAseprite("../asset/trafficEnvironment/1_lane.aseprite");
@@ -38,6 +40,8 @@ void Road::draw() {
 
     for(Obstacle *obs: obstacles) {
         obs->draw();
+        if(isMainCharDead)
+            obs->setMove(false);
     }
 
     if(y > 768 + 48 * 3) { // TODO: Load from config file.
@@ -47,14 +51,21 @@ void Road::draw() {
 
 void Road::updateMessage(const Message message) {
     if(message == Message::BLOCK_OUT_OF_SCREEN) {
-        int randomX = rand() % 20;
+        int randomX = rand() % 500;
         cout << randomX << endl;
         // TODO: update last x = last obstacle.x - randomX
-        Obstacle *obs = new Obstacle( randomX, y, 1);
+        double newPositionX = obstacles[obstacles.size() - 1]->getX() - randomX;
+        Obstacle *obs = new Obstacle( newPositionX, y, 1);
         obs ->Attach(this);
-        obs->initObstacle();
+//        obs->initObstacle();
         obstacles.push_back(obs);
         obstacles.erase(obstacles.begin()); // TODO: Fix this! This is a bug
+    }
+    else if(message==Message::COLLISION) {
+        BaseGameObject::Notify(Message::COLLISION);
+        for (Obstacle *obs: obstacles) {
+            obs->setMove(false);
+        }
     }
 }
 

@@ -18,8 +18,7 @@ protected:
     double x, y;
     double screenSpeed = 0.1;
     std::list<IObserver *> list_observer_;
-    
-
+    bool isMainCharDead = false;
 public:
     BaseGameObject(double x, double y) : x(x), y(y) {};
     BaseGameObject () {};
@@ -44,11 +43,15 @@ public:
     double getY() {
         return y;
     }
-    virtual bool checkCollision(Vector2 pos,Vector2 size)
-    {
-        return false;
+
+    double getX() {
+        return x;
     }
+
     virtual void updateMainPos(Rectangle mainPosRect) = 0;
+    void setMainCharacterDead(bool isDead) {
+        isMainCharDead = isDead;
+    }
 };
 
 

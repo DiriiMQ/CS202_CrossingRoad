@@ -12,13 +12,20 @@
 #include "gameObjects/Observer.h"
 #include "gameObjects/Message.h"
 #include "gameObjects/River.h"
+#include "gameObjects/MainChar.h"
+#include "Position.h"
 
 class GameScreen : public BaseScreen, public IObserver {
 private:
     AnimatedTexture *test{};
     vector<BaseGameObject*> map; // only road and nonroad, maybe river later
     bool hasInit = false;
+    MainChar *mainChar;
+    MainPos mainPos;
+    Rectangle mainPosRec;
     void randomNewBlock();
+
+    int score = 0;
 
 public:
     GameScreen() = default;
@@ -35,6 +42,7 @@ public:
 
     void load() override;
     void unload() override;
+    void NotifyMainPos();
 };
 
 

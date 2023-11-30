@@ -12,7 +12,7 @@ void NonRoad::handleInput() {
 }
 
 void NonRoad::draw() {
-    y += screenSpeed;
+//    y += screenSpeed;
 
     DrawRectangle(x, y, 1500, 50, GREEN);
     if(y > 768 + 48 * 3) { // TODO: Load from config file.

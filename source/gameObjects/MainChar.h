@@ -12,19 +12,22 @@ using namespace std;
 class MainChar : public BaseGameObject
 {
 protected: 
-    int stepSize=25;
+    int stepSizeX=25;
+    int stepSizeY=24;
     bool isDead=false;
+    float width = 25;
+    float height=40;
+
 public:
-    MainChar() : BaseGameObject(722,722) {}
+    MainChar() : BaseGameObject(722,626) {}
     void draw() override;
     void handleInput() override;
-    bool checkCollision(Vector2 pos,Vector2 size) override {
-        return false;
-    }
+
     Vector2 getPos();
     void updateMainPos(Rectangle mainPosRec) override {};
     Rectangle returnMainPos();
-    
+    void setDead() { isDead = true; };
+    bool getDead() { return isDead; }
 };
 
 #endif //CROSSING_ROAD_MAINCHAR_H

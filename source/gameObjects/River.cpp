@@ -12,7 +12,7 @@ void River::handleInput() {
 }
 
 void River::draw() {
-    y += screenSpeed;
+//    y += screenSpeed;
 
     DrawRectangle(x, y, 1500, 50, BLUE);
     if(y > 768 + 48 * 3) { // TODO: Load from config file.

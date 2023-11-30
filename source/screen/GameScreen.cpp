@@ -4,14 +4,31 @@
 
 #include "GameScreen.h"
 
+void GameScreen::NotifyMainPos()
+{
+    for (BaseGameObject *subject: map) {
+        subject->updateMainPos(mainPosRec);
+        subject->setMainCharacterDead(mainChar->getDead());
+    }
+}
+
 void GameScreen::handleInput() {
     for(BaseGameObject *block: map) {
         block->handleInput();
     }
+    if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && !mainChar->getDead()) {
+        score += 1;
+    }
+
+    mainChar->handleInput();
+    mainPos.pos=mainChar->getPos();
+    mainPosRec=mainChar->returnMainPos();
 }
 
 void GameScreen::update() {
-
+    mainPos.pos=mainChar->getPos();
+    mainPos.size=(Vector2){50,50};
+    NotifyMainPos();
 }
 
 void GameScreen::randomNewBlock() {
@@ -34,18 +51,26 @@ void GameScreen::randomNewBlock() {
 }
 
 void GameScreen::updateMessage(const Message message) {
-    if(message == Message::BLOCK_OUT_OF_SCREEN) {
+
+    if (message == Message::BLOCK_OUT_OF_SCREEN){
         cout << "UPDATE CALLED!" << endl;
         randomNewBlock();
         map.erase(map.begin());
     }
+    else if (message == Message::COLLISION) {
+        mainChar->setDead();
+//        for(BaseGameObject *obj : map) {
+//            if (obj) obj->setMove(false);
+//        }
+    }
+
 }
 
 void GameScreen::Observe() {
     for (BaseGameObject *subject: map) {
         subject->Attach(this);
     }
-
+    mainChar->Attach(this);
 }
 
 void GameScreen::draw() {
@@ -55,7 +80,13 @@ void GameScreen::draw() {
     }
     for(BaseGameObject *block: map) {
         block->draw();
+//        block->moveY(0.1);
     }
+    mainChar->draw();
+
+    DrawText(to_string(score).c_str(), 722, 50, 36, GRAY);
+//    mainChar->moveY(0.1);
+
 }
 
 void GameScreen::load() {
@@ -74,7 +105,7 @@ void GameScreen::unload() {
 void GameScreen::init() {
     cout << "Test Screen inti Called" << endl;
 
-
+    mainChar = new MainChar();
     for (int i = 0; i < 20; i++) {
         int randnum = rand();
         double x_direction = -100;
@@ -100,5 +131,7 @@ void GameScreen::init() {
 GameScreen::~GameScreen() {
     for(BaseGameObject *road: map)
         delete road;
+
+    delete mainChar;
 };
 
