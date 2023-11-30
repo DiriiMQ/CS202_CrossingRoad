@@ -9,6 +9,7 @@
 #include "Obstacle.h"
 #include <vector>
 #include <iostream>
+#include "screen/Position.h"
 
 using namespace std;
 
@@ -22,11 +23,13 @@ private:
 public:
 
     Road(double x, double y, int numObstacles = 5);
+
     ~Road();
     void draw() override;
     void handleInput() override;
 
     void updateMessage(const Message message) override;
+    void updateMainPos(Rectangle mainPosRect) override;
 };
 
 

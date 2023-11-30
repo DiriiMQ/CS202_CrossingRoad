@@ -4,10 +4,12 @@
 
 #ifndef CROSSING_ROAD_BASEGAMEOBJECT_H
 #define CROSSING_ROAD_BASEGAMEOBJECT_H
+#include "raylib.h"
 #include "Observer.h"
 #include <list>
 #include "Message.h"
 #include <iostream>
+#include "screen/Position.h"
 
 using namespace std;
 
@@ -16,9 +18,11 @@ protected:
     double x, y;
     double screenSpeed = 0.1;
     std::list<IObserver *> list_observer_;
+    
 
 public:
     BaseGameObject(double x, double y) : x(x), y(y) {};
+    BaseGameObject () {};
     virtual void draw() = 0;
     virtual void handleInput() = 0;
 
@@ -40,6 +44,11 @@ public:
     double getY() {
         return y;
     }
+    virtual bool checkCollision(Vector2 pos,Vector2 size)
+    {
+        return false;
+    }
+    virtual void updateMainPos(Rectangle mainPosRect) = 0;
 };
 
 

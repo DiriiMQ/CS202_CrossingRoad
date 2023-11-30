@@ -63,6 +63,25 @@ add_executable(crossing_road main.cpp
         source/screen/ImportScreens.h
         source/assetsLib/TexturesIO.cpp
         source/assetsLib/TexturesIO.h
-        source/screen/GameScreen.cpp source/screen/GameScreen.h source/gameObjects/Observer.h source/gameObjects/Road.cpp source/gameObjects/Road.h source/gameObjects/Obstacle.cpp source/gameObjects/Obstacle.h source/gameObjects/NonRoad.cpp source/gameObjects/NonRoad.h source/gameObjects/BaseGameObject.h source/gameObjects/Message.h
-        source/temp.cpp source/gameObjects/River.cpp source/gameObjects/River.h source/gameObjects/River.h)
-target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json raylib raylib_aseprite)
+        source/screen/GameScreen.cpp
+        source/screen/GameScreen.h
+        source/gameObjects/Observer.h
+        source/gameObjects/Road.cpp
+        source/gameObjects/Road.h
+        source/gameObjects/Obstacle.cpp
+        source/gameObjects/Obstacle.h
+        source/gameObjects/NonRoad.cpp
+        source/gameObjects/NonRoad.h
+        source/temp.cpp
+        source/gameObjects/River.cpp
+        source/gameObjects/River.h
+        source/gameObjects/River.h
+        source/gameObjects/BaseGameObject.h
+        source/gameObjects/Message.h
+        source/gameObjects/MainChar.h
+        source/gameObjects/MainChar.cpp
+        source/screen/CharScreen.cpp
+        source/screen/CharScreen.h
+        source/screen/Position.h
+        )
+target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json raylib)

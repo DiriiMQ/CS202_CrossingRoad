@@ -12,14 +12,16 @@
 #include "raylib-aseprite.h"
 
 class Obstacle : public BaseGameObject {
+    int x, y;
     int width = 50, height = 30; // Will be updated to sprite later
-    bool isMoving; // remove
-    int direction; // 1 for right -1 for left . 0 not moving
+    bool isMoving=true;
+    int direction; // 1 for right -1 for left
     std::list<IObserver *> list_observer_;
-    Aseprite *sprite;
-
+    //Vector2 mainPos;
+   // Vector2 mainSize=(Vector2) {50,50};
+    Rectangle mainPosRect;
 public:
-    Obstacle(double x, double y, int direction) : BaseGameObject(x, y), isMoving(true), direction(direction), sprite(nullptr) {}
+    Obstacle(double x, double y, int direction) : BaseGameObject(x, y), isMoving(true), direction(direction) {}
 
     void initObstacle();
     void draw();
@@ -27,9 +29,14 @@ public:
 
     bool checkCollision(Rectangle mainCharacter);
 
-    ~Obstacle() {
-        delete sprite;
-    }
+//    ~Obstacle() {
+//        delete sprite;
+//    }
+    bool checkCollision();
+    //void getPos(Vector2 mainPos,Vector2 mainSize);
+    void updateMainPos(Rectangle mainPosRect);
+
+   
 };
 
 #endif //CROSSING_ROAD_OBSTACLE_H

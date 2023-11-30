@@ -8,13 +8,15 @@
 #include "BaseScreen.h"
 #include "assetsLib/TexturesIO.h"
 #include "GameScreen.h"
+#include "CharScreen.h"
 
 class MenuScreen : public BaseScreen {
 private:
     AnimatedTexture *test{};
     bool hasInit = false;
     GameScreen testScreen;
-
+    CharScreen charScreen;
+     
 public:
     MenuScreen() = default;
     ~MenuScreen();

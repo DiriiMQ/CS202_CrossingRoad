@@ -9,7 +9,7 @@ enum class Message {
     BLOCK_OUT_OF_SCREEN,
     TRAFFIC_LIGHT_RED,
     TRAFFIC_LIGHT_GREEN,
-    LATER_3,
+    COLLISION,
 };
 
 #endif //CROSSING_ROAD_MESSAGE_H

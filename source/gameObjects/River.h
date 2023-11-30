@@ -11,11 +11,12 @@
 class River : public BaseGameObject {
 private:
     int stepSize = 48;
+    Rectangle mainPosRect;
 public:
     River(int x, int y) : BaseGameObject(x, y) {};
     void draw() override;
     void handleInput() override;
-
+    void updateMainPos(Rectangle mainPosRect) override {};
 };
 
 
