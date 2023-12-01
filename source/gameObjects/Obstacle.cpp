@@ -3,7 +3,6 @@
 //
 
 #include "Obstacle.h"
-#include "raylib-aseprite.h"
 
 using namespace std;
 

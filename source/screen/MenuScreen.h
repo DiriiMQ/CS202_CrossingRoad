@@ -15,7 +15,10 @@ private:
     AnimatedTexture *test{};
     bool hasInit = false;
     GameScreen testScreen;
-    Aseprite* testAseprite;
+
+    // for testing
+    Aseprite testAseprite;
+    AsepriteTag testWalkdown;
 
 public:
     MenuScreen() = default;

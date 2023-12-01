@@ -10,13 +10,13 @@
 
 class IObserver {
 public:
-    virtual ~IObserver() {};
+    virtual ~IObserver() = default;
     virtual void updateMessage(const Message message) = 0;
 };
 
 class ISubject {
 public:
-    virtual ~ISubject() {};
+    virtual ~ISubject() = default;
     virtual void Attach(IObserver *observer) = 0;
     virtual void Detach(IObserver *observer) = 0;
     virtual void Notify(Message mesage) = 0;

@@ -1,7 +1,7 @@
 //
 // Created by LENOVO on 11/16/2023.
 //
-#pragma once
+
 #ifndef CROSSING_ROAD_ROAD_H
 #define CROSSING_ROAD_ROAD_H
 #include "BaseGameObject.h"
@@ -9,7 +9,6 @@
 #include "Obstacle.h"
 #include <vector>
 #include <iostream>
-
 
 using namespace std;
 
@@ -22,7 +21,7 @@ private:
 public:
 
     Road(int x, int y, int numObstacles = 5);
-    ~Road();
+    ~Road() override;
     void draw() override;
     void handleInput() override;
 

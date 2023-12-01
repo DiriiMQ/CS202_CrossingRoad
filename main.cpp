@@ -1,5 +1,9 @@
 #include <iostream>
 
+// Do not change the order of first two lines below
+#define RAYLIB_ASEPRITE_IMPLEMENTATION
+#include "raylib-aseprite.h"
+
 #include "Window.h"
 #include "assetsLib/ConfigIO.h"
 #include "_raygui.h"

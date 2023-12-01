@@ -9,7 +9,7 @@ void MenuScreen::handleInput() {
 }
 
 void MenuScreen::update() {
-
+    UpdateAsepriteTag(&this->testWalkdown);
 }
 
 void MenuScreen::draw() {
@@ -27,6 +27,11 @@ void MenuScreen::draw() {
     if(GuiButton(buttonRect, "Click Me!")) {
         screenManager->setScreen(&testScreen);
     }
+
+    // Draw the first frame from the George sprite.
+    DrawAseprite(this->testAseprite, 0, 100, 400, WHITE);
+    // Draw the Walk Down animation.
+    DrawAsepriteTag(this->testWalkdown, 200, 400, WHITE);
 }
 
 void MenuScreen::load() {
@@ -46,10 +51,14 @@ void MenuScreen::init() {
     this->test = new AnimatedTexture("../assets/slime/Attack_1.png", 4);
     this->testScreen.setScreenManager(this->screenManager);
 
-    this->testAseprite = new Aseprite("../assets/animal/Cat.aseprite");
-
+    this->testAseprite = LoadAseprite("../assets/george.aseprite");
+    this->testWalkdown = LoadAsepriteTag(this->testAseprite, "Walk-Down");
+    this->testWalkdown.speed = 2;
+//    Aseprite testt = LoadAseprite("../assets/animal/Cat.aseprite");
 }
 
 MenuScreen::~MenuScreen() {
     delete test;
+
+    UnloadAseprite(this->testAseprite);
 }

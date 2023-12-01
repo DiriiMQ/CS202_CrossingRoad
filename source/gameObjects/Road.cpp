@@ -42,7 +42,7 @@ void Road::updateMessage(const Message message) {
         cout << randomX << endl;
         // TODO: update last x = last obstacle.x - randomX
         Obstacle *obs = new Obstacle( randomX, y, 1);
-        obs ->Attach(this);
+        obs->Attach(this);
         obstacles.push_back(obs);
 
         obstacles.erase(obstacles.begin()); // TODO: Fix this! This is a bug

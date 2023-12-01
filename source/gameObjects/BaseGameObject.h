@@ -4,6 +4,7 @@
 
 #ifndef CROSSING_ROAD_BASEGAMEOBJECT_H
 #define CROSSING_ROAD_BASEGAMEOBJECT_H
+
 #include "Observer.h"
 #include <list>
 #include "Message.h"
@@ -35,7 +36,6 @@ public:
             ++iterator;
         }
     }
-
 };
 
 
