@@ -10,6 +10,7 @@
 #include "GameScreen.h"
 #include "CharScreen.h"
 #include <string>
+#include "raylib-aseprite.h"
 
 class MenuScreen : public BaseScreen {
 private:
@@ -18,6 +19,11 @@ private:
     GameScreen testScreen;
     CharScreen charScreen;
      
+
+    // for testing
+    Aseprite testAseprite;
+    AsepriteTag testWalkdown;
+
 public:
     MenuScreen() = default;
     ~MenuScreen();

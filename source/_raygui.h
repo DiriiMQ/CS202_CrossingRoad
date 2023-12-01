@@ -11,9 +11,5 @@
 #include "raylib.h"
 #define RAYGUI_IMPLEMENTATION
 #include "raygui.h"
-#define RAYLIB_ASEPRITE_IMPLEMENTATION
-#include "raylib-aseprite.h"
-#define CUTE_ASEPRITE_IMPLEMENTATION
-#include "cute_aseprite.h"
 
 #endif //CROSSING_ROAD__RAYGUI_H

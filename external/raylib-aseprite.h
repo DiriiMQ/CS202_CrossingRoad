@@ -41,6 +41,68 @@ typedef struct Aseprite Aseprite;                                   // A loaded 
 typedef struct AsepriteTag AsepriteTag;                             // A tag sprite animation within an Aseprite file
 typedef struct AsepriteSlice AsepriteSlice;                         // A slice is a defined region within the Asperite.
 
+// fix for C++ compatibility
+#ifndef RAYLIB_ASEPRITE_IMPLEMENTATION
+// Have cute_aseprite report warnings through raylib.
+#define CUTE_ASEPRITE_WARNING(msg) TraceLog(LOG_WARNING, "ASEPRITE: %s (cute_headers.h:%i)", msg, __LINE__)
+
+#define CUTE_ASEPRITE_ASSERT(condition) do { if (!(condition)) { TraceLog(LOG_WARNING, "ASEPRITE: Failed assert \"%s\" in %s:%i", #condition, __FILE__, __LINE__); } } while(0)
+
+#define CUTE_ASEPRITE_ALLOC(size, ctx) MemAlloc((int)(size))
+#define CUTE_ASEPRITE_FREE(mem, ctx) MemFree((void*)(mem))
+
+#define CUTE_ASEPRITE_SEEK_SET 0
+#define CUTE_ASEPRITE_SEEK_END 0
+#define CUTE_ASEPRITE_FILE void
+#define CUTE_ASEPRITE_FOPEN(file, property) (CUTE_ASEPRITE_FILE*)file
+#define CUTE_ASEPRITE_FSEEK(fp, sz, pos) TraceLog(LOG_ERROR, "ASEPRITE: fseek() was removed")
+#define CUTE_ASEPRITE_FREAD(data, sz, num, fp) TraceLog(LOG_ERROR, "ASEPRITE: fread() was removed")
+#define CUTE_ASEPRITE_FTELL(fp) (0)
+#define CUTE_ASEPRITE_FCLOSE(fp) TraceLog(LOG_ERROR, "ASEPRITE: fclose() was removed")
+
+#include "cute_aseprite.h" // NOLINT
+
+/**
+ * Aseprite object containing a pointer to the ase_t* from cute_aseprite.h.
+ *
+ * @see LoadAseprite()
+ * @see UnloadAseprite()
+ */
+struct Aseprite {
+    ase_t* ase;         // Pointer to the cute_aseprite data.
+};
+
+/**
+ * Tag information from an Aseprite object.
+ *
+ * @see LoadAsepriteTag()
+ * @see LoadAsepriteTagFromIndex()
+ */
+struct AsepriteTag {
+    char* name;         // The name of the tag.
+    int currentFrame;   // The frame that the tag is currently on
+    float timer;        // The countdown timer in seconds
+    int direction;      // Whether we are moving forwards, or backwards through the frames
+    float speed;        // The animation speed factor (1 is normal speed, 2 is double speed)
+    Color color;        // The color provided for the tag
+    bool loop;          // Whether to continue to play the animation when the animation finishes
+    bool paused;        // Set to true to not progression of the animation
+    Aseprite aseprite;  // The loaded Aseprite file
+    ase_tag_t* tag;     // The active tag to act upon
+};
+
+/**
+ * Slice data for the Aseprite.
+ *
+ * @see LoadAsepriteSlice()
+ * @see https://www.aseprite.org/docs/slices/
+ */
+struct AsepriteSlice {
+    char* name;         // The name of the slice.
+    Rectangle bounds;   // The rectangle outer bounds for the slice.
+};
+#endif
+
 // Aseprite functions
 Aseprite LoadAseprite(const char* fileName);                        // Load an .aseprite file
 Aseprite LoadAsepriteFromMemory(unsigned char* fileData, unsigned int size);  // Load an aseprite file from memory
