@@ -24,7 +24,7 @@ private:
     int randomPercentage=25;
     TrafficLight* light;
    // bool isMainAlive=true;
-
+    
 public:
 
     Road(double x, double y, int numObstacles = 5);

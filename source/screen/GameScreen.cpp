@@ -13,6 +13,7 @@ void GameScreen::NotifyMainPos()
 }
 
 void GameScreen::handleInput() {
+    if (isGamePause) return;
     for(BaseGameObject *block: map) {
         block->handleInput();
     }
@@ -83,7 +84,11 @@ void GameScreen::draw() {
 //        block->moveY(0.1);
     }
     mainChar->draw();
-
+    Rectangle buttonRectPause {900, 50, 100, 100};
+    if (GuiButton(buttonRectPause, "Pause!")) {
+        NotifyPauseGame();
+        this->isGamePause=!(this->isGamePause);
+    }
     DrawText(to_string(score).c_str(), 722, 50, 36, GRAY);
 //    mainChar->moveY(0.1);
 
@@ -133,5 +138,10 @@ GameScreen::~GameScreen() {
         delete road;
 
     delete mainChar;
-};
-
+}
+void GameScreen::NotifyPauseGame()
+{
+    for (BaseGameObject *subject: map) {
+        subject->pauseGame();
+    }
+}

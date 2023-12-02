@@ -32,7 +32,7 @@ Road::Road(double x, double y, int numObstacles) : BaseGameObject(x, y) {
 
 void Road::handleInput() {
     // TODO: Update screen speed;
-
+  
     if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
         y += stepSize;
     }
@@ -44,6 +44,8 @@ void Road::handleInput() {
 //        if(!isMoving)
 //            obs->setMove(false);
     }
+
+    
 }
 
 void Road::draw() {
@@ -59,7 +61,7 @@ void Road::draw() {
     
     if (hasLight)
     {
-        if (!isMainCharDead) lightHandle();
+        if ((!isMainCharDead)&&(!isGamePause)) lightHandle();
         light->draw();
     }
         
@@ -68,7 +70,13 @@ void Road::draw() {
         obs->draw();
         if(isMainCharDead)
             obs->setMove(false);
-        if ((hasLight)&&(!isMainCharDead))
+        if (isGamePause)
+            obs->setMove(false);
+        else 
+        {
+            if ((!hasLight)or((hasLight)&&(!light->isRed))) obs->setMove(true);
+        }
+        if ((hasLight)&&(!isMainCharDead)&&(!isGamePause))
         {
             if (light->isRed)
             {
