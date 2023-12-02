@@ -10,6 +10,7 @@
 #include <vector>
 #include <iostream>
 #include "screen/Position.h"
+#include "TrafficLight.h"
 
 using namespace std;
 
@@ -19,6 +20,10 @@ private:
     vector<Obstacle*> obstacles;
     //Aseprite roadSprite = LoadAseprite("assets/1_lane.aseprite");
     int direction = 1;
+    bool hasLight;
+    int randomPercentage=25;
+    TrafficLight* light;
+   // bool isMainAlive=true;
 
 public:
 
@@ -31,6 +36,8 @@ public:
 
     void updateMessage(const Message message) override;
     void updateMainPos(Rectangle mainPosRect) override;
+    void randomLight();
+    void lightHandle();
 };
 
 

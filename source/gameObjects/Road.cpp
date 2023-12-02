@@ -4,7 +4,19 @@
 
 #include "Road.h"
 #include "temp.cpp"
-
+#include <ctime>
+#include <random>
+double lastTime=0;
+bool eventTriggeredLight(double interval)
+{
+    double currentTime=GetTime();
+    if (currentTime-lastTime >=interval)
+    {
+        lastTime=currentTime;
+        return true;
+    }
+    return false;
+}
 Road::Road(double x, double y, int numObstacles) : BaseGameObject(x, y) {
 
     for(int i = 0; i < numObstacles; i++) {
@@ -14,6 +26,7 @@ Road::Road(double x, double y, int numObstacles) : BaseGameObject(x, y) {
         obs->initObstacle();
         obstacles.push_back(obs);
     }
+    randomLight();
     
 }
 
@@ -23,7 +36,9 @@ void Road::handleInput() {
     if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
         y += stepSize;
     }
-
+  
+    if (hasLight) light->handleInput();
+    
     for(Obstacle *obs: obstacles) {
         obs->handleInput();
 //        if(!isMoving)
@@ -35,18 +50,41 @@ void Road::draw() {
 //    y += screenSpeed;
 
     DrawRectangle(x, y, 1500, 50, BLACK);
+   //else DrawRectangle(x, y, 1500, 50, ORANGE);
 //    Aseprite tempObj = LoadAseprite("../asset/trafficEnvironment/1_lane.aseprite");
 //    DrawAseprite(tempObj, 0, 500, y, BLACK);
-
+    
+        //DrawCircle(float(50),float(y+35),float(5),RED);
+    
+    
+    if (hasLight)
+    {
+        if (!isMainCharDead) lightHandle();
+        light->draw();
+    }
+        
+    
     for(Obstacle *obs: obstacles) {
         obs->draw();
         if(isMainCharDead)
             obs->setMove(false);
+        if ((hasLight)&&(!isMainCharDead))
+        {
+            if (light->isRed)
+            {
+                obs->setMove(false);
+            }
+            else 
+            {
+                obs->setMove(true);
+            }
+        }
     }
 
     if(y > 768 + 48 * 3) { // TODO: Load from config file.
         BaseGameObject::Notify();
     }
+    
 }
 
 void Road::updateMessage(const Message message) {
@@ -67,12 +105,14 @@ void Road::updateMessage(const Message message) {
             obs->setMove(false);
         }
     }
+    
 }
 
 Road::~Road() {
     for (Obstacle *obs: obstacles) {
         delete obs;
     }
+    delete light;
 };
 void Road::updateMainPos(Rectangle mainPosRect)
 {
@@ -80,5 +120,41 @@ void Road::updateMainPos(Rectangle mainPosRect)
     {
        // obs->getPos(mainPos.pos,mainPos.size);
        obs->updateMainPos(mainPosRect);
+    }
+}
+void Road::randomLight()
+{
+   std::default_random_engine randomEngine(std::random_device{}());
+    std::uniform_int_distribution<int> distribution(0,99);
+    int r=distribution(randomEngine);
+    if (r<randomPercentage)
+    {
+        hasLight=true;
+        light=new TrafficLight;
+        light->init(x,y);
+    }
+    else hasLight=false;
+}
+void Road::lightHandle()
+{
+    if (hasLight)
+    {
+        if (!light->isRed)
+        {
+            std::default_random_engine randomEngine(std::random_device{}());
+            std::uniform_int_distribution<int> distribution(5,10);
+            int interval=distribution(randomEngine);
+            if (eventTriggeredLight(double(interval))) {
+                light->isRed=true;
+            }
+            
+        }
+        else 
+        {
+            if (eventTriggeredLight(5))
+            {
+                light->isRed=false;
+            }
+        }
     }
 }
