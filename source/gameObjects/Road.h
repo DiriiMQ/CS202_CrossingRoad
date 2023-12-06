@@ -17,7 +17,7 @@ class Road : public BaseGameObject, public IObserver {
 private:
     int stepSize = 48;
     vector<Obstacle*> obstacles;
-    //Aseprite roadSprite = LoadAseprite("assets/1_lane.aseprite");
+    Aseprite roadSprite;
     int direction = 1;
 
 public:

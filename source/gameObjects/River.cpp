@@ -14,7 +14,7 @@ void River::handleInput() {
 void River::draw() {
 //    y += screenSpeed;
 
-    DrawRectangle(x, y, 1500, 50, BLUE);
+    DrawRectangle(x, y, 1500, 50, Color{134, 180, 188, 255});
     if(y > 768 + 48 * 3) { // TODO: Load from config file.
         BaseGameObject::Notify();
     }

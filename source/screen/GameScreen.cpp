@@ -13,16 +13,19 @@ void GameScreen::NotifyMainPos()
 }
 
 void GameScreen::handleInput() {
-    for(BaseGameObject *block: map) {
-        block->handleInput();
-    }
-    if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && !mainChar->getDead()) {
-        score += 1;
-    }
 
-    mainChar->handleInput();
-    mainPos.pos=mainChar->getPos();
-    mainPosRec=mainChar->returnMainPos();
+    if (!mainChar->getDead()) {
+        for (BaseGameObject *block: map) {
+            block->handleInput();
+        }
+        if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && !mainChar->getDead()) {
+            score += 1;
+        }
+
+        mainChar->handleInput();
+        mainPos.pos = mainChar->getPos();
+        mainPosRec = mainChar->returnMainPos();
+    }
 }
 
 void GameScreen::update() {

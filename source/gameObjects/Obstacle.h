@@ -11,15 +11,14 @@
 #include <list>
 #include "raylib-aseprite.h"
 //#include "_raygui.h"
-//#include "raylib-aseprite.h"
+#include "raylib-aseprite.h"
 //#include "cute_aseprite.h"
 
 class Obstacle : public BaseGameObject {
-    int width = 50, height = 30; // Will be updated to sprite later
+    int width = 0, height = 0;
     int direction; // 1 for right -1 for left
+    Aseprite sprite;
     std::list<IObserver *> list_observer_;
-    //Vector2 mainPos;
-   // Vector2 mainSize=(Vector2) {50,50};
     Rectangle mainPosRect;
     bool isMoving;
 public:
@@ -29,9 +28,7 @@ public:
     void draw();
     void handleInput();
 
-//    ~Obstacle() {
-//        delete sprite;
-//    }
+    ~Obstacle() {}
     bool checkCollision();
     //void getPos(Vector2 mainPos,Vector2 mainSize);
     void updateMainPos(Rectangle mainPosRect);

@@ -6,6 +6,7 @@
 #include "temp.cpp"
 
 Road::Road(double x, double y, int numObstacles) : BaseGameObject(x, y) {
+    roadSprite = LoadAseprite("../assets/trafficEnvironment/2_lane.aseprite");
 
     for(int i = 0; i < numObstacles; i++) {
         int randomX = rand() % 500;
@@ -34,9 +35,10 @@ void Road::handleInput() {
 void Road::draw() {
 //    y += screenSpeed;
 
-    DrawRectangle(x, y, 1500, 50, BLACK);
-//    Aseprite tempObj = LoadAseprite("../asset/trafficEnvironment/1_lane.aseprite");
-//    DrawAseprite(tempObj, 0, 500, y, BLACK);
+//    DrawRectangle(x, y, 1500, 50, BLACK);
+    Rectangle rectangle = {(float) x, (float) y, 1500, 50};
+
+    DrawAsepritePro(roadSprite, 0, rectangle, {(float) 0, (float)0}, 0, WHITE);
 
     for(Obstacle *obs: obstacles) {
         obs->draw();
@@ -57,7 +59,7 @@ void Road::updateMessage(const Message message) {
         double newPositionX = obstacles[obstacles.size() - 1]->getX() - randomX;
         Obstacle *obs = new Obstacle( newPositionX, y, 1);
         obs ->Attach(this);
-//        obs->initObstacle();
+        obs->initObstacle();
         obstacles.push_back(obs);
         obstacles.erase(obstacles.begin()); // TODO: Fix this! This is a bug
     }

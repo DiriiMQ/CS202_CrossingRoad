@@ -15,6 +15,8 @@ void MainChar::draw()
 {
 //    y += screenSpeed;
     DrawRectangle(x, y, width, height, YELLOW);
+
+    DrawAseprite(sprite,5,x,y, YELLOW);
 }
 void MainChar::handleInput()
 {

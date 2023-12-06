@@ -6,6 +6,7 @@
 #include <vector>
 #include <iostream>
 #include "assetsLib/ConfigIO.h"
+#include "raylib-aseprite.h"
 
 using namespace std;
 //class mainChar : public Obstacle
@@ -17,9 +18,12 @@ protected:
     bool isDead=false;
     float width = 25;
     float height=40;
+    Aseprite sprite;
 
 public:
-    MainChar() : BaseGameObject(722,626) {}
+    MainChar() : BaseGameObject(722,626) {
+        sprite = LoadAseprite("../assets/george.aseprite");
+    }
     void draw() override;
     void handleInput() override;
 

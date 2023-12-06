@@ -3,7 +3,6 @@
 //
 #include "Obstacle.h"
 #include "temp.cpp"
-//#include "raylib-aseprite.h"
 
 using namespace std;
 
@@ -18,8 +17,10 @@ void Obstacle::handleInput() {
 void Obstacle::draw() {
 //    y += screenSpeed;
 
-    DrawRectangle(x, y, width, height, WHITE);
+    Rectangle boxRect{(float) x, (float) y, (float) (width * 1.5), (float) (height * 1.5)};
+//    DrawRectangleRec(boxRect, WHITE);
 
+    DrawAsepritePro(sprite, 5, boxRect, {(float)0, (float)0}, 0, WHITE);
 //    isMoving=true;
     if (isMoving) {
         if (!checkCollision())
@@ -36,8 +37,9 @@ void Obstacle::draw() {
     }
 }
 void Obstacle::initObstacle() {
-//    Aseprite temp = LoadAseprite("../assets/vehicle/Bus.aseprite");
-//    sprite = new Aseprite(temp);
+    sprite = LoadAseprite("../assets/vehicle/NoRoofCar.aseprite");
+    width = GetAsepriteWidth(sprite);
+    height = GetAsepriteHeight(sprite);
 }
 
 void Obstacle::updateMainPos(Rectangle mainPosRect)
@@ -49,6 +51,6 @@ bool Obstacle::checkCollision()
 {
     
     //return (((this->x+50>=mainPos.x)&&(this->x+50<=mainPos.x+50))&& ((this->y+30>mainPos.y)&&(this->y+30<mainPos.y+50)));
-    Rectangle rect1 = {float (x),float (y),50,30};
+    Rectangle rect1 = {float (x),float (y), (float) width,(float) height};
     return CheckCollisionRecs(rect1,mainPosRect);
 }
