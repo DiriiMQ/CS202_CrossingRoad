@@ -7,6 +7,7 @@
 
 #include "nlohmann/json.hpp"
 #include <mutex>
+#include <utility>
 
 using json = nlohmann::json;
 
@@ -26,34 +27,43 @@ public:
 };
 
 class BasicConfig : public ConfigIO {
-public:
-    static constexpr char BASIC_CONFIG_PATH[] = "../assets/configs/basic.json";
+private:
+    std::string BASIC_CONFIG_PATH = "../assets/configs/basic.json";
 
-    BasicConfig();
+public:
+    BasicConfig() = default;
+    explicit BasicConfig(std::string path);
     ~BasicConfig();
 
     void loadConfig();
     void saveConfig();
 };
 
+namespace ConfigType {
+    enum ConfigType {
+        BASIC,
+        LEADERBOARD
+    };
+}
+
 class BasicConfigInstance {
 private:
     static BasicConfigInstance *instance;
     static std::mutex _mutex;
+    static BasicConfig config[2];
     
 protected:
     BasicConfigInstance() = default;
     ~BasicConfigInstance() = default;
-    BasicConfig config;
 
 public:
     BasicConfigInstance(const BasicConfigInstance&) = delete;
     BasicConfigInstance& operator=(const BasicConfigInstance&) = delete;
     
-    static BasicConfigInstance *getInstance();
-    static void destroyInstance();
-    json& getData();
-    BasicConfig& getConfig();
+    static BasicConfigInstance &getInstance(int id = 0);
+//    static void destroyInstance(int id);
+    static json& getData(int id = 0);
+    static BasicConfig& getConfig(int id = 0);
 };
 
 #endif //CROSSING_ROAD_CONFIGIO_H
