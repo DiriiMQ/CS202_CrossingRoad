@@ -43,45 +43,51 @@ void ConfigIO::setConfig(json _config) {
 }
 
 void BasicConfig::loadConfig() {
-    ConfigIO::loadConfig(BASIC_CONFIG_PATH);
+    ConfigIO::loadConfig(BASIC_CONFIG_PATH.c_str());
 }
 
 void BasicConfig::saveConfig() {
-    ConfigIO::saveConfig(BASIC_CONFIG_PATH);
-}
-
-BasicConfig::BasicConfig() {
-    this->loadConfig();
+    ConfigIO::saveConfig(BASIC_CONFIG_PATH.c_str());
 }
 
 BasicConfig::~BasicConfig() {
     this->saveConfig();
+
+    std::cout << "BasicConfig::~BasicConfig() called!" << std::endl;
+}
+
+BasicConfig::BasicConfig(std::string path) : BASIC_CONFIG_PATH(std::move(path)) {
+    this->loadConfig();
 }
 
 BasicConfigInstance* BasicConfigInstance::instance = nullptr;
 std::mutex BasicConfigInstance::_mutex;
+BasicConfig BasicConfigInstance::config[2] = {
+        BasicConfig("../assets/configs/basic.json"),
+        BasicConfig("../assets/configs/leaderboard.json")
+};
 
-BasicConfigInstance *BasicConfigInstance::getInstance() {
+BasicConfigInstance &BasicConfigInstance::getInstance(int id) {
     std::lock_guard<std::mutex> lock(_mutex);
-    if (instance == nullptr) {
-        instance = new BasicConfigInstance();
-    }
-    return instance;
+//    if (BasicConfigInstance::instance[id] == nullptr) {
+//        instance = new BasicConfigInstance();
+//    }
+    return BasicConfigInstance::instance[id];
 }
 
-json &BasicConfigInstance::getData() {
-    return this->config.getConfig();
+json &BasicConfigInstance::getData(int id) {
+    return BasicConfigInstance::config[id].getConfig();
 }
 
-BasicConfig &BasicConfigInstance::getConfig() {
-    return this->config;
+BasicConfig &BasicConfigInstance::getConfig(int id) {
+    return BasicConfigInstance::config[id];
 }
 
-void BasicConfigInstance::destroyInstance() {
-    std::lock_guard<std::mutex> lock(_mutex);
-    if (instance != nullptr) {
-        delete instance;
-        instance = nullptr;
-    }
-}
+//void BasicConfigInstance::destroyInstance(int id = 0) {
+//    std::lock_guard<std::mutex> lock(_mutex);
+//    if (instance != nullptr) {
+//        delete instance;
+//        instance = nullptr;
+//    }
+//}
 

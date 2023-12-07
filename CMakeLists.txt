@@ -49,8 +49,6 @@ include_directories(${CMAKE_SOURCE_DIR}/source ${CMAKE_SOURCE_DIR}/external)
 add_subdirectory(external)
 
 add_executable(crossing_road main.cpp
-#        external/raygui.h
-#        external/cute_aseprite.h
         external/raylib-aseprite.h
         source/Window.cpp
         source/Window.h

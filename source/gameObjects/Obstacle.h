@@ -1,7 +1,7 @@
 //
 // Created by LENOVO on 11/16/2023.
 //
-#pragma once
+
 #ifndef CROSSING_ROAD_OBSTACLE_H
 #define CROSSING_ROAD_OBSTACLE_H
 
@@ -10,9 +10,6 @@
 #include "BaseGameObject.h"
 #include <list>
 #include "raylib-aseprite.h"
-//#include "_raygui.h"
-#include "raylib-aseprite.h"
-//#include "cute_aseprite.h"
 
 class Obstacle : public BaseGameObject {
     int width = 0, height = 0;
@@ -35,7 +32,7 @@ public:
     void setMove(bool move) {
         isMoving = move;
     }
-   
+
 };
 
 #endif //CROSSING_ROAD_OBSTACLE_H

@@ -12,11 +12,10 @@ void Window::init() {
 }
 
 void Window::presetWindow() {
-    BasicConfigInstance *config = BasicConfigInstance::getInstance();
-    int screenWidth = config->getData()["SCREEN"]["SIZE"]["WIDTH"];
-    int screenHeight = config->getData()["SCREEN"]["SIZE"]["HEIGHT"];
-    std::string screenTitle = config->getData()["SCREEN"]["TITLE"];
-    int fps = config->getData()["SCREEN"]["FRAMES_PER_SECOND"];
+    int screenWidth = BasicConfigInstance::getData()["SCREEN"]["SIZE"]["WIDTH"];
+    int screenHeight = BasicConfigInstance::getData()["SCREEN"]["SIZE"]["HEIGHT"];
+    std::string screenTitle = BasicConfigInstance::getData()["SCREEN"]["TITLE"];
+    int fps = BasicConfigInstance::getData()["SCREEN"]["FRAMES_PER_SECOND"];
 //    std::cerr << "Window::presetWindow " << screenWidth << " " << screenHeight << " " << screenTitle << " " << fps << std::endl;
 
     InitWindow(
@@ -46,6 +45,4 @@ void Window::run() {
         this->screenManager.draw();
         EndDrawing();
     }
-
-    CloseWindow();
 }

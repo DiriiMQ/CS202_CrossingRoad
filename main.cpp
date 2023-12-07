@@ -7,16 +7,16 @@
 #include "Window.h"
 #include "assetsLib/ConfigIO.h"
 #include "_raygui.h"
-#define RAYLIB_ASEPRITE_IMPLEMENTATION
 
 int main() {
     srand(time(0));
 
-    Window window;
-    window.run();
-//    BasicConfigInstance *config = BasicConfigInstance::getInstance();
-//    config->getData()["SCREEN"]["TEST"] = 10;
-//    std::cout << config->getData()["SCREEN"]["TEST"] << std::endl;
-    BasicConfigInstance::destroyInstance();
+    auto* window = new Window();
+    window->run();
+
+//    BasicConfigInstance::getData(ConfigType::LEADERBOARD)["Quang"] = 100;
+
+    delete window;
+    CloseWindow();
     return 0;
 }
