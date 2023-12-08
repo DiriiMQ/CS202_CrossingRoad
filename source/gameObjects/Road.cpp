@@ -15,7 +15,7 @@ Road::Road(double x, double y, int numObstacles) : BaseGameObject(x, y) {
 
     int prevPosition = -300;
     for(int i = 0; i < numObstacles; i++) {
-        int randomX = rand() % 300;
+        int randomX = rand() % 500;
         Obstacle *obs = new Obstacle(prevPosition + randomX, y, direction);
         prevPosition += randomX;
         obs->Attach(this);
@@ -65,7 +65,7 @@ void Road::updateMessage(const Message message) {
         if (direction == -1)
             newPositionX = 1336 + 50;
         else
-            newPositionX = obstacles[obstacles.size() - 1]->getX() - 1366;
+            newPositionX = obstacles[obstacles.size() - 1]->getX() - 1366-50;
 
         Obstacle *obs = new Obstacle( newPositionX, y, direction);
         obs ->Attach(this);

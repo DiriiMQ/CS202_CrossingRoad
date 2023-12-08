@@ -35,7 +35,7 @@ void Obstacle::draw() {
             isMoving = false;
         }
     }
-    if((direction == 1 && x > 1366 + 50) || (direction == -1 && x < 0)) { // TODO: Load from config file
+    if((direction == 1 && x > 1366 + 50) || (direction == -1 && x < -100)) { // TODO: Load from config file
         BaseGameObject::Notify(Message::BLOCK_OUT_OF_SCREEN);
     }
 }

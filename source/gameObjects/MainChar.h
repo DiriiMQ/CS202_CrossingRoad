@@ -16,8 +16,8 @@ protected:
     int stepSizeX=25;
     int stepSizeY=24;
     bool isDead=false;
-    float width = 48;
-    float height=48;
+    float width = 40;
+    float height=40;
     Aseprite sprite;
     AsepriteTag spriteTag;
 
