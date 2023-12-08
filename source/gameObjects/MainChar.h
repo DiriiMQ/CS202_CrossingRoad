@@ -16,22 +16,26 @@ protected:
     int stepSizeX=25;
     int stepSizeY=24;
     bool isDead=false;
-    float width = 25;
-    float height=40;
+    float width = 48;
+    float height=48;
     Aseprite sprite;
+    AsepriteTag spriteTag;
 
 public:
     MainChar() : BaseGameObject(722,626) {
         sprite = LoadAseprite("../assets/george.aseprite");
+        spriteTag = LoadAsepriteTag(sprite, "Walk-Up");
+
     }
     void draw() override;
     void handleInput() override;
 
-    Vector2 getPos();
+
     void updateMainPos(Rectangle mainPosRec) override {};
     Rectangle returnMainPos();
     void setDead() { isDead = true; };
     bool getDead() { return isDead; }
+    ~MainChar();
 };
 
 #endif //CROSSING_ROAD_MAINCHAR_H

@@ -80,8 +80,6 @@ add_executable(crossing_road main.cpp
         source/gameObjects/Message.h
         source/gameObjects/MainChar.h
         source/gameObjects/MainChar.cpp
-        source/screen/CharScreen.cpp
-        source/screen/CharScreen.h
         source/screen/Position.h
         source/gameObjects/MainChar.cpp)
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json raylib)

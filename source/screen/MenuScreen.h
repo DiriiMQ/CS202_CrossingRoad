@@ -8,7 +8,6 @@
 #include "BaseScreen.h"
 #include "assetsLib/TexturesIO.h"
 #include "GameScreen.h"
-#include "CharScreen.h"
 #include <string>
 #include "raylib-aseprite.h"
 
@@ -17,8 +16,6 @@ private:
     AnimatedTexture *test{};
     bool hasInit = false;
     GameScreen testScreen;
-    CharScreen charScreen;
-     
 
     // for testing
     Aseprite testAseprite;

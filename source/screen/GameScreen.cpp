@@ -7,7 +7,7 @@
 void GameScreen::NotifyMainPos()
 {
     for (BaseGameObject *subject: map) {
-        subject->updateMainPos(mainPosRec);
+        subject->updateMainPos(mainChar->returnMainPos());
         subject->setMainCharacterDead(mainChar->getDead());
     }
 }
@@ -23,14 +23,10 @@ void GameScreen::handleInput() {
         }
 
         mainChar->handleInput();
-        mainPos.pos = mainChar->getPos();
-        mainPosRec = mainChar->returnMainPos();
     }
 }
 
 void GameScreen::update() {
-    mainPos.pos=mainChar->getPos();
-    mainPos.size=(Vector2){50,50};
     NotifyMainPos();
 }
 

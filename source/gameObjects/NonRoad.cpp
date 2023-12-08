@@ -14,7 +14,7 @@ void NonRoad::handleInput() {
 void NonRoad::draw() {
 //    y += screenSpeed;
 
-    DrawRectangle(x, y, 1500, 50,  Color{122, 182, 120, 255});
+    DrawRectangle(x, y, 1500, 50,  Color{205, 223, 108, 255});
 //    Rectangle rectangle = {(float) x, (float) y, 1500, 60};
 
 //    DrawAsepritePro(sprite, 0, rectangle, {(float) 0, (float)0}, 0, WHITE);

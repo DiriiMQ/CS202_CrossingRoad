@@ -15,7 +15,7 @@ using namespace std;
 
 class BaseGameObject : public ISubject {
 protected:
-    double x, y;
+    int x, y;
     double screenSpeed = 0.1;
     std::list<IObserver *> list_observer_;
     bool isMainCharDead = false;

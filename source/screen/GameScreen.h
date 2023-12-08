@@ -21,8 +21,8 @@ private:
     vector<BaseGameObject*> map; // only road and nonroad, maybe river later
     bool hasInit = false;
     MainChar *mainChar;
-    MainPos mainPos;
-    Rectangle mainPosRec;
+//    MainPos mainPos;
+//    Rectangle mainPosRec;
     void randomNewBlock();
 
     int score = 0;

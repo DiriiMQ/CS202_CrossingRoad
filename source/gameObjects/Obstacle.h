@@ -15,6 +15,8 @@ class Obstacle : public BaseGameObject {
     int width = 0, height = 0;
     int direction; // 1 for right -1 for left
     Aseprite sprite;
+    AsepriteTag spriteTag;
+
     std::list<IObserver *> list_observer_;
     Rectangle mainPosRect;
     bool isMoving;

@@ -7,10 +7,17 @@
 
 Road::Road(double x, double y, int numObstacles) : BaseGameObject(x, y) {
     roadSprite = LoadAseprite("../assets/trafficEnvironment/2_lane.aseprite");
+    int randNum = rand();
+    if (randNum % 2)
+        direction = 1;
+    else
+        direction = -1;
 
+    int prevPosition = -300;
     for(int i = 0; i < numObstacles; i++) {
-        int randomX = rand() % 500;
-        Obstacle *obs = new Obstacle(randomX, y, direction);
+        int randomX = rand() % 300;
+        Obstacle *obs = new Obstacle(prevPosition + randomX, y, direction);
+        prevPosition += randomX;
         obs->Attach(this);
         obs->initObstacle();
         obstacles.push_back(obs);
@@ -53,15 +60,18 @@ void Road::draw() {
 
 void Road::updateMessage(const Message message) {
     if(message == Message::BLOCK_OUT_OF_SCREEN) {
-        int randomX = rand() % 500;
-        cout << randomX << endl;
-        // TODO: update last x = last obstacle.x - randomX
-        double newPositionX = obstacles[obstacles.size() - 1]->getX() - randomX;
-        Obstacle *obs = new Obstacle( newPositionX, y, 1);
+        double newPositionX;
+
+        if (direction == -1)
+            newPositionX = 1336 + 50;
+        else
+            newPositionX = obstacles[obstacles.size() - 1]->getX() - 1366;
+
+        Obstacle *obs = new Obstacle( newPositionX, y, direction);
         obs ->Attach(this);
         obs->initObstacle();
         obstacles.push_back(obs);
-        obstacles.erase(obstacles.begin()); // TODO: Fix this! This is a bug
+        obstacles.erase(obstacles.begin());
     }
     else if(message==Message::COLLISION) {
         BaseGameObject::Notify(Message::COLLISION);

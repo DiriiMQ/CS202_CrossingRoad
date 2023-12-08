@@ -10,6 +10,18 @@
         "TITLE": "Crossy Road"
     },
     "TEXTURES": {
+        "OBSTACLES": [
+            "../assets/vehicle/NoRoofCar.aseprite",
+            "../assets/vehicle/Bus.aseprite",
+            "../assets/vehicle/Car.aseprite",
+            "../assets/vehicle/Truck.aseprite"
+        ],
+        "OBSTACLES_TAG": [
+            "NoRoofCar",
+            "Bus",
+            "Car",
+            "Truck"
+        ],
         "SLIME": {
             "Idle": {
                 "NUM_FRAMES": 8,

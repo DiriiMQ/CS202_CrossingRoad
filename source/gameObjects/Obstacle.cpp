@@ -3,11 +3,12 @@
 //
 #include "Obstacle.h"
 #include "temp.cpp"
+#include "../assetsLib/ConfigIO.h"
 
 using namespace std;
 
 void Obstacle::handleInput() {
-
+    UpdateAsepriteTag(&spriteTag);
     if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
         if (!checkCollision())
             y += 48;
@@ -20,7 +21,7 @@ void Obstacle::draw() {
     Rectangle boxRect{(float) x, (float) y, (float) (width * 1.5), (float) (height * 1.5)};
 //    DrawRectangleRec(boxRect, WHITE);
 
-    DrawAsepritePro(sprite, 5, boxRect, {(float)0, (float)0}, 0, WHITE);
+    DrawAsepriteTagPro(spriteTag, boxRect, {(float)0, (float)0}, 0, WHITE);
 //    isMoving=true;
     if (isMoving) {
         if (!checkCollision())
@@ -28,16 +29,26 @@ void Obstacle::draw() {
             x += direction;
         }
         else {
+            cout << "COLLISION with object at position: (" << x << ", " << y << ")" << endl;
+            cout << "Main Char position: (" << mainPosRect.x << ", " << mainPosRect.y << ")" << endl;
             BaseGameObject::Notify(Message::COLLISION);
             isMoving = false;
         }
     }
-    if(x > 1366 + 50) { // TODO: Load from config file
+    if((direction == 1 && x > 1366 + 50) || (direction == -1 && x < 0)) { // TODO: Load from config file
         BaseGameObject::Notify(Message::BLOCK_OUT_OF_SCREEN);
     }
 }
 void Obstacle::initObstacle() {
-    sprite = LoadAseprite("../assets/vehicle/NoRoofCar.aseprite");
+
+    vector<string> textureList = BasicConfigInstance::getData(ConfigType::BASIC)["TEXTURES"]["OBSTACLES"];
+    vector<string> tagList = BasicConfigInstance::getData(ConfigType::BASIC)["TEXTURES"]["OBSTACLES_TAG"];
+
+    int randIndex = rand() % textureList.size();
+
+    sprite = LoadAseprite(textureList[randIndex].c_str());
+    spriteTag = LoadAsepriteTag(sprite, tagList[randIndex].c_str());
+
     width = GetAsepriteWidth(sprite);
     height = GetAsepriteHeight(sprite);
 }
