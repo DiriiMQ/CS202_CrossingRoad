@@ -10,11 +10,3 @@ void TrafficLight::draw()
     if (isRed) DrawCircle(float(35),float(y+35),float(5),RED);
     else DrawCircle(float(35),float(y+35),float(5),BLUE);
 }
-void TrafficLight::setRed()
-{
-    if (!isRed) isRed=true;
-}
-void TrafficLight::setGreen()
-{
-    if (isRed) isRed=false;
-}

@@ -31,9 +31,7 @@ public:
     bool checkCollision();
     //void getPos(Vector2 mainPos,Vector2 mainSize);
     void updateMainPos(Rectangle mainPosRect);
-    void setMove(bool move) {
-        isMoving = move;
-    }
+    void setMove(bool move);
 
 };
 

@@ -6,6 +6,8 @@
 
 #include "Window.h"
 #include "assetsLib/ConfigIO.h"
+#include "stuff/RandomNumber.h"
+
 #include "_raygui.h"
 
 int main() {
@@ -18,5 +20,7 @@ int main() {
 
     delete window;
     CloseWindow();
+
+//    std::cerr << RandomNumber::getInstance().getRandomNumber(0, 100) << std::endl;
     return 0;
 }

@@ -28,10 +28,10 @@ Road::Road(int x, int y, int numObstacles) : BaseGameObject(x, y) {
 
     int prevPosition = direction == 1 ? -300 : 1366 + 300; // TODO: Fix hard code
     for(int i = 0; i < numObstacles; i++) {
-        int randomX = rand() % 500;
+        int randomX = rand() % 300;
         randomX = direction == 1 ? randomX : -randomX;
         Obstacle *obs = new Obstacle(prevPosition + randomX, y, direction);
-        prevPosition += randomX;
+        prevPosition += direction == 1 ? 300 : -300;
         obs->Attach(this);
         obs->initObstacle();
         obstacles.push_back(obs);
@@ -83,17 +83,6 @@ void Road::draw() {
             if ((!hasLight) || ((hasLight) && (!light->isRed)))
                 obs->setMove(true);
         }
-//        if ((hasLight)&&(!isMainCharDead)&&(!isGamePause))
-//        {
-//            if (light->isRed)
-//            {
-//                obs->setMove(false);
-//            }
-//            else
-//            {
-//                obs->setMove(true);
-//            }
-//        }
     }
 
     if(y > 768 + 48 * 3) { // TODO: Load from config file.
@@ -107,12 +96,12 @@ void Road::updateMessage(const Message message) {
         double newPositionX;
 
         if (direction == -1)
-            newPositionX = 1336 + 50;
+            newPositionX = 1336 + 100;
         else
-            newPositionX = obstacles[obstacles.size() - 1]->getX() - 1366-50;
+            newPositionX = -100;
 
         Obstacle *obs = new Obstacle( newPositionX, y, direction);
-        obs ->Attach(this);
+        obs->Attach(this);
         obs->initObstacle();
         obstacles.push_back(obs);
         if (obstacles.size() > numObstacles)
@@ -131,7 +120,8 @@ Road::~Road() {
     for (Obstacle *obs: obstacles) {
         delete obs;
     }
-    delete light;
+    if (hasLight)
+        delete light;
 };
 void Road::updateMainPos(Rectangle mainPosRect)
 {

@@ -3,14 +3,17 @@
 
 #include "BaseGameObject.h"
 #include <ctime>
+#include "raylib-aseprite.h"
 
 class TrafficLight : public BaseGameObject {
+private:
+    Aseprite sprite;
+    AsepriteTag tag;
 public:
     void init(double x,double y);
     bool isRed=false;
     void draw() override;
-    void setRed();
-    void setGreen();
+
     void handleInput() override {
         if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP))
         {
