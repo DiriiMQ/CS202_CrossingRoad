@@ -3,7 +3,7 @@
 //
 #include "Obstacle.h"
 #include "temp.cpp"
-#include "../assetsLib/ConfigIO.h"
+#include "assetsLib/ConfigIO.h"
 
 using namespace std;
 
@@ -64,4 +64,8 @@ bool Obstacle::checkCollision()
     //return (((this->x+50>=mainPos.x)&&(this->x+50<=mainPos.x+50))&& ((this->y+30>mainPos.y)&&(this->y+30<mainPos.y+50)));
     Rectangle rect1 = {float (x),float (y), (float) width,(float) height};
     return CheckCollisionRecs(rect1,mainPosRect);
+}
+
+void Obstacle::setMove(bool move) {
+    isMoving = move;
 }
