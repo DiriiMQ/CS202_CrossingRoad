@@ -8,6 +8,7 @@
 #include "raylib.h"
 #include "Observer.h"
 #include "BaseGameObject.h"
+#include "stuff/RandomNumber.h"
 #include <list>
 #include "raylib-aseprite.h"
 
@@ -20,6 +21,7 @@ class Obstacle : public BaseGameObject {
     std::list<IObserver *> list_observer_;
     Rectangle mainPosRect;
     bool isMoving;
+
 public:
     Obstacle(double x, double y, int direction) : BaseGameObject(x, y), isMoving(true), direction(direction) {}
 
@@ -33,6 +35,8 @@ public:
     void updateMainPos(Rectangle mainPosRect);
     void setMove(bool move);
 
+    int getWidth() const;
+    int getHeight() const;
 };
 
 #endif //CROSSING_ROAD_OBSTACLE_H

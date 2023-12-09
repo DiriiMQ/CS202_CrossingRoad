@@ -40,11 +40,10 @@ void Obstacle::draw() {
     }
 }
 void Obstacle::initObstacle() {
-
     vector<string> textureList = BasicConfigInstance::getData(ConfigType::BASIC)["TEXTURES"]["OBSTACLES"];
     vector<string> tagList = BasicConfigInstance::getData(ConfigType::BASIC)["TEXTURES"]["OBSTACLES_TAG"];
 
-    int randIndex = rand() % textureList.size();
+    int randIndex = RandomNumber::getInstance().getRandomNumber(0, textureList.size() - 1);
 
     sprite = LoadAseprite(textureList[randIndex].c_str());
     spriteTag = LoadAsepriteTag(sprite, tagList[randIndex].c_str());
@@ -68,4 +67,14 @@ bool Obstacle::checkCollision()
 
 void Obstacle::setMove(bool move) {
     isMoving = move;
+}
+
+int Obstacle::getWidth() const
+{
+    return width;
+}
+
+int Obstacle::getHeight() const
+{
+    return height;
 }

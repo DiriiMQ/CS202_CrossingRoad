@@ -64,6 +64,7 @@ public:
 //    static void destroyInstance(int id);
     static json& getData(int id = 0);
     static BasicConfig& getConfig(int id = 0);
+    static void reloadConfig(int id = 0);
 };
 
 #endif //CROSSING_ROAD_CONFIGIO_H

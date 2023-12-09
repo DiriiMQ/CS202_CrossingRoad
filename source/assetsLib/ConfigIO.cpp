@@ -83,6 +83,12 @@ BasicConfig &BasicConfigInstance::getConfig(int id) {
     return BasicConfigInstance::config[id];
 }
 
+void BasicConfigInstance::reloadConfig(int id)
+{
+    BasicConfigInstance::config[id].saveConfig();
+    BasicConfigInstance::config[id].loadConfig();
+}
+
 //void BasicConfigInstance::destroyInstance(int id = 0) {
 //    std::lock_guard<std::mutex> lock(_mutex);
 //    if (instance != nullptr) {
