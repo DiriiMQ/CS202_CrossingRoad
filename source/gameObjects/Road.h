@@ -12,6 +12,8 @@
 #include "screen/Position.h"
 #include <algorithm>
 #include "TrafficLight.h"
+#include "stuff/RandomNumber.h"
+#include "assetsLib/ConfigIO.h"
 
 using namespace std;
 
@@ -22,7 +24,7 @@ private:
     Aseprite roadSprite;
     int direction = 1;
     int numObstacles;
-
+    float speed = 1;
     bool hasLight;
     int randomPercentage=25;
     TrafficLight* light;
@@ -35,6 +37,9 @@ public:
     ~Road() override;
     void draw() override;
     void handleInput() override;
+
+    void handleBlockOutOfScreen();
+    void handleCollision();
 
     void updateMessage(const Message message) override;
     void updateMainPos(Rectangle mainPosRect) override;

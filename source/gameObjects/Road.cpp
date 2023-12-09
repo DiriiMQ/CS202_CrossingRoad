@@ -19,26 +19,37 @@ bool eventTriggeredLight(double interval)
 }
 
 Road::Road(int x, int y, int numObstacles) : BaseGameObject(x, y) {
+    // TODO: Load from config file.
     roadSprite = LoadAseprite("../assets/trafficEnvironment/2_lane.aseprite");
-    int randNum = rand();
-    if (randNum % 2)
-        direction = 1;
-    else
-        direction = -1;
+    int randNum = RandomNumber::getInstance().getRandomNumber(0, 1);
+    if (randNum) direction = 1;
+    else direction = -1;
 
-    int prevPosition = direction == 1 ? -300 : 1366 + 300; // TODO: Fix hard code
-    for(int i = 0; i < numObstacles; i++) {
-        int randomX = rand() % 300;
-        randomX = direction == 1 ? randomX : -randomX;
-        Obstacle *obs = new Obstacle(prevPosition + randomX, y, direction);
-        prevPosition += direction == 1 ? 300 : -300;
+    // int prevPosition = -300;
+    // for(int i = 0; i < numObstacles; i++) {
+    //     int randomX = rand() % 500;
+    //     Obstacle *obs = new Obstacle(prevPosition + randomX, y, direction);
+    //     prevPosition += randomX;
+    //     obs->Attach(this);
+    //     obs->initObstacle();
+    //     obstacles.push_back(obs);
+    // }
+    int originX = RandomNumber::getInstance().getRandomNumber(
+        0,
+        BasicConfigInstance::getData(ConfigType::BASIC)["SCREEN"]["SIZE"]["WIDTH"]
+    );
+    
+    for (int i = 0; i < numObstacles; i++) {
+        Obstacle *obs = new Obstacle(originX, y, direction);
         obs->Attach(this);
         obs->initObstacle();
         obstacles.push_back(obs);
+        originX += this->direction * (
+            RandomNumber::getInstance().getRandomNumber(10, 200) +
+            obs->getWidth() * 2
+        );
     }
-    reverse(obstacles.begin(), obstacles.end());
 
-    this->numObstacles = numObstacles;
     randomLight();
 
 }
@@ -91,29 +102,53 @@ void Road::draw() {
     
 }
 
-void Road::updateMessage(const Message message) {
-    if(message == Message::BLOCK_OUT_OF_SCREEN) {
-        double newPositionX;
+void Road::handleBlockOutOfScreen() {
+    // double newPositionX;
+    // if (direction == -1)
+    //     newPositionX = 1336 + 50;
+    // else
+    //     newPositionX = obstacles.back()->getX() - 1366 - 50;
 
-        if (direction == -1)
-            newPositionX = 1336 + 100;
-        else
-            newPositionX = -100;
+    // Obstacle *obs = new Obstacle( newPositionX, y, direction);
+    // obs->Attach(this);
+    // obs->initObstacle();
+    // obstacles.push_back(obs);
+    // obstacles.erase(obstacles.begin());
 
-        Obstacle *obs = new Obstacle( newPositionX, y, direction);
-        obs->Attach(this);
-        obs->initObstacle();
-        obstacles.push_back(obs);
-        if (obstacles.size() > numObstacles)
-            obstacles.erase(obstacles.begin());
-    }
-    else if(message==Message::COLLISION) {
-        BaseGameObject::Notify(Message::COLLISION);
-        for (Obstacle *obs: obstacles) {
-            obs->setMove(false);
-        }
+    int screenW = BasicConfigInstance::getData(ConfigType::BASIC)["SCREEN"]["SIZE"]["WIDTH"];
+    int newX = obstacles[0]->getX();
+
+    if (direction == -1)
+        newX = max(
+                newX + RandomNumber::getInstance().getRandomNumber(10, 200) + obstacles[0]->getWidth() * 2,
+                screenW + 50
+        );
+    else
+        newX = min(
+                newX - (RandomNumber::getInstance().getRandomNumber(10, 200) + obstacles[0]->getWidth() * 2),
+                -50
+        );
+
+    Obstacle *obs = new Obstacle(newX, y, direction);
+    obs->Attach(this);
+    obs->initObstacle();
+    obstacles.insert(obstacles.begin(), obs);
+    obstacles.pop_back();
+}
+
+void Road::handleCollision() {
+    BaseGameObject::Notify(Message::COLLISION);
+    for (Obstacle *obs: obstacles) {
+        obs->setMove(false);
     }
     
+}
+
+void Road::updateMessage(const Message message) {
+    if(message == Message::BLOCK_OUT_OF_SCREEN) 
+        this->handleBlockOutOfScreen();
+    else if(message==Message::COLLISION) 
+        this->handleCollision();
 }
 
 Road::~Road() {
@@ -133,10 +168,10 @@ void Road::updateMainPos(Rectangle mainPosRect)
 }
 void Road::randomLight()
 {
-   std::default_random_engine randomEngine(std::random_device{}());
+    std::default_random_engine randomEngine(std::random_device{}());
     std::uniform_int_distribution<int> distribution(0,99);
     int r=distribution(randomEngine);
-    if (r<randomPercentage)
+    if (r < randomPercentage)
     {
         hasLight=true;
         light=new TrafficLight;
