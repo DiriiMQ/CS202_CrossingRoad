@@ -10,7 +10,8 @@
 #include <vector>
 #include <iostream>
 #include "screen/Position.h"
-#include <algorithm>    // std::reverse
+#include <algorithm>
+#include "TrafficLight.h"
 
 using namespace std;
 
@@ -22,6 +23,11 @@ private:
     int direction = 1;
     int numObstacles;
 
+    bool hasLight;
+    int randomPercentage=25;
+    TrafficLight* light;
+   // bool isMainAlive=true;
+    
 public:
 
 
@@ -32,6 +38,8 @@ public:
 
     void updateMessage(const Message message) override;
     void updateMainPos(Rectangle mainPosRect) override;
+    void randomLight();
+    void lightHandle();
 };
 
 

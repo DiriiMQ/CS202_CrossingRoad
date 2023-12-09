@@ -10,6 +10,7 @@ enum class Message {
     TRAFFIC_LIGHT_RED,
     TRAFFIC_LIGHT_GREEN,
     COLLISION,
+    PAUSE_GAME,
 };
 
 #endif //CROSSING_ROAD_MESSAGE_H

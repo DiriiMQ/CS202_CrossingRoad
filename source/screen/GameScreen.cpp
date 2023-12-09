@@ -14,6 +14,8 @@ void GameScreen::NotifyMainPos()
 
 void GameScreen::handleInput() {
 
+    if (isGamePause) return;
+
     if (!mainChar->getDead()) {
         for (BaseGameObject *block: map) {
             block->handleInput();
@@ -73,16 +75,36 @@ void GameScreen::Observe() {
 }
 
 void GameScreen::draw() {
-    Rectangle buttonRect {50, 50, 200, 100};
-    if(GuiButton(buttonRect, "Back!")) {
-        screenManager->backScreen();
-    }
+    //Rectangle buttonRect {50, 50, 200, 100};
+   // if(GuiButton(buttonRect, "Back!")) {
+   //     screenManager->backScreen();
+   // }
     for(BaseGameObject *block: map) {
         block->draw();
 //        block->moveY(0.1);
     }
     mainChar->draw();
-
+    if (!this->isGamePause) {
+        Rectangle buttonRectPause {900, 50, 100, 100};
+        if (GuiButton(buttonRectPause, "Pause!")) {
+            NotifyPauseGame();
+            this->isGamePause=!(this->isGamePause);
+         }
+    }
+    else {
+        DrawRectangle  (400, 100, 600, 600, GRAY);
+        Rectangle continueButton {450, 300, 500, 100};
+        if (GuiButton(continueButton, "Continue")) {
+            this->isGamePause=!(this->isGamePause);
+            NotifyPauseGame();
+        }
+        Rectangle backButton {450, 450, 500, 100};
+        if (GuiButton(backButton, "Back"))
+        {
+            screenManager->backScreen();
+        }
+        DrawText("Game Pause!", 580, 200, 40, RED);
+    }
     DrawText(to_string(score).c_str(), 722, 50, 36, GRAY);
 //    mainChar->moveY(0.1);
 
@@ -132,5 +154,10 @@ GameScreen::~GameScreen() {
         delete road;
 
     delete mainChar;
-};
-
+}
+void GameScreen::NotifyPauseGame()
+{
+    for (BaseGameObject *subject: map) {
+        subject->pauseGame();
+    }
+}

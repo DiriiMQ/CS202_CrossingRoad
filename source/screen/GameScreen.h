@@ -24,8 +24,8 @@ private:
 //    MainPos mainPos;
 //    Rectangle mainPosRec;
     void randomNewBlock();
-
     int score = 0;
+    bool isGamePause=false;
 
 public:
     GameScreen() = default;
@@ -43,6 +43,8 @@ public:
     void load() override;
     void unload() override;
     void NotifyMainPos();
+    void NotifyPauseGame();
+
 };
 
 

@@ -81,5 +81,8 @@ add_executable(crossing_road main.cpp
         source/gameObjects/MainChar.h
         source/gameObjects/MainChar.cpp
         source/screen/Position.h
-        source/gameObjects/MainChar.cpp)
+        source/gameObjects/MainChar.cpp
+        source/gameObjects/TrafficLight.cpp
+        source/gameObjects/TrafficLight.h)
+        
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json raylib)

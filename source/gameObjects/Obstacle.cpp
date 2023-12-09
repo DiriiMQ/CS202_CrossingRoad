@@ -47,8 +47,9 @@ void Obstacle::initObstacle() {
     int randIndex = rand() % textureList.size();
 
     sprite = LoadAseprite(textureList[randIndex].c_str());
-    spriteTag = LoadAsepriteTag(sprite, tagList[randIndex].c_str());
 
+    string tag = direction == -1 ? tagList[randIndex] : "l2r";
+    spriteTag = LoadAsepriteTag(sprite, tag.c_str());
     width = GetAsepriteWidth(sprite);
     height = GetAsepriteHeight(sprite);
 }

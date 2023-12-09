@@ -19,6 +19,7 @@ protected:
     double screenSpeed = 0.1;
     std::list<IObserver *> list_observer_;
     bool isMainCharDead = false;
+    bool isGamePause = false;
 public:
     BaseGameObject(double x, double y) : x(x), y(y) {};
     BaseGameObject () {};
@@ -51,6 +52,9 @@ public:
     virtual void updateMainPos(Rectangle mainPosRect) = 0;
     void setMainCharacterDead(bool isDead) {
         isMainCharDead = isDead;
+    }
+    void pauseGame() {
+        isGamePause=!isGamePause;
     }
 };
 
