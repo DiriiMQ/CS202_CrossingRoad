@@ -5,7 +5,7 @@
 #include "Road.h"
 #include "temp.cpp"
 
-Road::Road(double x, double y, int numObstacles) : BaseGameObject(x, y) {
+Road::Road(int x, int y, int numObstacles) : BaseGameObject(x, y) {
     roadSprite = LoadAseprite("../assets/trafficEnvironment/2_lane.aseprite");
     int randNum = rand();
     if (randNum % 2)
@@ -13,15 +13,19 @@ Road::Road(double x, double y, int numObstacles) : BaseGameObject(x, y) {
     else
         direction = -1;
 
-    int prevPosition = -300;
+    int prevPosition = direction == 1 ? -300 : 1366 + 300; // TODO: Fix hard code
     for(int i = 0; i < numObstacles; i++) {
         int randomX = rand() % 500;
+        randomX = direction == 1 ? randomX : -randomX;
         Obstacle *obs = new Obstacle(prevPosition + randomX, y, direction);
         prevPosition += randomX;
         obs->Attach(this);
         obs->initObstacle();
         obstacles.push_back(obs);
     }
+    reverse(obstacles.begin(), obstacles.end());
+
+    this->numObstacles = numObstacles;
     
 }
 
@@ -71,7 +75,8 @@ void Road::updateMessage(const Message message) {
         obs ->Attach(this);
         obs->initObstacle();
         obstacles.push_back(obs);
-        obstacles.erase(obstacles.begin());
+        if (obstacles.size() > numObstacles)
+            obstacles.erase(obstacles.begin());
     }
     else if(message==Message::COLLISION) {
         BaseGameObject::Notify(Message::COLLISION);

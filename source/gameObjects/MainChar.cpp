@@ -15,7 +15,7 @@ void MainChar::draw()
 {
 //    y += screenSpeed;
     Rectangle  rect{(float)x, (float)y, width, height};
-    DrawAsepriteTagPro(spriteTag, rect, { 0.0, 0.0}, 0, WHITE);
+    DrawAsepriteTagPro(spriteTag, rect, { 0.0, 0.0 }, 0, WHITE);
 
 
 }

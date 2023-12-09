@@ -10,6 +10,7 @@
 #include <vector>
 #include <iostream>
 #include "screen/Position.h"
+#include <algorithm>    // std::reverse
 
 using namespace std;
 
@@ -19,10 +20,10 @@ private:
     vector<Obstacle*> obstacles;
     Aseprite roadSprite;
     int direction = 1;
+    int numObstacles;
 
 public:
 
-    Road(double x, double y, int numObstacles = 5);
 
     Road(int x, int y, int numObstacles = 5);
     ~Road() override;
