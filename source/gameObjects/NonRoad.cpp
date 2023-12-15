@@ -4,30 +4,50 @@
 
 #include "NonRoad.h"
 
+NonRoad::NonRoad(int x, int y, int numStatic) : BaseGameObject(x, y) {
+    int direction = 0; // static obstacles
+    int originX = RandomNumber::getInstance().getRandomNumber(
+            0,
+            BasicConfigInstance::getData(ConfigType::BASIC)["SCREEN"]["SIZE"]["WIDTH"]
+    );
+
+    for (int i = 0; i < numStatic; i++) {
+        Obstacle *obs = new Obstacle(originX, y, direction);
+//        obs->Attach(this);
+        obs->initObstacle();
+        staticObs.push_back(obs);
+        originX += (
+                RandomNumber::getInstance().getRandomNumber(10, 200) +
+                obs->getWidth() * 2
+        );
+    }
+}
+
 void NonRoad::handleInput() {
 
     if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
         y += stepSize;
+    }
+    for (Obstacle *obs: staticObs) {
+        obs->handleInput();
     }
 }
 
 void NonRoad::draw() {
 //    y += screenSpeed;
 
+
     DrawRectangle(x, y, 1500, 50,  Color{205, 223, 108, 255});
-//    Rectangle rectangle = {(float) x, (float) y, 1500, 60};
 
-//    DrawAsepritePro(sprite, 0, rectangle, {(float) 0, (float)0}, 0, WHITE);
-//    cout << "SPRITE SHAPE: " << GetAsepriteHeight(sprite) << ", " << GetAsepriteWidth(sprite) << endl;
-//    for(int i = x; i < 1500; i += 64) {
-//        for(int j = y; j < y + 48; j += 12) {
-//            DrawAseprite(sprite, 0, i, j, WHITE);
-//        }
-//    }
+    for(Obstacle *obs: staticObs) {
+        obs->draw();
+    }
+    json cfg = BasicConfigInstance::getData(ConfigType::BASIC);
 
-//    DrawAseprite(sprite,0, 500, y, WHITE);
-//    DrawAse
-    if(y > 768 + 48 * 3) { // TODO: Load from config file.
+    if(y > (int) cfg["SCREEN"]["SIZE"]["HEIGHT"] + (int) cfg["TEXTURES"]["OUT_SCREEN_OFFSET"]) {
+        cout << "UPDATE CALLED!" << endl;
         BaseGameObject::Notify();
     }
+
+
 }

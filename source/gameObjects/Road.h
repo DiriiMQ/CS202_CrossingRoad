@@ -12,7 +12,7 @@
 #include "screen/Position.h"
 #include <algorithm>
 #include "TrafficLight.h"
-#include "stuff/RandomNumber.h"
+#include "utils/RandomNumber.h"
 #include "assetsLib/ConfigIO.h"
 
 using namespace std;

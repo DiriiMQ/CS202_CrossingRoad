@@ -24,6 +24,7 @@ void Window::presetWindow() {
             screenTitle.c_str());
 
     SetTargetFPS(fps);
+    AsepriteInstance::initInstance();
 }
 
 void Window::presetScreens() {

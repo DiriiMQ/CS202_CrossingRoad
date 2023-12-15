@@ -10,6 +10,7 @@
 #include "GameScreen.h"
 #include <string>
 #include "raylib-aseprite.h"
+#include "../UI/TexturedButton.h"
 
 class MenuScreen : public BaseScreen {
 private:
@@ -20,6 +21,11 @@ private:
     // for testing
     Aseprite testAseprite;
     AsepriteTag testWalkdown;
+    Texture bgImage;
+
+    // screen var
+    int screenWidth;
+    int screenHeight;
 
 public:
     MenuScreen() = default;
@@ -30,8 +36,12 @@ public:
     void update() override;
     void draw() override;
 
+    // draw functions
+    void drawButtons();
+
     void load() override;
     void unload() override;
+
 };
 
 

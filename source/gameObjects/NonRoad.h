@@ -7,15 +7,17 @@
 #include "BaseGameObject.h"
 #include "raylib.h"
 #include "raylib-aseprite.h"
+#include "Obstacle.h"
+#include <vector>
+#include "assetsLib/ConfigIO.h"
 
 class NonRoad : public BaseGameObject {
 private:
     int stepSize = 48;
-    Aseprite sprite;
+    std::vector<Obstacle*> staticObs;
+
 public:
-    NonRoad(int x, int y) : BaseGameObject(x, y) {
-        sprite = LoadAseprite("../assets/trafficEnvironment/separator.aseprite");
-    };
+    NonRoad(int x, int y, int numStatic = 5);
     void draw() override;
     void handleInput() override;
     void updateMainPos(Rectangle mainPosRect) override {};

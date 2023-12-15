@@ -4,9 +4,12 @@ void TrafficLight::init(double x,double y)
 {
     this->x=x;
     this->y=y;
+    sprite = LoadAseprite("../assets/trafficLights/TrafficLights.aseprite");
 }
+
+
 void TrafficLight::draw()
 {
-    if (isRed) DrawCircle(float(35),float(y+35),float(5),RED);
-    else DrawCircle(float(35),float(y+35),float(5),BLUE);
+    tag = LoadAsepriteTag(sprite, isRed ? "red" : "green");
+    DrawAsepriteTag(tag, 50, y + 20, WHITE);
 }

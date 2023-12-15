@@ -8,9 +8,10 @@
 #include "raylib.h"
 #include "Observer.h"
 #include "BaseGameObject.h"
-#include "stuff/RandomNumber.h"
+#include "utils/RandomNumber.h"
 #include <list>
 #include "raylib-aseprite.h"
+#include "assetsLib/AsepriteIO.h"
 
 class Obstacle : public BaseGameObject {
     int width = 0, height = 0;
@@ -28,12 +29,13 @@ public:
     void initObstacle();
     void draw();
     void handleInput();
-
-    ~Obstacle() {}
+    void handleCollision();
     bool checkCollision();
     //void getPos(Vector2 mainPos,Vector2 mainSize);
     void updateMainPos(Rectangle mainPosRect);
     void setMove(bool move);
+
+    ~Obstacle() {}
 
     int getWidth() const;
     int getHeight() const;

@@ -5,38 +5,36 @@
 #include "MenuScreen.h"
 
 void MenuScreen::handleInput() {
-
+    //playButton->handleInput();
 }
 
 void MenuScreen::update() {
-    UpdateAsepriteTag(&this->testWalkdown); // testing
 }
 
 void MenuScreen::draw() {
-    DrawText("Duong Bao!", 10, 10, 20, RED);
 
-    // for testing
-    static int cnt = 0, curr = 0;
-    if (cnt++ > 5) {
-        cnt = 0;
-        curr = (curr + 1) % 8;
-    }
-    this->test->draw({100, 100}, curr);
+    DrawText("Duong Bao!", 10, 10, 20, RED);
 
     Rectangle buttonRect {50, 50, 200, 100};
     if(GuiButton(buttonRect, "Click Me!")) {
         screenManager->setScreen(&testScreen);
     }
 
-    // testing
-    // Draw the first frame from the George sprite.
-    DrawAseprite(this->testAseprite, 0, 100, 400, WHITE);
-    // Draw the Walk Down animation.
-    DrawAsepriteTag(this->testWalkdown, 200, 400, WHITE);
+    Rectangle tempRec{0, 0, (float) this->screenWidth, (float) this->screenHeight};
+    DrawTextureRec(bgImage, tempRec, {0,0}, WHITE);
+//    drawButtons();
+}
+
+void MenuScreen::drawButtons() {
+    //playButton->draw();
 }
 
 void MenuScreen::load() {
     BaseScreen::load();
+
+    //playButton = new TexturedButton("../assets/welcome_screen/b_play.png");
+    Image bgTemp = LoadImage("../assets/welcome_screen/menu_background.png");
+    bgImage = LoadTextureFromImage(bgTemp);
 
     if (!this->hasInit) {
         this->init();
@@ -45,17 +43,16 @@ void MenuScreen::load() {
 }
 
 void MenuScreen::unload() {
+    UnloadTexture(bgImage);
     BaseScreen::unload();
 }
 
 void MenuScreen::init() {
-    this->test = new AnimatedTexture("../assets/slime/Attack_1.png", 4);
     this->testScreen.setScreenManager(this->screenManager);
 
-    // for testing
-    this->testAseprite = LoadAseprite("../assets/george.aseprite");
-    this->testWalkdown = LoadAsepriteTag(this->testAseprite, "Walk-Down");
-    this->testWalkdown.speed = 2;
+    // set screen variable
+    this->screenHeight = BasicConfigInstance::getData(ConfigType::BASIC)["SCREEN"]["SIZE"]["HEIGHT"];
+    this->screenWidth = BasicConfigInstance::getData(ConfigType::BASIC)["SCREEN"]["SIZE"]["WIDTH"];
 }
 
 MenuScreen::~MenuScreen() {

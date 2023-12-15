@@ -7,8 +7,6 @@
 
 enum class Message {
     BLOCK_OUT_OF_SCREEN,
-    TRAFFIC_LIGHT_RED,
-    TRAFFIC_LIGHT_GREEN,
     COLLISION,
     PAUSE_GAME,
 };

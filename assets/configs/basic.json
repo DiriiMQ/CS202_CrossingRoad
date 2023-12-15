@@ -22,11 +22,24 @@
             "Car",
             "Truck"
         ],
+        "OUT_SCREEN_OFFSET": 144,
         "SLIME": {
             "Idle": {
                 "NUM_FRAMES": 8,
                 "PATH": "../assets/slime/idle.png"
             }
-        }
+        },
+        "STATIC_OBSTACLES": [
+            "../assets/staticObstacle/greenTree.aseprite",
+            "../assets/staticObstacle/sakuraTree.aseprite",
+            "../assets/staticObstacle/youngTree.aseprite",
+            "../assets/staticObstacle/autumnTree.aseprite"
+        ],
+        "STATIC_OBSTACLES_TAG": [
+            "",
+            "",
+            "",
+            ""
+        ]
     }
 }

@@ -6,8 +6,8 @@
 
 #include "Window.h"
 #include "assetsLib/ConfigIO.h"
-#include "stuff/RandomNumber.h"
-
+#include "utils/RandomNumber.h"
+#include "assetsLib/AsepriteIO.h"
 #include "_raygui.h"
 
 int main() {

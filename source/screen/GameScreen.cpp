@@ -38,13 +38,13 @@ void GameScreen::randomNewBlock() {
     BaseGameObject *block;
 
     if (randomNumber % 100 > 60) {
-        block = new Road(-100.0, map[map.size() - 1]->getY()-48, 3);
+        block = new Road(-100.0, map[map.size() - 1]->getY()-48, 5);
     }
     else if(randomNumber % 100 > 40) {
         block = new River(-100.0, map[map.size() - 1]->getY()-48);
     }
     else {
-        block = new NonRoad(-100.0, map[map.size() - 1]->getY()-48);
+        block = new NonRoad(-100.0, map[map.size() - 1]->getY()-48, 3);
     }
     block->Attach(this);
     map.push_back(block);
@@ -140,7 +140,7 @@ void GameScreen::init() {
             map.push_back(riverBlock);
         }
         else {
-            NonRoad *nonRoadBlock = new NonRoad(x_direction, y_direction);
+            NonRoad *nonRoadBlock = new NonRoad(x_direction, y_direction, 3);
             map.push_back(nonRoadBlock);
         }
     }

@@ -25,15 +25,6 @@ Road::Road(int x, int y, int numObstacles) : BaseGameObject(x, y) {
     if (randNum) direction = 1;
     else direction = -1;
 
-    // int prevPosition = -300;
-    // for(int i = 0; i < numObstacles; i++) {
-    //     int randomX = rand() % 500;
-    //     Obstacle *obs = new Obstacle(prevPosition + randomX, y, direction);
-    //     prevPosition += randomX;
-    //     obs->Attach(this);
-    //     obs->initObstacle();
-    //     obstacles.push_back(obs);
-    // }
     int originX = RandomNumber::getInstance().getRandomNumber(
         0,
         BasicConfigInstance::getData(ConfigType::BASIC)["SCREEN"]["SIZE"]["WIDTH"]
@@ -77,29 +68,28 @@ void Road::draw() {
     Rectangle rectangle = {(float) x, (float) y, 1500, 50};
 
     DrawAsepritePro(roadSprite, 0, rectangle, {(float) 0, (float)0}, 0, WHITE);
-    
-    if (hasLight)
-    {
-        if ((!isMainCharDead)&&(!isGamePause)) lightHandle();
-        light->draw();
-    }
 
     
     for(Obstacle *obs: obstacles) {
         obs->draw();
         if(isMainCharDead || isGamePause || (hasLight && light->isRed))
             obs->setMove(false);
-        else 
-        {
-            if ((!hasLight) || ((hasLight) && (!light->isRed)))
+        else if ((!hasLight) || ((hasLight) && (!light->isRed))) {
                 obs->setMove(true);
         }
     }
 
-    if(y > 768 + 48 * 3) { // TODO: Load from config file.
+    json cfg = BasicConfigInstance::getData(ConfigType::BASIC);
+
+    if(y > (int) cfg["SCREEN"]["SIZE"]["HEIGHT"] + (int) cfg["TEXTURES"]["OUT_SCREEN_OFFSET"]) {
         BaseGameObject::Notify();
     }
-    
+
+    if (hasLight)
+    {
+        if ((!isMainCharDead)&&(!isGamePause)) lightHandle();
+        light->draw();
+    }
 }
 
 void Road::handleBlockOutOfScreen() {
@@ -174,7 +164,7 @@ void Road::randomLight()
     if (r < randomPercentage)
     {
         hasLight=true;
-        light=new TrafficLight;
+        light= new TrafficLight;
         light->init(x,y);
     }
     else hasLight=false;
@@ -193,12 +183,9 @@ void Road::lightHandle()
             }
             
         }
-        else 
+        else if (eventTriggeredLight(5))
         {
-            if (eventTriggeredLight(5))
-            {
-                light->isRed=false;
-            }
+            light->isRed=false;
         }
     }
 }

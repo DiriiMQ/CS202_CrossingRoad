@@ -21,6 +21,6 @@ public:
         }
     }
     void updateMainPos(Rectangle mainPosRect) override {}
-   // void Attach(IObserver *observer) override;
+
 };
 #endif //CROSSING_ROAD_TRAFFICLIGHT_H
