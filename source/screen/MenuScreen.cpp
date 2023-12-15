@@ -55,12 +55,9 @@ void MenuScreen::init() {
             BasicConfigInstance::getData()["BACKGROUND"]["MENU"].get<std::string>().c_str()
             );
 
-    this->test = new AnimatedTexture("../assets/slime/Attack_1.png", 4);
     this->gameScreen.setScreenManager(this->screenManager);
 }
 
 MenuScreen::~MenuScreen() {
-    delete test;
-
     UnloadTexture(this->background);
 }

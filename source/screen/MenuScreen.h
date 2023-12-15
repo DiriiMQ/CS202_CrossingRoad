@@ -15,7 +15,6 @@ class MenuScreen : public BaseScreen {
 private:
     Texture2D background{};
 
-    AnimatedTexture *test{};
     bool hasInit = false;
     GameScreen gameScreen;
 

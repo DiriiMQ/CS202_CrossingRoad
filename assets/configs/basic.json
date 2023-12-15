@@ -5,12 +5,14 @@
     "SCREEN": {
         "FRAMES_ANIMATION_SPEED": 10,
         "FRAMES_PER_SECOND": 120,
+        "GUI_FONT": "../assets/theme/MonomaniacOne.ttf",
+        "GUI_STYLE": "../assets/theme/light.rgs",
         "SIZE": {
             "HEIGHT": 768,
             "WIDTH": 1366
         },
         "TEST": null,
-        "TITLE": "Crossy Road"
+        "TITLE": "Crosy Road"
     },
     "TEXTURES": {
         "OBSTACLES": [
