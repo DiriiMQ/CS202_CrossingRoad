@@ -1,4 +1,7 @@
 {
+    "BACKGROUND": {
+        "MENU": "../assets/welcome_screen/menu_nobutton.png"
+    },
     "SCREEN": {
         "FRAMES_ANIMATION_SPEED": 10,
         "FRAMES_PER_SECOND": 120,

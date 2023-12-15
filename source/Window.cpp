@@ -24,6 +24,8 @@ void Window::presetWindow() {
             screenTitle.c_str());
 
     SetTargetFPS(fps);
+    GuiLoadStyle("../assets/theme/light.rgs");
+    GuiSetFont(LoadFont("../assets/theme/MonomaniacOne.ttf"));
 }
 
 void Window::presetScreens() {

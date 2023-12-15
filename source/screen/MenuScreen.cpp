@@ -9,30 +9,32 @@ void MenuScreen::handleInput() {
 }
 
 void MenuScreen::update() {
-    UpdateAsepriteTag(&this->testWalkdown); // testing
+
 }
 
 void MenuScreen::draw() {
+    DrawTexture(this->background, 0, 0, WHITE);
     DrawText("Duong Bao!", 10, 10, 20, RED);
 
-    // for testing
-    static int cnt = 0, curr = 0;
-    if (cnt++ > 5) {
-        cnt = 0;
-        curr = (curr + 1) % 8;
-    }
-    this->test->draw({100, 100}, curr);
-
-    Rectangle buttonRect {50, 50, 200, 100};
-    if(GuiButton(buttonRect, "Click Me!")) {
-        screenManager->setScreen(&testScreen);
+    Rectangle buttonRect = {
+            (float) (GetScreenWidth() - this->buttonOptionMenuSize.x) / 2,
+            (float) (GetScreenHeight() - this->buttonOptionMenuSize.y) / 2,
+            this->buttonOptionMenuSize.x,
+            this->buttonOptionMenuSize.y
+    };
+    if(GuiButtonRounded(buttonRect, "New Game")) {
+        screenManager->setScreen(&gameScreen);
     }
 
-    // testing
-    // Draw the first frame from the George sprite.
-    DrawAseprite(this->testAseprite, 0, 100, 400, WHITE);
-    // Draw the Walk Down animation.
-    DrawAsepriteTag(this->testWalkdown, 200, 400, WHITE);
+    buttonRect.y += this->buttonOptionMenuSize.y + 28;
+    if(GuiButtonRounded(buttonRect, "Load Game")) {
+
+    }
+
+    buttonRect.y += this->buttonOptionMenuSize.y + 28;
+    if(GuiButtonRounded(buttonRect, "Leaderboard")) {
+
+    }
 }
 
 void MenuScreen::load() {
@@ -49,17 +51,16 @@ void MenuScreen::unload() {
 }
 
 void MenuScreen::init() {
-    this->test = new AnimatedTexture("../assets/slime/Attack_1.png", 4);
-    this->testScreen.setScreenManager(this->screenManager);
+    this->background = LoadTexture(
+            BasicConfigInstance::getData()["BACKGROUND"]["MENU"].get<std::string>().c_str()
+            );
 
-    // for testing
-    this->testAseprite = LoadAseprite("../assets/george.aseprite");
-    this->testWalkdown = LoadAsepriteTag(this->testAseprite, "Walk-Down");
-    this->testWalkdown.speed = 2;
+    this->test = new AnimatedTexture("../assets/slime/Attack_1.png", 4);
+    this->gameScreen.setScreenManager(this->screenManager);
 }
 
 MenuScreen::~MenuScreen() {
     delete test;
 
-    UnloadAseprite(this->testAseprite); // testing
+    UnloadTexture(this->background);
 }

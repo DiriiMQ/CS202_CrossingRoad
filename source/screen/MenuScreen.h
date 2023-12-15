@@ -13,13 +13,13 @@
 
 class MenuScreen : public BaseScreen {
 private:
+    Texture2D background{};
+
     AnimatedTexture *test{};
     bool hasInit = false;
-    GameScreen testScreen;
+    GameScreen gameScreen;
 
-    // for testing
-    Aseprite testAseprite;
-    AsepriteTag testWalkdown;
+    Vector2 buttonOptionMenuSize {344, 77};
 
 public:
     MenuScreen() = default;
