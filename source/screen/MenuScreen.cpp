@@ -16,25 +16,7 @@ void MenuScreen::draw() {
     DrawTexture(this->background, 0, 0, WHITE);
     DrawText("Duong Bao!", 10, 10, 20, RED);
 
-    Rectangle buttonRect = {
-            (float) (GetScreenWidth() - this->buttonOptionMenuSize.x) / 2,
-            (float) (GetScreenHeight() - this->buttonOptionMenuSize.y) / 2,
-            this->buttonOptionMenuSize.x,
-            this->buttonOptionMenuSize.y
-    };
-    if(GuiButtonRounded(buttonRect, "New Game")) {
-        screenManager->setScreen(&gameScreen);
-    }
-
-    buttonRect.y += this->buttonOptionMenuSize.y + 28;
-    if(GuiButtonRounded(buttonRect, "Load Game")) {
-
-    }
-
-    buttonRect.y += this->buttonOptionMenuSize.y + 28;
-    if(GuiButtonRounded(buttonRect, "Leaderboard")) {
-
-    }
+    this->buttonsProcess();
 }
 
 void MenuScreen::load() {
@@ -60,4 +42,26 @@ void MenuScreen::init() {
 
 MenuScreen::~MenuScreen() {
     UnloadTexture(this->background);
+}
+
+void MenuScreen::buttonsProcess() {
+    Rectangle buttonRect = {
+            (float) (GetScreenWidth() - this->buttonOptionMenuSize.x) / 2,
+            (float) (GetScreenHeight() - this->buttonOptionMenuSize.y) / 2,
+            this->buttonOptionMenuSize.x,
+            this->buttonOptionMenuSize.y
+    };
+    if(GuiButtonRounded(buttonRect, "New Game")) {
+        screenManager->setScreen(&gameScreen);
+    }
+
+    buttonRect.y += this->buttonOptionMenuSize.y + 28;
+    if(GuiButtonRounded(buttonRect, "Load Game")) {
+
+    }
+
+    buttonRect.y += this->buttonOptionMenuSize.y + 28;
+    if(GuiButtonRounded(buttonRect, "Leaderboard")) {
+
+    }
 }

@@ -29,6 +29,8 @@ public:
     void update() override;
     void draw() override;
 
+    void buttonsProcess();
+
     void load() override;
     void unload() override;
 };
