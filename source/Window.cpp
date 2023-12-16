@@ -24,13 +24,14 @@ void Window::presetWindow() {
             screenTitle.c_str());
 
     SetTargetFPS(fps);
+    GuiLoadStyle(BasicConfigInstance::getData()["SCREEN"]["GUI_STYLE"].get<std::string>().c_str());
+    GuiSetFont(LoadFont(BasicConfigInstance::getData()["SCREEN"]["GUI_FONT"].get<std::string>().c_str()));
     AsepriteInstance::initInstance();
 }
 
 void Window::presetScreens() {
     this->menuScreen.setScreenManager(&this->screenManager);
     this->screenManager.setScreen(&this->menuScreen);
-//    this->menuScreen.init();
 }
 
 void Window::run() {

@@ -10,18 +10,15 @@
 #include "GameScreen.h"
 #include <string>
 #include "raylib-aseprite.h"
-#include "../UI/TexturedButton.h"
 
 class MenuScreen : public BaseScreen {
 private:
-    AnimatedTexture *test{};
-    bool hasInit = false;
-    GameScreen testScreen;
+    Texture2D background{};
 
-    // for testing
-    Aseprite testAseprite;
-    AsepriteTag testWalkdown;
-    Texture bgImage;
+    bool hasInit = false;
+    GameScreen gameScreen;
+
+    Vector2 buttonOptionMenuSize {344, 77};
 
     // screen var
     int screenWidth;
@@ -36,12 +33,10 @@ public:
     void update() override;
     void draw() override;
 
-    // draw functions
-    void drawButtons();
+    void buttonsProcess();
 
     void load() override;
     void unload() override;
-
 };
 
 
