@@ -131,6 +131,7 @@ Road::~Road() {
     for (Obstacle *obs: obstacles) {
         delete obs;
     }
+    if (hasLight)
     delete light;
 };
 void Road::updateMainPos(Rectangle mainPosRect)

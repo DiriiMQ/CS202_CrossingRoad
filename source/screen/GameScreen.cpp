@@ -105,6 +105,27 @@ void GameScreen::draw() {
         }
         DrawText("Game Pause!", 580, 200, 40, RED);
     }
+    if (mainChar->getDead()) 
+    {
+        DrawRectangle  (400, 100, 600, 600, GRAY);
+        Rectangle continueButton {450, 300, 500, 100};
+        DrawText("YOU DEAD!", 580, 200, 40, RED);
+        Rectangle backButton {450, 450, 500, 100};
+        if (GuiButton(backButton, "Back"))
+        {
+            screenManager->backScreen();
+        }
+        Rectangle newgameButton {450, 300, 500, 100};
+        if (GuiButton(newgameButton, "New game")) {
+           /*GameScreen* A = new GameScreen;
+           A->init();*/
+           //loadScreen(A);
+           //A->deleteScreen();
+           //delete A;
+           this->newGameScreen();
+
+        }
+    }
     DrawText(to_string(score).c_str(), 722, 50, 36, GRAY);
 //    mainChar->moveY(0.1);
 
@@ -124,7 +145,7 @@ void GameScreen::unload() {
 }
 
 void GameScreen::init() {
-    cout << "Test Screen inti Called" << endl;
+    cout << "Test Screen init Called" << endl;
 
     mainChar = new MainChar();
     for (int i = 0; i < 20; i++) {
@@ -154,6 +175,7 @@ GameScreen::~GameScreen() {
         delete road;
 
     delete mainChar;
+    delete test;
 }
 void GameScreen::NotifyPauseGame()
 {

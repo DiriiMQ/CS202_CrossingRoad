@@ -20,7 +20,13 @@ void Obstacle::draw() {
 
     Rectangle boxRect{(float) x, (float) y, (float) (width * 1.5), (float) (height * 1.5)};
 //    DrawRectangleRec(boxRect, WHITE);
-
+    if (checkCollision()) 
+    {
+        cout << "COLLISION with object at position: (" << x << ", " << y << ")" << endl;
+            cout << "Main Char position: (" << mainPosRect.x << ", " << mainPosRect.y << ")" << endl;
+            BaseGameObject::Notify(Message::COLLISION);
+            isMoving = false;
+    }
     DrawAsepriteTagPro(spriteTag, boxRect, {(float)0, (float)0}, 0, WHITE);
 //    isMoving=true;
     if (isMoving) {
