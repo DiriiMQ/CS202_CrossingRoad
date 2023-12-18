@@ -44,7 +44,8 @@ public:
     void unload() override;
     void NotifyMainPos();
     void NotifyPauseGame();
-
+    void loadScreen(GameScreen* A);
+    void newGameScreen();
 };
 
 

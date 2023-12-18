@@ -47,7 +47,9 @@ void Obstacle::initObstacle() {
     sprite = AsepriteInstance::getAseprite(direction == 0 ? AsepriteType::STATIC : AsepriteType::ANIMATED, randIndex);
 
     string tag = direction != 1 ? tagList[randIndex] : "l2r";
-    spriteTag = LoadAsepriteTag(sprite, tag.c_str());
+
+    if (direction != 0)
+        spriteTag = LoadAsepriteTag(sprite, tag.c_str());
     width = GetAsepriteWidth(sprite);
     height = GetAsepriteHeight(sprite);
 }

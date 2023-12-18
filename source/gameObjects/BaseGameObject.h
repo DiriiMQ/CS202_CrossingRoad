@@ -56,6 +56,9 @@ public:
     void pauseGame() {
         isGamePause=!isGamePause;
     }
+    void moveDown() {
+        y+=48;
+    }
 };
 
 

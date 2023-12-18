@@ -36,6 +36,15 @@ public:
     void setDead() { isDead = true; };
     bool getDead() { return isDead; }
     ~MainChar();
+    void resetMainChar()
+    {
+        x=722;
+        y=626;
+    }
+    void mainCharRevive()
+    {
+        this->isDead=false;
+    }
 };
 
 #endif //CROSSING_ROAD_MAINCHAR_H

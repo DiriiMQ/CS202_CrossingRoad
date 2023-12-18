@@ -32,6 +32,8 @@ public:
 
     virtual bool isManager();
     [[nodiscard]] bool isLoaded() const;
+
+
 };
 
 

@@ -9,6 +9,7 @@ enum class Message {
     BLOCK_OUT_OF_SCREEN,
     COLLISION,
     PAUSE_GAME,
+    NEW_GAME,
 };
 
 #endif //CROSSING_ROAD_MESSAGE_H

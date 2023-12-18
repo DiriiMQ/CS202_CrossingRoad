@@ -14,7 +14,7 @@ void MenuScreen::update() {
 
 void MenuScreen::draw() {
     DrawTexture(this->background, 0, 0, WHITE);
-    DrawText("Duong Bao!", 10, 10, 20, RED);
+//    DrawText("Duong Bao!", 10, 10, 20, RED); // Sorry bro, have to delete this :(
 
     this->buttonsProcess();
 }

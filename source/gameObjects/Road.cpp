@@ -147,6 +147,7 @@ Road::~Road() {
     }
     if (hasLight)
         delete light;
+
 };
 void Road::updateMainPos(Rectangle mainPosRect)
 {
