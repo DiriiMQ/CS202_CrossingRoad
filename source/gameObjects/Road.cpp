@@ -18,7 +18,7 @@ bool eventTriggeredLight(double interval)
     return false;
 }
 
-Road::Road(int x, int y, int numObstacles) : BaseGameObject(x, y) {
+Road::Road(double x, double y, int numObstacles) : BaseGameObject(x, y) {
     // TODO: Load from config file.
     roadSprite = LoadAseprite("../assets/trafficEnvironment/2_lane.aseprite");
     int randNum = RandomNumber::getInstance().getRandomNumber(0, 1);
@@ -40,7 +40,7 @@ Road::Road(int x, int y, int numObstacles) : BaseGameObject(x, y) {
             obs->getWidth() * 2
         );
     }
-
+    this->numObstacles = numObstacles;
     randomLight();
 
 }
@@ -165,28 +165,40 @@ void Road::randomLight()
     if (r < randomPercentage)
     {
         hasLight=true;
-        light= new TrafficLight;
-        light->init(x,y);
+        light= new TrafficLight(x, y);
     }
     else hasLight=false;
 }
+
+//void Road::setScreenSpeed(double speed) {
+//    screenSpeed = speed;
+//    for (Obstacle *obs: obstacles) {
+//        obs->setScreenSpeed(speed);
+//    }
+//}
+
 void Road::lightHandle()
 {
-    if (hasLight)
-    {
-        if (!light->isRed)
-        {
+    if (hasLight) {
+        if (!light->isRed) {
             std::default_random_engine randomEngine(std::random_device{}());
             std::uniform_int_distribution<int> distribution(5,10);
             int interval=distribution(randomEngine);
             if (eventTriggeredLight(double(interval))) {
                 light->isRed=true;
             }
-            
         }
-        else if (eventTriggeredLight(5))
-        {
+        else if (eventTriggeredLight(5)) {
             light->isRed=false;
         }
     }
+}
+
+void Road::moveY(double offset) {
+    y += offset;
+    for(Obstacle *obs: obstacles) {
+        obs->moveY(offset);
+    }
+    if (hasLight)
+        light->moveY(offset);
 }

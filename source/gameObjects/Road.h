@@ -19,7 +19,6 @@ using namespace std;
 
 class Road : public BaseGameObject, public IObserver {
 private:
-    int stepSize = 48;
     vector<Obstacle*> obstacles;
     Aseprite roadSprite;
     int direction = 1;
@@ -28,12 +27,9 @@ private:
     bool hasLight;
     int randomPercentage=25;
     TrafficLight* light;
-   // bool isMainAlive=true;
-    
+
 public:
-
-
-    Road(int x, int y, int numObstacles = 5);
+    Road(double x, double y, int numObstacles = 5);
     ~Road() override;
     void draw() override;
     void handleInput() override;
@@ -45,6 +41,8 @@ public:
     void updateMainPos(Rectangle mainPosRect) override;
     void randomLight();
     void lightHandle();
+//    void setScreenSpeed(double speed) override;
+    void moveY(double offset) override;
 };
 
 

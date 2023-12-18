@@ -13,16 +13,15 @@
 
 class NonRoad : public BaseGameObject {
 private:
-    int stepSize = 48;
     std::vector<Obstacle*> staticObs;
 
 public:
-    NonRoad(int x, int y, int numStatic = 5);
+    NonRoad(double x, double y, int numStatic = 5);
     void draw() override;
     void handleInput() override;
     void updateMainPos(Rectangle mainPosRect) override {};
-    
-
+//    void setScreenSpeed(double speed) override;
+    void moveY(double offset) override;
 };
 
 

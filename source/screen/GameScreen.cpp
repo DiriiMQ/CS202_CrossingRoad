@@ -23,9 +23,10 @@ void GameScreen::handleInput() {
         if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && !mainChar->getDead()) {
             score += 1;
         }
-
         mainChar->handleInput();
     }
+    handleScreenSpeed();
+
 }
 
 void GameScreen::update() {
@@ -47,6 +48,7 @@ void GameScreen::randomNewBlock() {
         block = new NonRoad(-100.0, map[map.size() - 1]->getY()-48, 3);
     }
     block->Attach(this);
+    //block->setScreenSpeed(screenSpeed);
     map.push_back(block);
 
 }
@@ -54,7 +56,6 @@ void GameScreen::randomNewBlock() {
 void GameScreen::updateMessage(const Message message) {
 
     if (message == Message::BLOCK_OUT_OF_SCREEN){
-        cout << "UPDATE CALLED!" << endl;
         randomNewBlock();
         map.erase(map.begin());
     }
@@ -72,14 +73,13 @@ void GameScreen::Observe() {
 }
 
 void GameScreen::draw() {
-    //Rectangle buttonRect {50, 50, 200, 100};
-   // if(GuiButton(buttonRect, "Back!")) {
-   //     screenManager->backScreen();
-   // }
+
     for(BaseGameObject *block: map) {
+//        block->setScreenSpeed(screenSpeed);
         block->draw();
 //        block->moveY(0.1);
     }
+//    mainChar->setScreenSpeed(screenSpeed);
     mainChar->draw();
     if (!this->isGamePause) {
         Rectangle buttonRectPause {900, 50, 100, 100};
@@ -126,6 +126,26 @@ void GameScreen::draw() {
     DrawText(to_string(score).c_str(), 722, 50, 36, GRAY);
 //    mainChar->moveY(0.1);
 
+}
+
+void GameScreen::handleScreenSpeed() {
+    double charY = mainChar->getY();
+    int screenHeight = BasicConfigInstance::getData(ConfigType::BASIC)["SCREEN"]["SIZE"]["HEIGHT"];
+    if (mainChar->getDead()) {
+        screenSpeed = 0.0;
+    }
+    else if (charY <  screenHeight / 2) {
+        screenSpeed = 0.75;
+    }
+    else if (charY > 626 - 50){
+        screenSpeed = 0.25;
+    }
+
+
+    for(BaseGameObject *block: map) {
+        block->moveY(screenSpeed);
+    }
+    mainChar->moveY(screenSpeed);
 }
 
 void GameScreen::load() {

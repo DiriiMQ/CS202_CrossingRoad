@@ -15,7 +15,9 @@ void River::draw() {
 //    y += screenSpeed;
 
     DrawRectangle(x, y, 1500, 50, Color{134, 180, 188, 255});
-    if(y > 768 + 48 * 3) { // TODO: Load from config file.
+    json cfg = BasicConfigInstance::getData(ConfigType::BASIC);
+
+    if(y > (int) cfg["SCREEN"]["SIZE"]["HEIGHT"] + (int) cfg["TEXTURES"]["OUT_SCREEN_OFFSET"]) {
         BaseGameObject::Notify();
     }
 }

@@ -37,7 +37,7 @@ void MainChar::handleInput()
     }
     else if (IsKeyDown(KEY_UP) || IsKeyDown(KEY_W)) {
         if (eventTriggered(0.15)) {
-            y = 626;
+            y -= stepSizeY;
             spriteTag = LoadAsepriteTag(sprite, "Walk-Up");
         }
     }

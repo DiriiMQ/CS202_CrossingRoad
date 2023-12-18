@@ -1,15 +1,13 @@
 #include "TrafficLight.h"
 
-void TrafficLight::init(double x,double y)
-{
-    this->x=x;
-    this->y=y;
-    sprite = LoadAseprite("../assets/trafficLights/TrafficLights.aseprite");
-}
-
-
-void TrafficLight::draw()
-{
+void TrafficLight::draw() {
+//    y += screenSpeed;
     tag = LoadAsepriteTag(sprite, isRed ? "red" : "green");
     DrawAsepriteTag(tag, 50, y + 20, WHITE);
+}
+
+void TrafficLight::handleInput() {
+    if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
+        y += stepSize;
+    }
 }

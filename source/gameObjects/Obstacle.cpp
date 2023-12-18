@@ -13,7 +13,7 @@ void Obstacle::handleInput() {
 
     if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
         if (!checkCollision()) {
-            y += 48;
+            y += stepSize;
         }
     }
 }

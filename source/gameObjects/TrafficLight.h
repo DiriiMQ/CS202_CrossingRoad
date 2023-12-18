@@ -10,16 +10,14 @@ private:
     Aseprite sprite;
     AsepriteTag tag;
 public:
-    void init(double x,double y);
-    bool isRed=false;
+    TrafficLight(double x, double y) : BaseGameObject(x, y) {
+        sprite = LoadAseprite("../assets/trafficLights/TrafficLights.aseprite");
+    };
+
+    bool isRed = false;
     void draw() override;
 
-    void handleInput() override {
-        if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP))
-        {
-            y+=48;
-        }
-    }
+    void handleInput();
     void updateMainPos(Rectangle mainPosRect) override {}
 
 };

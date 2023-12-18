@@ -13,7 +13,7 @@ using namespace std;
 class MainChar : public BaseGameObject
 {
 protected: 
-    int stepSizeX=25;
+    int stepSizeX = 25;
     int stepSizeY=24;
     bool isDead=false;
     float width = 40;
@@ -22,7 +22,7 @@ protected:
     AsepriteTag spriteTag;
 
 public:
-    MainChar() : BaseGameObject(722,626) {
+    MainChar() : BaseGameObject(722.0,626.0) {
         sprite = LoadAseprite("../assets/george.aseprite");
         spriteTag = LoadAsepriteTag(sprite, "Walk-Up");
 

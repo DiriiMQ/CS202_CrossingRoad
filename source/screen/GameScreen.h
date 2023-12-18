@@ -21,11 +21,10 @@ private:
     vector<BaseGameObject*> map; // only road and nonroad, maybe river later
     bool hasInit = false;
     MainChar *mainChar;
-//    MainPos mainPos;
-//    Rectangle mainPosRec;
     void randomNewBlock();
     int score = 0;
     bool isGamePause=false;
+    double screenSpeed = 0.25;
 
 public:
     GameScreen() = default;
@@ -33,10 +32,12 @@ public:
     void init();
 
     void handleInput() override;
+    void handleScreenSpeed();
+
     void update() override;
     void updateMessage(const Message message) override;
-    void Observe();
 
+    void Observe();
 
     void draw() override;
 

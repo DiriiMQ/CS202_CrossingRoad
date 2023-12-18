@@ -15,11 +15,13 @@ using namespace std;
 
 class BaseGameObject : public ISubject {
 protected:
-    int x, y;
-    double screenSpeed = 0.1;
+    double x, y;
+//    double screenSpeed = 0.3;
     std::list<IObserver *> list_observer_;
     bool isMainCharDead = false;
     bool isGamePause = false;
+    double stepSize = 24.0;
+
 public:
     BaseGameObject(double x, double y) : x(x), y(y) {};
     BaseGameObject () {};
@@ -49,6 +51,10 @@ public:
         return x;
     }
 
+    virtual void moveY(double offset) {
+        y += offset;
+    }
+
     virtual void updateMainPos(Rectangle mainPosRect) = 0;
     void setMainCharacterDead(bool isDead) {
         isMainCharDead = isDead;
@@ -56,9 +62,15 @@ public:
     void pauseGame() {
         isGamePause=!isGamePause;
     }
-    void moveDown() {
-        y+=48;
-    }
+
+
+//    virtual void setScreenSpeed(double speed) {
+//        screenSpeed = speed;
+//    }
+//
+//    virtual double getScreenSpeed() {
+//        return screenSpeed;
+//    }
 };
 
 

@@ -4,7 +4,7 @@
 
 #include "NonRoad.h"
 
-NonRoad::NonRoad(int x, int y, int numStatic) : BaseGameObject(x, y) {
+NonRoad::NonRoad(double x, double y, int numStatic) : BaseGameObject(x, y) {
     int direction = 0; // static obstacles
     int originX = RandomNumber::getInstance().getRandomNumber(
             0,
@@ -33,6 +33,13 @@ void NonRoad::handleInput() {
     }
 }
 
+//void NonRoad::setScreenSpeed(double speed) {
+//    screenSpeed = speed;
+//    for(Obstacle *obs: staticObs) {
+//        obs->setScreenSpeed(speed);
+//    }
+//}
+
 void NonRoad::draw() {
 //    y += screenSpeed;
 
@@ -48,6 +55,11 @@ void NonRoad::draw() {
         cout << "UPDATE CALLED!" << endl;
         BaseGameObject::Notify();
     }
+}
 
-
+void NonRoad::moveY(double offset) {
+    y += offset;
+    for(Obstacle *obs: staticObs) {
+        obs->moveY(offset);
+    }
 }
