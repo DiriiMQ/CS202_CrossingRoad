@@ -23,7 +23,7 @@ void Obstacle::draw() {
 //    y += screenSpeed;
 
     Rectangle boxRect{(float) x, (float) y, (float) (width), (float) (height)};
-    DrawRectangleRec(boxRect, WHITE);
+    //DrawRectangleRec(boxRect, WHITE);
 
     if (direction != 0)
         DrawAsepriteTagPro(spriteTag, boxRect, {(float)0, (float)0}, 0, WHITE);

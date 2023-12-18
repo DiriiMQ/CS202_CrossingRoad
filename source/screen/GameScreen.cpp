@@ -140,7 +140,7 @@ void GameScreen::init() {
             map.push_back(riverBlock);
         }
         else {
-            NonRoad *nonRoadBlock = new NonRoad(x_direction, y_direction, 3);
+            NonRoad *nonRoadBlock = new NonRoad(x_direction, y_direction, 15);
             map.push_back(nonRoadBlock);
         }
     }
