@@ -14,7 +14,6 @@ void Obstacle::handleInput() {
     if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
         if (!checkCollision()) {
             y += 48;
-            cout << "y: " << y << endl;
         }
     }
 }
@@ -33,7 +32,7 @@ void Obstacle::draw() {
     if (isMoving) {
         handleCollision();
         int screenWidth = BasicConfigInstance::getData(ConfigType::BASIC)["SCREEN"]["SIZE"]["WIDTH"];
-        if ((direction == 1 && x > screenWidth + 100) || (direction == -1 && x < -100)) { // TODO: Load from config file
+        if ((direction == 1 && x > screenWidth + 100) || (direction == -1 && x < -100)) {
             BaseGameObject::Notify(Message::BLOCK_OUT_OF_SCREEN);
         }
     }
