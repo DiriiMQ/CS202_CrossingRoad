@@ -5,36 +5,22 @@
 #include "MenuScreen.h"
 
 void MenuScreen::handleInput() {
-    //playButton->handleInput();
+
 }
 
 void MenuScreen::update() {
+
 }
 
 void MenuScreen::draw() {
-
+    DrawTexture(this->background, 0, 0, WHITE);
     DrawText("Duong Bao!", 10, 10, 20, RED);
 
-    Rectangle buttonRect {50, 50, 200, 100};
-    if(GuiButton(buttonRect, "Click Me!")) {
-        screenManager->setScreen(&testScreen);
-    }
-
-    Rectangle tempRec{0, 0, (float) this->screenWidth, (float) this->screenHeight};
-    DrawTextureRec(bgImage, tempRec, {0,0}, WHITE);
-//    drawButtons();
-}
-
-void MenuScreen::drawButtons() {
-    //playButton->draw();
+    this->buttonsProcess();
 }
 
 void MenuScreen::load() {
     BaseScreen::load();
-
-    //playButton = new TexturedButton("../assets/welcome_screen/b_play.png");
-    Image bgTemp = LoadImage("../assets/welcome_screen/menu_background.png");
-    bgImage = LoadTextureFromImage(bgTemp);
 
     if (!this->hasInit) {
         this->init();
@@ -43,20 +29,42 @@ void MenuScreen::load() {
 }
 
 void MenuScreen::unload() {
-    UnloadTexture(bgImage);
     BaseScreen::unload();
 }
 
 void MenuScreen::init() {
-    this->testScreen.setScreenManager(this->screenManager);
+    this->background = LoadTexture(
+            BasicConfigInstance::getData()["BACKGROUND"]["MENU"].get<std::string>().c_str()
+            );
 
     // set screen variable
     this->screenHeight = BasicConfigInstance::getData(ConfigType::BASIC)["SCREEN"]["SIZE"]["HEIGHT"];
     this->screenWidth = BasicConfigInstance::getData(ConfigType::BASIC)["SCREEN"]["SIZE"]["WIDTH"];
+    this->gameScreen.setScreenManager(this->screenManager);
 }
 
 MenuScreen::~MenuScreen() {
-    delete test;
+    UnloadTexture(this->background);
+}
 
-    UnloadAseprite(this->testAseprite); // testing
+void MenuScreen::buttonsProcess() {
+    Rectangle buttonRect = {
+            (float) (GetScreenWidth() - this->buttonOptionMenuSize.x) / 2,
+            (float) (GetScreenHeight() - this->buttonOptionMenuSize.y) / 2,
+            this->buttonOptionMenuSize.x,
+            this->buttonOptionMenuSize.y
+    };
+    if(GuiButtonRounded(buttonRect, "New Game")) {
+        screenManager->setScreen(&gameScreen);
+    }
+
+    buttonRect.y += this->buttonOptionMenuSize.y + 28;
+    if(GuiButtonRounded(buttonRect, "Load Game")) {
+
+    }
+
+    buttonRect.y += this->buttonOptionMenuSize.y + 28;
+    if(GuiButtonRounded(buttonRect, "Leaderboard")) {
+
+    }
 }
