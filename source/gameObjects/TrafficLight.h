@@ -10,7 +10,7 @@ private:
     Aseprite sprite;
     AsepriteTag tag;
 public:
-    TrafficLight(double x, double y) : BaseGameObject(x, y) {
+    TrafficLight(float x, float y) : BaseGameObject(x, y) {
         sprite = LoadAseprite("../assets/trafficLights/TrafficLights.aseprite");
     };
 

@@ -24,7 +24,7 @@ class Obstacle : public BaseGameObject {
     bool isMoving;
 
 public:
-    Obstacle(double x, double y, int direction) : BaseGameObject(x, y), isMoving(true), direction(direction) {}
+    Obstacle(float x, float y, int direction) : BaseGameObject(x, y), isMoving(true), direction(direction) {}
 
     void initObstacle();
     void draw();

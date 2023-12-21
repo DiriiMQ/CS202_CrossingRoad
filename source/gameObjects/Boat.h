@@ -5,10 +5,32 @@
 #ifndef CROSSING_ROAD_BOAT_H
 #define CROSSING_ROAD_BOAT_H
 #include "BaseGameObject.h"
+#include "raylib-aseprite.h"
+#include "assetsLib/AsepriteIO.h"
+#include "assetsLib/ConfigIO.h"
+#include "MainChar.h"
 
 class Boat : public BaseGameObject {
-private:
-    Boat(double x, double y) : BaseGameObject(x, y) {};
+    int width, height;
+    int direction;
+    Aseprite sprite;
+    AsepriteTag spriteTag;
+    bool isMoving = true;
+    Rectangle mainPosRect;
+    MainChar *mainChar;
+
+public:
+    Boat(float x, float y, int direction, MainChar *mainChar);
+    void draw() override;
+    void handleInput() override;
+    void handleCollision();
+    void setMove(bool move);
+    virtual void updateMainPos(Rectangle mainPosRect);
+
+
+    float getWidth();
+    bool checkCollision();
+
 };
 
 

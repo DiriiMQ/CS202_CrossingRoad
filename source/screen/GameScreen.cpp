@@ -35,17 +35,18 @@ void GameScreen::update() {
 
 void GameScreen::randomNewBlock() {
     int randomNumber = rand();
+    double stepSize = BasicConfigInstance::getData(ConfigType::BASIC)["GAME"]["STEP_SIZE"];
 
     BaseGameObject *block;
-
+    int newY = map[map.size() - 1]->getY() - stepSize;
     if (randomNumber % 100 > 60) {
-        block = new Road(-100.0, map[map.size() - 1]->getY()-48, 5);
+        block = new Road(-100.0, newY, 5);
     }
     else if(randomNumber % 100 > 40) {
-        block = new River(-100.0, map[map.size() - 1]->getY()-48);
+        block = new River(-100.0, newY, 5, mainChar);
     }
     else {
-        block = new NonRoad(-100.0, map[map.size() - 1]->getY()-48, 3);
+        block = new NonRoad(-100.0, newY, 3);
     }
     block->Attach(this);
     //block->setScreenSpeed(screenSpeed);
@@ -162,29 +163,29 @@ void GameScreen::unload() {
 }
 
 void GameScreen::init() {
-    cout << "Test Screen init Called" << endl;
-
-    mainChar = new MainChar();
-    for (int i = 0; i < 20; i++) {
-        int randnum = rand();
-        double x_direction = -100;
-        double y_direction = 48 * (19 - i);
-        if ((randnum % 100 > 60 && i > 10) || i == 10) {
-            Road *roadBlock = new Road(x_direction, y_direction, 5);
-            map.push_back(roadBlock);
-        }
-        else if (randnum % 100 > 40 && i > 10) {
-            River *riverBlock = new River(x_direction, y_direction);
-            map.push_back(riverBlock);
-        }
-        else {
-            NonRoad *nonRoadBlock = new NonRoad(x_direction, y_direction, 15);
-            map.push_back(nonRoadBlock);
-        }
-    }
-    Observe();
-
-    this->test = new AnimatedTexture("../assets/slime/Jump.png", 13);
+//    cout << "Test Screen init Called" << endl;
+//    double stepSize = BasicConfigInstance::getData(ConfigType::BASIC)["GAME"]["STEP_SIZE"];
+//
+//    mainChar = new MainChar();
+//    for (int i = 0; i < 20; i++) {
+//        int randnum = rand();
+//        double x_direction = -100;
+//        double y_direction = stepSize * (19. - i);
+//        if ((randnum % 100 > 60 && i > 10) || i == 10) {
+//            Road *roadBlock = new Road(x_direction, y_direction, 5);
+//            map.push_back(roadBlock);
+//        }
+//        else if (randnum % 100 > 40 && i > 10) {
+//            River *riverBlock = new River(x_direction, y_direction);
+//            map.push_back(riverBlock);
+//        }
+//        else {
+//            NonRoad *nonRoadBlock = new NonRoad(x_direction, y_direction, 15);
+//            map.push_back(nonRoadBlock);
+//        }
+//    }
+//    Observe();
+    this->newGameScreen();
 }
 
 void GameScreen::loadScreen(GameScreen* A)
@@ -202,21 +203,29 @@ void GameScreen::loadScreen(GameScreen* A)
 void GameScreen::newGameScreen() {
     this->score=0;
     this->isGamePause=false;
-    mainChar->resetMainChar();
-    mainChar->mainCharRevive();
-    int mapsize=map.size();
+
+    if (mainChar) {
+        mainChar->resetMainChar();
+        mainChar->mainCharRevive();
+    } else {
+        mainChar = new MainChar();
+    }
+
+    double stepSize = BasicConfigInstance::getData(ConfigType::BASIC)["GAME"]["STEP_SIZE"];
+
+    map.clear();
     for (int i = 0; i < 20; i++)
     {
         int randnum = rand();
         double x_direction = -100;
-        double y_direction = 48 * (19 - i);
-        if ((randnum % 100 > 60 && i > 10) || i == 10) {
+        double y_direction = stepSize * (19 - i);
+        if (randnum % 100 > 60 && i > 10) {
             Road *roadBlock = new Road(x_direction, y_direction, 5);
             map.push_back(roadBlock);
             //map.erase(map.begin());
         }
         else if (randnum % 100 > 40 && i > 10) {
-            River *riverBlock = new River(x_direction, y_direction);
+            River *riverBlock = new River(x_direction, y_direction, 5, mainChar);
             map.push_back(riverBlock);
             //map.erase(map.begin());
         }
@@ -225,12 +234,11 @@ void GameScreen::newGameScreen() {
             map.push_back(nonRoadBlock);
             //map.erase(map.begin());
         }
-        map.erase(map.begin());
+        //map.erase(map.begin());
         mainChar->mainCharRevive();
         //delete test;
         //map[i]->Notify(Message::NEW_GAME);
     }
-    this->test = new AnimatedTexture("../assets/slime/Jump.png", 13);
 
     Observe();
 }

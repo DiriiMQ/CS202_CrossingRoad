@@ -21,13 +21,13 @@ void Obstacle::handleInput() {
 void Obstacle::draw() {
 //    y += screenSpeed;
 
-    Rectangle boxRect{(float) x, (float) y, (float) (width), (float) (height)};
-    //DrawRectangleRec(boxRect, WHITE);
+    Rectangle boxRect{x,  y, (float) width, (float) height};
+    DrawRectangleRec(boxRect, WHITE);
 
     if (direction != 0)
-        DrawAsepriteTagPro(spriteTag, boxRect, {(float)0, (float)0}, 0, WHITE);
+        DrawAsepriteTagPro(spriteTag, boxRect, {0., 0.}, 0, WHITE);
     else
-        DrawAsepritePro(sprite, 0, boxRect, {(float)0, (float)0}, 0, WHITE);
+        DrawAsepritePro(sprite, 0, boxRect, {0., 0.}, 0, WHITE);
 
     if (isMoving) {
         handleCollision();
@@ -50,13 +50,13 @@ void Obstacle::initObstacle() {
 
     if (direction != 0)
         spriteTag = LoadAsepriteTag(sprite, tag.c_str());
-    width = GetAsepriteWidth(sprite);
-    height = GetAsepriteHeight(sprite);
+    width = GetAsepriteWidth(sprite) * 1.5;
+    height = GetAsepriteHeight(sprite) * 1.5;
 }
 
 void Obstacle::updateMainPos(Rectangle mainPosRect)
 {
-    this->mainPosRect=mainPosRect;
+    this->mainPosRect = mainPosRect;
 }
 
 void Obstacle::handleCollision() {

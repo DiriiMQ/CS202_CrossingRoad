@@ -16,7 +16,7 @@ private:
     std::vector<Obstacle*> staticObs;
 
 public:
-    NonRoad(double x, double y, int numStatic = 5);
+    NonRoad(float x, float y, int numStatic = 5);
     void draw() override;
     void handleInput() override;
     void updateMainPos(Rectangle mainPosRect) override {};

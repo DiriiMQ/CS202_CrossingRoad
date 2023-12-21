@@ -10,20 +10,23 @@
 #include "Message.h"
 #include <iostream>
 #include "screen/Position.h"
+#include "assetsLib/ConfigIO.h"
 
 using namespace std;
 
 class BaseGameObject : public ISubject {
 protected:
-    double x, y;
+    float x, y;
 //    double screenSpeed = 0.3;
     std::list<IObserver *> list_observer_;
     bool isMainCharDead = false;
     bool isGamePause = false;
-    double stepSize = 24.0;
+    double stepSize;
 
 public:
-    BaseGameObject(double x, double y) : x(x), y(y) {};
+    BaseGameObject(float x, float y) : x(x), y(y) {
+        stepSize = (double) BasicConfigInstance::getData(ConfigType::BASIC)["GAME"]["STEP_SIZE"] / 2.0;
+    };
     BaseGameObject () {};
     virtual void draw() = 0;
     virtual void handleInput() = 0;
@@ -63,14 +66,6 @@ public:
         isGamePause=!isGamePause;
     }
 
-
-//    virtual void setScreenSpeed(double speed) {
-//        screenSpeed = speed;
-//    }
-//
-//    virtual double getScreenSpeed() {
-//        return screenSpeed;
-//    }
 };
 
 

@@ -2,6 +2,9 @@
     "BACKGROUND": {
         "MENU": "../assets/welcome_screen/menu_nobutton.png"
     },
+    "GAME": {
+        "STEP_SIZE": 64
+    },
     "SCREEN": {
         "FRAMES_ANIMATION_SPEED": 10,
         "FRAMES_PER_SECOND": 120,
@@ -15,6 +18,9 @@
         "TITLE": "Crosy Road"
     },
     "TEXTURES": {
+        "BOAT": [
+            "../assets/vehicle/Boat.aseprite"
+        ],
         "OBSTACLES": [
             "../assets/vehicle/NoRoofCar.aseprite",
             "../assets/vehicle/Bus.aseprite",

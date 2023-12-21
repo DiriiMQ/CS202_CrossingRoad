@@ -4,7 +4,7 @@
 
 #include "NonRoad.h"
 
-NonRoad::NonRoad(double x, double y, int numStatic) : BaseGameObject(x, y) {
+NonRoad::NonRoad(float x, float y, int numStatic) : BaseGameObject(x, y) {
     int direction = 0; // static obstacles
     int originX = RandomNumber::getInstance().getRandomNumber(
             0,
@@ -43,8 +43,7 @@ void NonRoad::handleInput() {
 void NonRoad::draw() {
 //    y += screenSpeed;
 
-
-    DrawRectangle(x, y, 1500, 50,  Color{205, 223, 108, 255});
+    DrawRectangle(x, y, 1500, (float) stepSize * 2,  Color{205, 223, 108, 255});
 
     for(Obstacle *obs: staticObs) {
         obs->draw();

@@ -18,7 +18,7 @@ bool eventTriggeredLight(double interval)
     return false;
 }
 
-Road::Road(double x, double y, int numObstacles) : BaseGameObject(x, y) {
+Road::Road(float x, float y, int numObstacles) : BaseGameObject(x, y) {
     // TODO: Load from config file.
     roadSprite = LoadAseprite("../assets/trafficEnvironment/2_lane.aseprite");
     int randNum = RandomNumber::getInstance().getRandomNumber(0, 1);
@@ -65,9 +65,9 @@ void Road::draw() {
 //    y += screenSpeed;
 
 //    DrawRectangle(x, y, 1500, 50, BLACK);
-    Rectangle rectangle = {(float) x, (float) y, 1500, 50};
+    Rectangle rectangle = {x,  y, 1500, (float) stepSize * 2};
 
-    DrawAsepritePro(roadSprite, 0, rectangle, {(float) 0, (float)0}, 0, WHITE);
+    DrawAsepritePro(roadSprite, 0, rectangle, {0., 0.}, 0, WHITE);
 
     
     for(Obstacle *obs: obstacles) {
@@ -75,7 +75,7 @@ void Road::draw() {
         if(isMainCharDead || isGamePause || (hasLight && light->isRed))
             obs->setMove(false);
         else if ((!hasLight) || ((hasLight) && (!light->isRed))) {
-                obs->setMove(true);
+            obs->setMove(true);
         }
     }
 

@@ -13,19 +13,20 @@ using namespace std;
 class MainChar : public BaseGameObject
 {
 protected: 
-    int stepSizeX = 25;
-    int stepSizeY=24;
+    double stepSizeX;
+    double stepSizeY;
     bool isDead=false;
     float width = 40;
-    float height=40;
+    float height = 40;
     Aseprite sprite;
     AsepriteTag spriteTag;
 
 public:
-    MainChar() : BaseGameObject(722.0,626.0) {
+    MainChar() : BaseGameObject(722.0,658.0) {
         sprite = LoadAseprite("../assets/george.aseprite");
         spriteTag = LoadAsepriteTag(sprite, "Walk-Up");
-
+        stepSizeY = (double) BasicConfigInstance::getData(ConfigType::BASIC)["GAME"]["STEP_SIZE"] / 2;
+        stepSizeX = stepSizeY;
     }
     void draw() override;
     void handleInput() override;
@@ -36,15 +37,17 @@ public:
     void setDead() { isDead = true; };
     bool getDead() { return isDead; }
     ~MainChar();
-    void resetMainChar()
-    {
-        x=722;
-        y=626;
+    void resetMainChar() {
+        x = 722;
+        y = 658;
     }
     void mainCharRevive()
     {
         this->isDead=false;
     }
+    void moveX(double offset) {
+        x += offset;
+    };
 };
 
 #endif //CROSSING_ROAD_MAINCHAR_H

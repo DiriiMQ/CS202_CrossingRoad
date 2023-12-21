@@ -8,15 +8,27 @@
 #include "BaseGameObject.h"
 #include "raygui.h"
 #include "assetsLib/ConfigIO.h"
+#include "Boat.h"
+#include <iostream>
+#include "MainChar.h"
 
-class River : public BaseGameObject {
+class River : public BaseGameObject, public IObserver {
 private:
     Rectangle mainPosRect;
+    vector<Boat*> boats;
+    int direction = 1;
+    MainChar *mainChar;
+
+
 public:
-    River(double x, double y) : BaseGameObject(x, y) {};
+    River(float x, float y, int num_boats = 5, MainChar *mainChar = nullptr);
     void draw() override;
     void handleInput() override;
-    void updateMainPos(Rectangle mainPosRect) override {};
+    void updateMainPos(Rectangle mainPosRect) override;
+    void updateMessage(const Message message) override;
+    void handleBlockOutOfScreen();
+
+    void moveY(double offset) override;
 };
 
 

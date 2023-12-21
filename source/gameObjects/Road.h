@@ -29,7 +29,7 @@ private:
     TrafficLight* light;
 
 public:
-    Road(double x, double y, int numObstacles = 5);
+    Road(float x, float y, int numObstacles = 5);
     ~Road() override;
     void draw() override;
     void handleInput() override;
