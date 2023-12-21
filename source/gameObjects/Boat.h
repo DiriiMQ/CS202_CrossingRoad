@@ -14,7 +14,6 @@ class Boat : public BaseGameObject {
     int width, height;
     int direction;
     Aseprite sprite;
-    AsepriteTag spriteTag;
     bool isMoving = true;
     Rectangle mainPosRect;
     MainChar *mainChar;

@@ -7,13 +7,10 @@
 Boat::Boat(float x, float y, int direction, MainChar *mainChar): BaseGameObject(x, y) , direction(direction), mainChar(mainChar) {
     int index = 0;
     sprite = AsepriteInstance::getAseprite(AsepriteType::BOAT, index);
-    string tag = direction != 1 ? "" : "r2l";
-    if (direction == 1)
-        spriteTag = LoadAsepriteTag(sprite, tag.c_str());
 
-    width = GetAsepriteWidth(sprite) * 1.5;
+    width = GetAsepriteWidth(sprite) * 4;
 
-    height = GetAsepriteHeight(sprite) * 1.5;
+    height = GetAsepriteHeight(sprite) * 4;
 }
 
 void Boat::setMove(bool move) {
@@ -22,8 +19,6 @@ void Boat::setMove(bool move) {
 
 
 void Boat::handleInput() {
-    if (direction == 1)
-        UpdateAsepriteTag(&spriteTag);
 
     if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
         y += stepSize;
@@ -38,10 +33,8 @@ void Boat::updateMainPos(Rectangle mainPosRect)
 void Boat::draw() {
     Rectangle boxRect{x,  y, (float) width, (float) height};
     DrawRectangleRec(boxRect, WHITE);
-    if (direction == 1)
-        DrawAsepriteTagPro(spriteTag, boxRect, {0., 0.}, 0, WHITE);
-    else
-        DrawAsepritePro(sprite, 0, boxRect, {0., 0.}, 0, WHITE);
+
+    DrawAsepritePro(sprite, 0, boxRect, {0., 0.}, 0, WHITE);
 
 //    x += direction;
     if (isMoving) {

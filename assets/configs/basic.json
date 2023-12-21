@@ -19,7 +19,7 @@
     },
     "TEXTURES": {
         "BOAT": [
-            "../assets/vehicle/Boat.aseprite"
+            "../assets/vehicle/log.aseprite"
         ],
         "OBSTACLES": [
             "../assets/vehicle/NoRoofCar.aseprite",
