@@ -2,7 +2,6 @@
 #define CROSSING_ROAD_MAINCHAR_H
 #include "BaseGameObject.h"
 #include "Observer.h"
-#include "Obstacle.h"
 #include <vector>
 #include <iostream>
 #include "assetsLib/ConfigIO.h"
@@ -22,6 +21,12 @@ protected:
     AsepriteTag spriteTag;
 
 public:
+
+    bool canMoveLeft = true;
+    bool canMoveRight = true;
+    bool canMoveUp = true;
+    bool canMoveDown = true;
+
     MainChar() : BaseGameObject(722.0,658.0) {
         sprite = LoadAseprite("../assets/george.aseprite");
         spriteTag = LoadAsepriteTag(sprite, "Walk-Up");
@@ -36,15 +41,17 @@ public:
     Rectangle returnMainPos();
     void setDead() { isDead = true; };
     bool getDead() { return isDead; }
+
     ~MainChar();
     void resetMainChar() {
         x = 722;
         y = 658;
     }
-    void mainCharRevive()
-    {
-        this->isDead=false;
+
+    void mainCharRevive() {
+        this->isDead = false;
     }
+
     void moveX(double offset) {
         x += offset;
     };

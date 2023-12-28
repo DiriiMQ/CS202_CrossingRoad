@@ -40,13 +40,13 @@ void GameScreen::randomNewBlock() {
     BaseGameObject *block;
     int newY = map[map.size() - 1]->getY() - stepSize;
     if (randomNumber % 100 > 60) {
-        block = new Road(-100.0, newY, 5);
+        block = new Road(-100.0, newY, 5, mainChar);
     }
     else if(randomNumber % 100 > 40) {
         block = new River(-100.0, newY, 5, mainChar);
     }
     else {
-        block = new NonRoad(-100.0, newY, 3);
+        block = new NonRoad(-100.0, newY, 5, mainChar);
     }
     block->Attach(this);
     //block->setScreenSpeed(screenSpeed);
@@ -83,7 +83,7 @@ void GameScreen::draw() {
 //    mainChar->setScreenSpeed(screenSpeed);
     mainChar->draw();
     if (!this->isGamePause) {
-        Rectangle buttonRectPause {900, 50, 100, 100};
+        Rectangle buttonRectPause {1100, 50, 100, 100};
         if (GuiButton(buttonRectPause, "Pause!")) {
             NotifyPauseGame();
             this->isGamePause=!(this->isGamePause);
@@ -106,20 +106,13 @@ void GameScreen::draw() {
     if (mainChar->getDead()) 
     {
         DrawRectangle  (400, 100, 600, 600, GRAY);
-        Rectangle continueButton {450, 300, 500, 100};
         DrawText("YOU DEAD!", 580, 200, 40, RED);
         Rectangle backButton {450, 450, 500, 100};
-        if (GuiButton(backButton, "Back"))
-        {
+        if (GuiButton(backButton, "Back")) {
             screenManager->backScreen();
         }
         Rectangle newgameButton {450, 300, 500, 100};
         if (GuiButton(newgameButton, "New game")) {
-           /*GameScreen* A = new GameScreen;
-           A->init();*/
-           //loadScreen(A);
-           //A->deleteScreen();
-           //delete A;
            this->newGameScreen();
 
         }
@@ -193,11 +186,11 @@ void GameScreen::loadScreen(GameScreen* A)
     this->test=A->test;
     int sizemap=map.size();
     for (int i=0;i<sizemap;i++) {
-        this->map[i]=A->map[i];
+        this->map[i] = A->map[i];
     }
-    this->mainChar=A->mainChar;
-    this->score=0;
-    this->isGamePause=false;
+    this->mainChar = A->mainChar;
+    this->score = 0;
+    this->isGamePause = false;
 }
 
 void GameScreen::newGameScreen() {
@@ -217,10 +210,10 @@ void GameScreen::newGameScreen() {
     for (int i = 0; i < 20; i++)
     {
         int randnum = rand();
-        double x_direction = -100;
-        double y_direction = stepSize * (19 - i);
+        float x_direction = -100.0;
+        float y_direction = stepSize * (19 - i);
         if (randnum % 100 > 60 && i > 10) {
-            Road *roadBlock = new Road(x_direction, y_direction, 5);
+            Road *roadBlock = new Road(x_direction, y_direction, 5, mainChar);
             map.push_back(roadBlock);
             //map.erase(map.begin());
         }
@@ -230,7 +223,7 @@ void GameScreen::newGameScreen() {
             //map.erase(map.begin());
         }
         else {
-            NonRoad *nonRoadBlock = new NonRoad(x_direction, y_direction);
+            NonRoad *nonRoadBlock = new NonRoad(x_direction, y_direction, 5, mainChar);
             map.push_back(nonRoadBlock);
             //map.erase(map.begin());
         }

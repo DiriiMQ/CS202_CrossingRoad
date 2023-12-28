@@ -24,10 +24,11 @@ public:
     River(float x, float y, int num_boats = 5, MainChar *mainChar = nullptr);
     void draw() override;
     void handleInput() override;
+    void handleBlockOutOfScreen();
+    void handleMainCharCondition();
+
     void updateMainPos(Rectangle mainPosRect) override;
     void updateMessage(const Message message) override;
-    void handleBlockOutOfScreen();
-
     void moveY(double offset) override;
 };
 

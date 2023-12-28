@@ -29,11 +29,26 @@ River::River(float x, float y, int num_boats, MainChar *mainChar) : BaseGameObje
 
 void River::handleInput() {
 
-    if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
+    if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && mainChar->canMoveUp) {
         y += stepSize;
     }
     for (Boat *boat: boats) {
         boat->handleInput();
+    }
+}
+
+void River::handleMainCharCondition() {
+
+    bool isOnBoat = false;
+    for(Boat *boat: boats) {
+        if(boat->checkCollision()) {
+            isOnBoat = true;
+            break;
+        }
+    }
+    Rectangle riverRect = { x, y, 1500., (float) stepSize * 2 };
+    if (!isOnBoat && CheckCollisionRecs(riverRect,mainPosRect)) {
+        BaseGameObject::Notify(Message::COLLISION);
     }
 }
 
@@ -48,15 +63,17 @@ void River::draw() {
             boat->setMove(true);
         boat->draw();
     }
+    handleMainCharCondition();
 
     json cfg = BasicConfigInstance::getData(ConfigType::BASIC);
 
     if(y > (int) cfg["SCREEN"]["SIZE"]["HEIGHT"] + (int) cfg["TEXTURES"]["OUT_SCREEN_OFFSET"]) {
-        BaseGameObject::Notify();
+        BaseGameObject::Notify(Message::BLOCK_OUT_OF_SCREEN);
     }
 }
 
 void River::updateMainPos(Rectangle mainPosRect) {
+    this->mainPosRect = mainPosRect;
     for (Boat *boat: boats) {
         boat->updateMainPos(mainPosRect);
     }

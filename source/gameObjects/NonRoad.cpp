@@ -4,7 +4,7 @@
 
 #include "NonRoad.h"
 
-NonRoad::NonRoad(float x, float y, int numStatic) : BaseGameObject(x, y) {
+NonRoad::NonRoad(float x, float y, int numStatic, MainChar *mainChar) : BaseGameObject(x, y), mainChar(mainChar) {
     int direction = 0; // static obstacles
     int originX = RandomNumber::getInstance().getRandomNumber(
             0,
@@ -12,7 +12,7 @@ NonRoad::NonRoad(float x, float y, int numStatic) : BaseGameObject(x, y) {
     );
 
     for (int i = 0; i < numStatic; i++) {
-        Obstacle *obs = new Obstacle(originX, y, direction);
+        Obstacle *obs = new Obstacle(originX, y, direction, mainChar);
 //        obs->Attach(this);
         obs->initObstacle();
         staticObs.push_back(obs);
@@ -25,7 +25,7 @@ NonRoad::NonRoad(float x, float y, int numStatic) : BaseGameObject(x, y) {
 
 void NonRoad::handleInput() {
 
-    if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
+    if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && (mainChar && mainChar->canMoveUp)) {
         y += stepSize;
     }
     for (Obstacle *obs: staticObs) {

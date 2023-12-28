@@ -7,7 +7,7 @@ void TrafficLight::draw() {
 }
 
 void TrafficLight::handleInput() {
-    if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
+    if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && mainChar->canMoveUp) {
         y += stepSize;
     }
 }

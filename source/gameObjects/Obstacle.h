@@ -12,8 +12,10 @@
 #include <list>
 #include "raylib-aseprite.h"
 #include "assetsLib/AsepriteIO.h"
+#include "MainChar.h"
 
 class Obstacle : public BaseGameObject {
+private:
     int width = 0, height = 0;
     int direction; // 1 for right -1 for left
     Aseprite sprite;
@@ -22,15 +24,20 @@ class Obstacle : public BaseGameObject {
     std::list<IObserver *> list_observer_;
     Rectangle mainPosRect;
     bool isMoving;
+    MainChar *mainChar;
 
 public:
-    Obstacle(float x, float y, int direction) : BaseGameObject(x, y), isMoving(true), direction(direction) {}
+    Obstacle(float x, float y, int direction, MainChar *mainChar)
+        : BaseGameObject(x, y), isMoving(true), direction(direction), mainChar(mainChar) {}
 
     void initObstacle();
     void draw();
     void handleInput();
     void handleCollision();
+    void handleBlockMove();
+
     bool checkCollision();
+
     //void getPos(Vector2 mainPos,Vector2 mainSize);
     void updateMainPos(Rectangle mainPosRect);
     void setMove(bool move);

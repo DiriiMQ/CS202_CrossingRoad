@@ -42,7 +42,9 @@
         },
         "STATIC_OBSTACLES": [
             "../assets/staticObstacle/greenTree.aseprite",
-            "../assets/staticObstacle/youngTree.aseprite"
+            "../assets/staticObstacle/autumnTree.aseprite",
+            "../assets/staticObstacle/sakuraTree.aseprite",
+            "../assets/staticObstacle/winterTree.aseprite"
         ],
         "STATIC_OBSTACLES_TAG": [
             "",

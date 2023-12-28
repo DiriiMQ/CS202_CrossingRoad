@@ -4,7 +4,7 @@
 
 #include "Boat.h"
 
-Boat::Boat(float x, float y, int direction, MainChar *mainChar): BaseGameObject(x, y) , direction(direction), mainChar(mainChar) {
+Boat::Boat(float x, float y, int direction, MainChar *mainChar): BaseGameObject(x, y), direction(direction), mainChar(mainChar) {
     int index = 0;
     sprite = AsepriteInstance::getAseprite(AsepriteType::BOAT, index);
 
@@ -20,7 +20,7 @@ void Boat::setMove(bool move) {
 
 void Boat::handleInput() {
 
-    if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
+    if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && mainChar->canMoveUp) {
         y += stepSize;
     }
 }
@@ -41,16 +41,15 @@ void Boat::draw() {
         x += direction;
         this->handleCollision();
         int screenWidth = BasicConfigInstance::getData(ConfigType::BASIC)["SCREEN"]["SIZE"]["WIDTH"];
-        if ((direction == 1 && x > screenWidth + 100) || (direction == -1 && x < -100)) {
+        if ((direction == 1 && x > screenWidth + width + 50) || (direction == -1 && x < -width + 50)) {
             BaseGameObject::Notify(Message::BLOCK_OUT_OF_SCREEN);
         }
     }
 }
 
 void Boat::handleCollision() {
-    if (checkCollision()) {
-        if(mainChar)
-            mainChar->moveX(direction);
+    if (checkCollision() && mainChar) {
+        mainChar->moveX(direction);
     }
 }
 

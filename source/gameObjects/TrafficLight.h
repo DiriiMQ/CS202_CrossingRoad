@@ -4,13 +4,16 @@
 #include "BaseGameObject.h"
 #include <ctime>
 #include "raylib-aseprite.h"
+#include "MainChar.h"
 
 class TrafficLight : public BaseGameObject {
 private:
     Aseprite sprite;
     AsepriteTag tag;
+    MainChar *mainChar;
+
 public:
-    TrafficLight(float x, float y) : BaseGameObject(x, y) {
+    TrafficLight(float x, float y, MainChar *mainChar) : BaseGameObject(x, y), mainChar(mainChar) {
         sprite = LoadAseprite("../assets/trafficLights/TrafficLights.aseprite");
     };
 

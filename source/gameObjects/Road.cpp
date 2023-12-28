@@ -18,7 +18,7 @@ bool eventTriggeredLight(double interval)
     return false;
 }
 
-Road::Road(float x, float y, int numObstacles) : BaseGameObject(x, y) {
+Road::Road(float x, float y, int numObstacles, MainChar *mainChar) : BaseGameObject(x, y), mainChar(mainChar) {
     // TODO: Load from config file.
     roadSprite = LoadAseprite("../assets/trafficEnvironment/2_lane.aseprite");
     int randNum = RandomNumber::getInstance().getRandomNumber(0, 1);
@@ -31,7 +31,7 @@ Road::Road(float x, float y, int numObstacles) : BaseGameObject(x, y) {
     );
     
     for (int i = 0; i < numObstacles; i++) {
-        Obstacle *obs = new Obstacle(originX, y, direction);
+        Obstacle *obs = new Obstacle(originX, y, direction, mainChar);
         obs->Attach(this);
         obs->initObstacle();
         obstacles.push_back(obs);
@@ -46,11 +46,11 @@ Road::Road(float x, float y, int numObstacles) : BaseGameObject(x, y) {
 }
 
 void Road::handleInput() {
-    // TODO: Update screen speed;
-  
-    if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
+
+    if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && mainChar->canMoveUp) {
         y += stepSize;
     }
+
   
     if (hasLight) light->handleInput();
     
@@ -119,7 +119,7 @@ void Road::handleBlockOutOfScreen() {
                 -50
         );
 
-    Obstacle *obs = new Obstacle(newX, y, direction);
+    Obstacle *obs = new Obstacle(newX, y, direction, mainChar);
     obs->Attach(this);
     obs->initObstacle();
     obstacles.insert(obstacles.begin(), obs);
@@ -159,13 +159,12 @@ void Road::updateMainPos(Rectangle mainPosRect)
 }
 void Road::randomLight()
 {
-    std::default_random_engine randomEngine(std::random_device{}());
-    std::uniform_int_distribution<int> distribution(0,99);
-    int r=distribution(randomEngine);
+
+    int r = RandomNumber::getInstance().getRandomNumber(0, 100);
     if (r < randomPercentage)
     {
         hasLight=true;
-        light= new TrafficLight(x, y);
+        light= new TrafficLight(x, y, mainChar);
     }
     else hasLight=false;
 }

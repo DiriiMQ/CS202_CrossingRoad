@@ -11,7 +11,7 @@ void Obstacle::handleInput() {
     if (direction != 0)
         UpdateAsepriteTag(&spriteTag);
 
-    if (IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
+    if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && mainChar->canMoveUp) {
         if (!checkCollision()) {
             y += stepSize;
         }
@@ -22,15 +22,16 @@ void Obstacle::draw() {
 //    y += screenSpeed;
 
     Rectangle boxRect{x,  y, (float) width, (float) height};
-    DrawRectangleRec(boxRect, WHITE);
 
     if (direction != 0)
         DrawAsepriteTagPro(spriteTag, boxRect, {0., 0.}, 0, WHITE);
     else
         DrawAsepritePro(sprite, 0, boxRect, {0., 0.}, 0, WHITE);
 
+    handleCollision();
+    if (direction == 0) // STATIC OBSTACLES
+        handleBlockMove();
     if (isMoving) {
-        handleCollision();
         int screenWidth = BasicConfigInstance::getData(ConfigType::BASIC)["SCREEN"]["SIZE"]["WIDTH"];
         if ((direction == 1 && x > screenWidth + 100) || (direction == -1 && x < -100)) {
             BaseGameObject::Notify(Message::BLOCK_OUT_OF_SCREEN);
@@ -60,14 +61,39 @@ void Obstacle::updateMainPos(Rectangle mainPosRect)
 }
 
 void Obstacle::handleCollision() {
-    if (!checkCollision())
-    {
-        x += direction;
-    }
-    else {
+    if (checkCollision()) {
         cout << "COLLISION with object at position: (" << x << ", " << y << ")" << endl;
         cout << "Main Char position: (" << mainPosRect.x << ", " << mainPosRect.y << ")" << endl;
         BaseGameObject::Notify(Message::COLLISION);
+    }
+    else if (isMoving){
+        x += direction;
+    }
+}
+
+void Obstacle::handleBlockMove() {
+    if(mainChar) {
+        Rectangle blockRect = {float(x), float(y), (float) width, (float) height};
+        float blockSize = stepSize * 2;
+        mainPosRect = mainChar->returnMainPos();
+        Rectangle rectUp = mainPosRect;
+        Rectangle rectLeft = mainPosRect;
+        Rectangle rectRight = mainPosRect;
+
+        rectUp.y -= blockSize;
+        rectLeft.x -= blockSize;
+        rectRight.x += blockSize;
+        if (CheckCollisionRecs(blockRect, rectUp))
+            mainChar->canMoveUp = false;
+        else if (CheckCollisionRecs(blockRect, rectLeft))
+            mainChar->canMoveLeft = false;
+        else if (CheckCollisionRecs(blockRect, rectRight))
+            mainChar->canMoveRight = false;
+//        else {
+//            mainChar->canMoveUp = true;
+//            mainChar->canMoveLeft = true;
+//            mainChar->canMoveRight = true;
+//        }
     }
 }
 

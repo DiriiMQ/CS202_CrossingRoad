@@ -10,13 +10,14 @@
 #include "Obstacle.h"
 #include <vector>
 #include "assetsLib/ConfigIO.h"
+#include "MainChar.h"
 
 class NonRoad : public BaseGameObject {
 private:
     std::vector<Obstacle*> staticObs;
-
+    MainChar *mainChar;
 public:
-    NonRoad(float x, float y, int numStatic = 5);
+    NonRoad(float x, float y, int numStatic = 5, MainChar *mainChar = nullptr);
     void draw() override;
     void handleInput() override;
     void updateMainPos(Rectangle mainPosRect) override {};

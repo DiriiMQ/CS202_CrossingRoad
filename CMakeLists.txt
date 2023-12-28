@@ -85,5 +85,6 @@ add_executable(crossing_road main.cpp
         source/gameObjects/TrafficLight.cpp
         source/gameObjects/TrafficLight.h
         source/utils/RandomNumber.cpp
-        source/utils/RandomNumber.h source/assetsLib/AsepriteIO.cpp source/assetsLib/AsepriteIO.h source/gameObjects/Boat.cpp source/gameObjects/Boat.h)
+        source/utils/RandomNumber.h source/assetsLib/AsepriteIO.cpp source/assetsLib/AsepriteIO.h source/gameObjects/Boat.cpp source/gameObjects/Boat.h
+)
 target_link_libraries(${PROJECT_NAME} PRIVATE nlohmann_json::nlohmann_json raylib)

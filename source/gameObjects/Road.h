@@ -8,12 +8,8 @@
 #include "Observer.h"
 #include "Obstacle.h"
 #include <vector>
-#include <iostream>
-#include "screen/Position.h"
-#include <algorithm>
 #include "TrafficLight.h"
-#include "utils/RandomNumber.h"
-#include "assetsLib/ConfigIO.h"
+#include "MainChar.h"
 
 using namespace std;
 
@@ -25,11 +21,12 @@ private:
     int numObstacles;
     float speed = 1;
     bool hasLight;
-    int randomPercentage=25;
+    int randomPercentage = 50;
     TrafficLight* light;
+    MainChar *mainChar;
 
 public:
-    Road(float x, float y, int numObstacles = 5);
+    Road(float x, float y, int numObstacles = 5, MainChar *mainChar = nullptr);
     ~Road() override;
     void draw() override;
     void handleInput() override;
