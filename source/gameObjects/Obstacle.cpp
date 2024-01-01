@@ -79,16 +79,21 @@ void Obstacle::handleBlockMove() {
         Rectangle rectUp = mainPosRect;
         Rectangle rectLeft = mainPosRect;
         Rectangle rectRight = mainPosRect;
+        Rectangle rectDown = mainPosRect;
 
         rectUp.y -= blockSize;
+        rectDown.y += blockSize;
         rectLeft.x -= blockSize;
         rectRight.x += blockSize;
+
         if (CheckCollisionRecs(blockRect, rectUp))
             mainChar->canMoveUp = false;
         else if (CheckCollisionRecs(blockRect, rectLeft))
             mainChar->canMoveLeft = false;
         else if (CheckCollisionRecs(blockRect, rectRight))
             mainChar->canMoveRight = false;
+        else if (CheckCollisionRecs(blockRect, rectDown))
+            mainChar->canMoveDown = false;
 //        else {
 //            mainChar->canMoveUp = true;
 //            mainChar->canMoveLeft = true;
@@ -108,12 +113,14 @@ void Obstacle::setMove(bool move) {
     isMoving = move;
 }
 
-int Obstacle::getWidth() const
-{
+int Obstacle::getWidth() const {
     return width;
 }
 
-int Obstacle::getHeight() const
-{
+int Obstacle::getHeight() const {
     return height;
 }
+
+
+
+

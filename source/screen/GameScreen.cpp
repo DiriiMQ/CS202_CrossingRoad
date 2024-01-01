@@ -156,28 +156,6 @@ void GameScreen::unload() {
 }
 
 void GameScreen::init() {
-//    cout << "Test Screen init Called" << endl;
-//    double stepSize = BasicConfigInstance::getData(ConfigType::BASIC)["GAME"]["STEP_SIZE"];
-//
-//    mainChar = new MainChar();
-//    for (int i = 0; i < 20; i++) {
-//        int randnum = rand();
-//        double x_direction = -100;
-//        double y_direction = stepSize * (19. - i);
-//        if ((randnum % 100 > 60 && i > 10) || i == 10) {
-//            Road *roadBlock = new Road(x_direction, y_direction, 5);
-//            map.push_back(roadBlock);
-//        }
-//        else if (randnum % 100 > 40 && i > 10) {
-//            River *riverBlock = new River(x_direction, y_direction);
-//            map.push_back(riverBlock);
-//        }
-//        else {
-//            NonRoad *nonRoadBlock = new NonRoad(x_direction, y_direction, 15);
-//            map.push_back(nonRoadBlock);
-//        }
-//    }
-//    Observe();
     this->newGameScreen();
 }
 

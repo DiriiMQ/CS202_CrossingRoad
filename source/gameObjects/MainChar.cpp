@@ -11,6 +11,7 @@ bool eventTriggered(double interval)
     }
     return false;
 }
+
 void MainChar::draw()
 {
 //    y += screenSpeed;
@@ -45,16 +46,37 @@ void MainChar::handleInput() {
             spriteTag = LoadAsepriteTag(sprite, "Walk-Up");
         }
     }
+    else if ((IsKeyDown(KEY_DOWN) || IsKeyDown(KEY_S)) && canMoveDown) {
+        if(eventTriggered(0.15)) {
+            y += stepSizeY * 2;
+            spriteTag = LoadAsepriteTag(sprite, "Walk-Down");
+        }
+    }
 
     canMoveUp = true;
     canMoveRight = true;
     canMoveLeft = true;
+    canMoveDown = true;
 }
+
 Rectangle MainChar::returnMainPos() {
     Rectangle rect1 = { static_cast<float>(x),static_cast<float>(y), width, height};
     return rect1;
 }
 
+json MainChar::toJson() {
+    json saveData = BaseGameObject::toJson();
+    saveData["isDead"] = true;
+    saveData["width"] = width;
+    saveData["height"] = height;
+    saveData["isDead"] = isDead;
+    return saveData;
+}
+
+void MainChar::fromJson(json saveData) {
+    BaseGameObject::fromJson(saveData);
+
+}
 
 MainChar::~MainChar() {
     UnloadAseprite(this->sprite);

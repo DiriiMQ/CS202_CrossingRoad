@@ -14,7 +14,7 @@ class MainChar : public BaseGameObject
 protected: 
     double stepSizeX;
     double stepSizeY;
-    bool isDead=false;
+    bool isDead = false;
     float width = 40;
     float height = 40;
     Aseprite sprite;
@@ -55,6 +55,9 @@ public:
     void moveX(double offset) {
         x += offset;
     };
+
+    json toJson() override;
+    void fromJson(json saveData) override;
 };
 
 #endif //CROSSING_ROAD_MAINCHAR_H

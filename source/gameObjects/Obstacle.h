@@ -27,6 +27,8 @@ private:
     MainChar *mainChar;
 
 public:
+
+    Obstacle() : BaseGameObject(0.0, 0.0), isMoving(true), direction(1), mainChar(nullptr) {}
     Obstacle(float x, float y, int direction, MainChar *mainChar)
         : BaseGameObject(x, y), isMoving(true), direction(direction), mainChar(mainChar) {}
 
@@ -46,6 +48,9 @@ public:
 
     int getWidth() const;
     int getHeight() const;
+
+    json toJson() override;
+    void fromJson(json saveData) override;
 };
 
 #endif //CROSSING_ROAD_OBSTACLE_H

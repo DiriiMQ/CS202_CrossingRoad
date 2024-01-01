@@ -30,6 +30,9 @@ public:
     float getWidth();
     bool checkCollision();
 
+    json toJson() override;
+    void fromJson(json saveData) override
+
 };
 
 

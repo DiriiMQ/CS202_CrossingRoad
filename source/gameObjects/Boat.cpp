@@ -60,3 +60,20 @@ bool Boat::checkCollision() {
 float Boat::getWidth() {
     return width;
 }
+
+json Boat::toJson() {
+    json saveData = BaseGameObject::toJson();
+    saveData["width"] = this->width;
+    saveData["height"] = this->height;
+    saveData["direction"] = this->direction;
+    saveData["isMoving"] = this->isMoving;
+    return saveData;
+}
+
+void Boat::fromJson(json saveData) {
+    BaseGameObject::fromJson(saveData);
+    this->width = saveData["width"];
+    this->height = saveData["height"];
+    this->direction = saveData["direction"];
+    this->isMoving = saveData["isMoving"];
+}

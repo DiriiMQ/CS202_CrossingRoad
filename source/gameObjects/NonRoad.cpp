@@ -62,3 +62,30 @@ void NonRoad::moveY(double offset) {
         obs->moveY(offset);
     }
 }
+
+json NonRoad::toJson() {
+    json saveData = BaseGameObject::toJson();
+    vector<json> staticObsJson;
+    for (Obstacle *obs: staticObs) {
+        staticObsJson.push_back(obs->toJson());
+    }
+    saveData["static_obs"] = staticObsJson;
+    return saveData;
+}
+
+void NonRoad::fromJson(json saveData) {
+
+    BaseGameObject::fromJson(saveData);
+    vector<Obstacle*> staticObs;
+    for(json staticObsJson: saveData["static_obs"]) {
+        Obstacle *obs = new Obstacle;
+        obs->fromJson(staticObsJson);
+        staticObs.push_back(obs);
+    }
+    this->staticObs = staticObs;
+
+}
+
+void NonRoad::setMainChar(MainChar *mainChar) {
+    this->mainChar = mainChar;
+}
