@@ -16,6 +16,7 @@
 
 class Obstacle : public BaseGameObject {
 private:
+    int objectIndex;
     int width = 0, height = 0;
     int direction; // 1 for right -1 for left
     Aseprite sprite;
@@ -44,13 +45,17 @@ public:
     void updateMainPos(Rectangle mainPosRect) override;
     void setMove(bool move);
 
-    ~Obstacle() {}
+    ~Obstacle() = default;
 
     int getWidth() const;
     int getHeight() const;
 
     json toJson() override;
     void fromJson(json saveData) override;
+
+    void setMainChar(MainChar *mainChar) {
+        this->mainChar = mainChar;
+    };
 };
 
 #endif //CROSSING_ROAD_OBSTACLE_H

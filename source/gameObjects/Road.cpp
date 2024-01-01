@@ -176,6 +176,43 @@ void Road::randomLight()
 //    }
 //}
 
+json Road::toJson() {
+    json saveData = BaseGameObject::toJson();
+    json obstaclesJson;
+    for(Obstacle *obs: obstacles) {
+        obstaclesJson.push_back(obs->toJson());
+    }
+    saveData["obstacles"] = obstaclesJson;
+    saveData["direction"] = direction;
+    saveData["numObstacles"] = numObstacles;
+    saveData["speed"] = speed;
+    saveData["hasLight"] = hasLight;
+    if(hasLight) {
+        saveData["light"] = light->toJson();
+    }
+
+    return saveData;
+}
+
+void Road::fromJson(json saveData) {
+    BaseGameObject::fromJson(saveData);
+    vector<Obstacle*> obstacles;
+    for(auto const &obsData: saveData["obstacles"]) {
+        Obstacle *obs = new Obstacle;
+        obs->fromJson(obsData);
+        obstacles.push_back(obs);
+    }
+    this->obstacles = obstacles;
+    direction = saveData["direction"];
+    numObstacles = saveData["numObstacles"];
+    speed = saveData["speed"];
+    hasLight = saveData["hasLight"];
+    if(hasLight) {
+        light = new TrafficLight;
+        light->fromJson(saveData["light"]);
+    }
+}
+
 void Road::lightHandle()
 {
     if (hasLight) {

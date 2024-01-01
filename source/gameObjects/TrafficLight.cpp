@@ -6,6 +6,16 @@ void TrafficLight::draw() {
     DrawAsepriteTag(tag, 50, y + 20, WHITE);
 }
 
+json TrafficLight::toJson() {
+    json saveData = BaseGameObject::toJson();
+    saveData["isRed"] = isRed;
+}
+
+void TrafficLight::fromJson(json saveData) {
+    BaseGameObject::fromJson(saveData);
+    isRed = saveData["isRed"];
+}
+
 void TrafficLight::handleInput() {
     if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && mainChar->canMoveUp) {
         y += stepSize;

@@ -55,10 +55,13 @@ void AsepriteInstance::initInstance() {
 }
 
 Aseprite& AsepriteInstance::getAseprite(int instanceId, int &randIndex) {
-
     AsepriteInstance *instance = getInstance(instanceId);
-    randIndex = RandomNumber::getInstance().getRandomNumber(0, instance->aseprite.size() - 1);
+    if(randIndex < 0 || randIndex > instance->aseprite.size() - 1) {
+        randIndex = RandomNumber::getInstance().getRandomNumber(0, instance->aseprite.size() - 1);
+        return instance->aseprite[randIndex].getAseprite();
+    }
     return instance->aseprite[randIndex].getAseprite();
+
 };
 
 AsepriteInstance* AsepriteInstance::getInstance(int id) {

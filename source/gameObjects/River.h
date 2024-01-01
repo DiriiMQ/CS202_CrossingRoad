@@ -30,6 +30,13 @@ public:
     void updateMainPos(Rectangle mainPosRect) override;
     void updateMessage(const Message message) override;
     void moveY(double offset) override;
+
+    json toJson() override;
+    void fromJson(json saveData) override;
+
+    void setMainChar(MainChar *mainChar) {
+        this->mainChar = mainChar;
+    };
 };
 
 

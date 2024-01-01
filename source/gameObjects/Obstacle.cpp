@@ -42,7 +42,7 @@ void Obstacle::initObstacle() {
     string obstacleField = direction == 0 ? "STATIC_OBSTACLES" : "OBSTACLES";
 
     vector<string> tagList = BasicConfigInstance::getData(ConfigType::BASIC)["TEXTURES"][obstacleField + "_TAG"];
-    int randIndex = 0;
+    int randIndex = -1;
 
 //    sprite = LoadAseprite(textureList[randIndex].c_str());
     sprite = AsepriteInstance::getAseprite(direction == 0 ? AsepriteType::STATIC : AsepriteType::ANIMATED, randIndex);
@@ -53,6 +53,7 @@ void Obstacle::initObstacle() {
         spriteTag = LoadAsepriteTag(sprite, tag.c_str());
     width = GetAsepriteWidth(sprite) * 1.5;
     height = GetAsepriteHeight(sprite) * 1.5;
+    this->objectIndex = randIndex;
 }
 
 void Obstacle::updateMainPos(Rectangle mainPosRect)
@@ -121,6 +122,36 @@ int Obstacle::getHeight() const {
     return height;
 }
 
+json Obstacle::toJson() {
+    json saveData = BaseGameObject::toJson();
+    saveData["width"] = this->width;
+    saveData["height"] = this->height;
+    saveData["direction"] = this->direction;
+    saveData["objectIndex"] = this->objectIndex;
+    saveData["isMoving"] = this->isMoving;
 
+    return saveData;
+}
 
+void Obstacle::fromJson(json saveData) {
+    BaseGameObject::fromJson(saveData);
+    this->width = saveData["width"];
+    this->height = saveData["height"];
+    this->direction = saveData["direction"];
+    this->isMoving = saveData["isMoving"];
+    this->objectIndex = saveData["objectIndex"];
+
+    string obstacleField = direction == 0 ? "STATIC_OBSTACLES" : "OBSTACLES";
+
+    vector<string> tagList = BasicConfigInstance::getData(ConfigType::BASIC)["TEXTURES"][obstacleField + "_TAG"];
+
+//    sprite = LoadAseprite(textureList[randIndex].c_str());
+    sprite = AsepriteInstance::getAseprite(direction == 0 ? AsepriteType::STATIC : AsepriteType::ANIMATED, objectIndex);
+
+    string tag = direction != 1 ? tagList[objectIndex] : "l2r";
+
+    if (direction != 0)
+        spriteTag = LoadAsepriteTag(sprite, tag.c_str());
+
+}
 

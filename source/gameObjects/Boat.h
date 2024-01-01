@@ -19,19 +19,23 @@ class Boat : public BaseGameObject {
     MainChar *mainChar;
 
 public:
+    Boat() : BaseGameObject(0.0, 0.0), direction(1){}
     Boat(float x, float y, int direction, MainChar *mainChar);
     void draw() override;
     void handleInput() override;
     void handleCollision();
     void setMove(bool move);
-    virtual void updateMainPos(Rectangle mainPosRect);
+    virtual void updateMainPos(Rectangle mainPosRect) override;
 
 
     float getWidth();
     bool checkCollision();
 
     json toJson() override;
-    void fromJson(json saveData) override
+    void fromJson(json saveData) override;
+    void setMainChar(MainChar *mainChar) {
+        this->mainChar = mainChar;
+    };
 
 };
 

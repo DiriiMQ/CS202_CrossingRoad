@@ -40,6 +40,13 @@ public:
     void lightHandle();
 //    void setScreenSpeed(double speed) override;
     void moveY(double offset) override;
+
+    json toJson() override;
+    void fromJson(json saveData) override;
+
+    void setMainChar(MainChar *mainChar) {
+        this->mainChar = mainChar;
+    };
 };
 
 
