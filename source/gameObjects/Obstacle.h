@@ -33,15 +33,15 @@ public:
         : BaseGameObject(x, y), isMoving(true), direction(direction), mainChar(mainChar) {}
 
     void initObstacle();
-    void draw();
-    void handleInput();
+    void draw() override;
+    void handleInput() override;
     void handleCollision();
     void handleBlockMove();
 
     bool checkCollision();
 
     //void getPos(Vector2 mainPos,Vector2 mainSize);
-    void updateMainPos(Rectangle mainPosRect);
+    void updateMainPos(Rectangle mainPosRect) override;
     void setMove(bool move);
 
     ~Obstacle() {}
