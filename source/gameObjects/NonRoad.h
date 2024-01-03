@@ -30,7 +30,7 @@ public:
     void setMainChar(MainChar *mainChar);
 
     string getClassName() override {
-        return "River";
+        return "NonRoad";
     }
 
 };

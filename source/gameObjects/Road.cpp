@@ -18,6 +18,8 @@ bool eventTriggeredLight(double interval)
     return false;
 }
 
+Road::Road() : BaseGameObject(0., 0.), mainChar(nullptr) {}
+
 Road::Road(float x, float y, int numObstacles, MainChar *mainChar) : BaseGameObject(x, y), mainChar(mainChar) {
     // TODO: Load from config file.
     roadSprite = LoadAseprite("../assets/trafficEnvironment/2_lane.aseprite");
@@ -195,6 +197,8 @@ json Road::toJson() {
 }
 
 void Road::fromJson(json saveData) {
+    roadSprite = LoadAseprite("../assets/trafficEnvironment/2_lane.aseprite");
+
     BaseGameObject::fromJson(saveData);
     vector<Obstacle*> obstacles;
     for(auto const &obsData: saveData["obstacles"]) {

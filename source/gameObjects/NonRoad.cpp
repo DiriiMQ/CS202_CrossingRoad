@@ -88,4 +88,7 @@ void NonRoad::fromJson(json saveData) {
 
 void NonRoad::setMainChar(MainChar *mainChar) {
     this->mainChar = mainChar;
+    for(Obstacle *obs: staticObs) {
+        obs->setMainChar(mainChar);
+    }
 }

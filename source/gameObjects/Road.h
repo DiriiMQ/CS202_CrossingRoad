@@ -26,6 +26,7 @@ private:
     MainChar *mainChar;
 
 public:
+    Road();
     Road(float x, float y, int numObstacles = 5, MainChar *mainChar = nullptr);
     ~Road() override;
     void draw() override;
@@ -46,6 +47,9 @@ public:
 
     void setMainChar(MainChar *mainChar) {
         this->mainChar = mainChar;
+        for(Obstacle *obs: obstacles) {
+            obs->setMainChar(mainChar);
+        }
     };
 
     string getClassName() override {

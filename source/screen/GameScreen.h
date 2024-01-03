@@ -18,7 +18,6 @@
 
 class GameScreen : public BaseScreen, public IObserver {
 private:
-    AnimatedTexture *test{};
     vector<BaseGameObject*> map; // only road and nonroad, maybe river later
     bool hasInit = false;
     MainChar *mainChar;
@@ -46,7 +45,7 @@ public:
     void unload() override;
     void NotifyMainPos();
     void NotifyPauseGame();
-    void loadScreen(GameScreen* A);
+    void loadScreen();
     void saveScreen();
 
     void newGameScreen();

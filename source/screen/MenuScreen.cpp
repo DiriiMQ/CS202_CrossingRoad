@@ -60,7 +60,11 @@ void MenuScreen::buttonsProcess() {
 
     buttonRect.y += this->buttonOptionMenuSize.y + 28;
     if(GuiButtonRounded(buttonRect, "Load Game")) {
-
+        std::ifstream file("../data/save_game.json");
+        if(file.good()) {
+            gameScreen.loadScreen();
+            screenManager->setScreen(&gameScreen);
+        }
     }
 
     buttonRect.y += this->buttonOptionMenuSize.y + 28;

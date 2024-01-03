@@ -21,6 +21,7 @@ private:
 
 
 public:
+    River() : BaseGameObject(0., 0.), mainChar(nullptr) {}
     River(float x, float y, int num_boats = 5, MainChar *mainChar = nullptr);
     void draw() override;
     void handleInput() override;
@@ -35,11 +36,14 @@ public:
     void fromJson(json saveData) override;
 
     void setMainChar(MainChar *mainChar) {
+        for(Boat *boat: boats) {
+            boat->setMainChar(mainChar);
+        }
         this->mainChar = mainChar;
     };
 
     string getClassName() override {
-        return "NonRoad";
+        return "River";
     }
 };
 
