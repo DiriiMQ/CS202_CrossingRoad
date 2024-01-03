@@ -47,7 +47,7 @@ void River::handleMainCharCondition() {
         }
     }
     Rectangle riverRect = { x, y, 1500., (float) stepSize * 2 };
-    if (!isOnBoat && CheckCollisionRecs(riverRect,mainPosRect)) {
+    if (!isOnBoat && CheckCollisionRecs(riverRect,mainPosRect) && !mainChar->getDead()) {
         BaseGameObject::Notify(Message::COLLISION);
     }
 }

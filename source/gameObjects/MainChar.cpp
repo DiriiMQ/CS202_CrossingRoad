@@ -66,7 +66,6 @@ Rectangle MainChar::returnMainPos() {
 
 json MainChar::toJson() {
     json saveData = BaseGameObject::toJson();
-    saveData["isDead"] = true;
     saveData["width"] = width;
     saveData["height"] = height;
     saveData["isDead"] = isDead;
@@ -75,7 +74,14 @@ json MainChar::toJson() {
 
 void MainChar::fromJson(json saveData) {
     BaseGameObject::fromJson(saveData);
+    isDead = saveData["isDead"];
+    width = saveData["width"];
+    height = saveData["height"];
 
+    canMoveUp = true;
+    canMoveDown = true;
+    canMoveLeft = true;
+    canMoveRight = true;
 }
 
 MainChar::~MainChar() {

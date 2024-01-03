@@ -62,6 +62,14 @@ void GameScreen::updateMessage(const Message message) {
     }
     else if (message == Message::COLLISION) {
         mainChar->setDead();
+        const char* filename = "../data/save_game.json";
+
+        // Delete the file
+        if (remove(filename) != 0) {
+            perror("Error deleting file");
+        } else {
+            printf("File successfully deleted");
+        }
     }
 
 }
@@ -163,7 +171,8 @@ void GameScreen::loadScreen() {
     if(file.is_open()) {
         file >> saveData;
         file.close();
-
+        if(mainChar != nullptr)
+            delete mainChar;
         mainChar = new MainChar;
         mainChar->fromJson(saveData["mainChar"]);
 
@@ -176,11 +185,9 @@ void GameScreen::loadScreen() {
                 Road *road = new Road;
                 road->fromJson(jsonInstance["obj"]);
                 road->setMainChar(mainChar);
-
                 map.push_back(road);
             }
             else if(jsonInstance["type"] == "River") {
-                cout << "JsonInstance: " << jsonInstance["obj"] << endl;
                 River *river = new River;
                 river->fromJson(jsonInstance["obj"]);
                 river->setMainChar(mainChar);
@@ -193,6 +200,7 @@ void GameScreen::loadScreen() {
                 map.push_back(nonRoad);
             }
         }
+        Observe();
     } else {
         std::cerr << "Could not open the file." << std::endl;
     }

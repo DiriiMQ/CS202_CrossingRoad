@@ -50,6 +50,8 @@ public:
         for(Obstacle *obs: obstacles) {
             obs->setMainChar(mainChar);
         }
+        if(hasLight)
+            light->setMainChar(mainChar);
     };
 
     string getClassName() override {

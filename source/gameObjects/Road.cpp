@@ -165,7 +165,7 @@ void Road::randomLight()
     int r = RandomNumber::getInstance().getRandomNumber(0, 100);
     if (r < randomPercentage)
     {
-        hasLight=true;
+        hasLight = true;
         light= new TrafficLight(x, y, mainChar);
     }
     else hasLight=false;
@@ -204,6 +204,7 @@ void Road::fromJson(json saveData) {
     for(auto const &obsData: saveData["obstacles"]) {
         Obstacle *obs = new Obstacle;
         obs->fromJson(obsData);
+        obs->Attach(this);
         obstacles.push_back(obs);
     }
     this->obstacles = obstacles;

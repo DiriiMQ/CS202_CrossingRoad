@@ -1,7 +1,7 @@
 //
 // Created by LENOVO on 11/17/2023.
 //
-
+#include <cstdio> // or #include <stdio.h>
 #include "NonRoad.h"
 
 NonRoad::NonRoad(float x, float y, int numStatic, MainChar *mainChar) : BaseGameObject(x, y), mainChar(mainChar) {

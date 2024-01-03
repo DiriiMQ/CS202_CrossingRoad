@@ -62,7 +62,7 @@ void Obstacle::updateMainPos(Rectangle mainPosRect)
 }
 
 void Obstacle::handleCollision() {
-    if (checkCollision()) {
+    if (checkCollision() && isMoving) {
         cout << "COLLISION with object at position: (" << x << ", " << y << ")" << endl;
         cout << "Main Char position: (" << mainPosRect.x << ", " << mainPosRect.y << ")" << endl;
         BaseGameObject::Notify(Message::COLLISION);
