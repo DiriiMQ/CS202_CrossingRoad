@@ -37,6 +37,10 @@ public:
     void setMainChar(MainChar *mainChar) {
         this->mainChar = mainChar;
     };
+
+    string getClassName() override {
+        return "NonRoad";
+    }
 };
 
 

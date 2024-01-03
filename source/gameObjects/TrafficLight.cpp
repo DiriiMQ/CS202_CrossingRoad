@@ -9,6 +9,7 @@ void TrafficLight::draw() {
 json TrafficLight::toJson() {
     json saveData = BaseGameObject::toJson();
     saveData["isRed"] = isRed;
+    return saveData;
 }
 
 void TrafficLight::fromJson(json saveData) {

@@ -28,6 +28,11 @@ public:
     json toJson() override;
     void fromJson(json saveData) override;
     void setMainChar(MainChar *mainChar);
+
+    string getClassName() override {
+        return "River";
+    }
+
 };
 
 

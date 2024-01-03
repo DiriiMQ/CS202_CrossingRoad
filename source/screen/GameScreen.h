@@ -14,6 +14,7 @@
 #include "gameObjects/River.h"
 #include "gameObjects/MainChar.h"
 #include "Position.h"
+#include <fstream>
 
 class GameScreen : public BaseScreen, public IObserver {
 private:
@@ -46,6 +47,8 @@ public:
     void NotifyMainPos();
     void NotifyPauseGame();
     void loadScreen(GameScreen* A);
+    void saveScreen();
+
     void newGameScreen();
 };
 

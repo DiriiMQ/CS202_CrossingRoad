@@ -81,6 +81,10 @@ public:
         this->isGamePause = saveData["isGamePause"];
     };
 
+    virtual string getClassName() {
+        return "BaseGameObject";
+    }
+
 };
 
 
