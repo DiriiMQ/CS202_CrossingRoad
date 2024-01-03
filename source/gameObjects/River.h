@@ -36,10 +36,11 @@ public:
     void fromJson(json saveData) override;
 
     void setMainChar(MainChar *mainChar) {
+
+        this->mainChar = mainChar;
         for(Boat *boat: boats) {
             boat->setMainChar(mainChar);
         }
-        this->mainChar = mainChar;
     };
 
     string getClassName() override {

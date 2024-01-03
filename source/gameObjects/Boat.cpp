@@ -71,6 +71,9 @@ json Boat::toJson() {
 }
 
 void Boat::fromJson(json saveData) {
+    int index = 0;
+    sprite = AsepriteInstance::getAseprite(AsepriteType::BOAT, index);
+
     BaseGameObject::fromJson(saveData);
     this->width = saveData["width"];
     this->height = saveData["height"];

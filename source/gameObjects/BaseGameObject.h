@@ -78,7 +78,7 @@ public:
         this->x = saveData["x"];
         this->y = saveData["y"];
         this->isMainCharDead = saveData["isMainCharDead"];
-        this->isGamePause = saveData["isGamePause"];
+        this->isGamePause = false;
     };
 
     virtual string getClassName() {
