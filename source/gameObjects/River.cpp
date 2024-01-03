@@ -47,7 +47,7 @@ void River::handleMainCharCondition() {
         }
     }
     Rectangle riverRect = { x, y, 1500., (float) stepSize * 2 };
-    if (!isOnBoat && CheckCollisionRecs(riverRect,mainPosRect)) {
+    if (!isOnBoat && CheckCollisionRecs(riverRect,mainPosRect) && !mainChar->getDead()) {
         BaseGameObject::Notify(Message::COLLISION);
     }
 }
@@ -112,4 +112,32 @@ void River::moveY(double offset) {
     for(Boat *boat: boats) {
         boat->moveY(offset);
     }
+}
+
+json River::toJson() {
+    json saveData = BaseGameObject::toJson();
+    json boatsJson;
+    for(Boat *boat: boats) {
+        boatsJson.push_back(boat->toJson());
+    }
+    saveData["boats"] = boatsJson;
+    saveData["direction"] = direction;
+
+    return saveData;
+
+}
+
+void River::fromJson(json saveData) {
+    BaseGameObject::fromJson(saveData);
+    vector<Boat*> boats;
+
+    for(auto const &boatData: saveData["boats"]) {
+        Boat *boat = new Boat;
+        boat->fromJson(boatData);
+        boats.push_back(boat);
+    }
+
+    this->boats = boats;
+    this->direction = saveData["direction"];
+
 }

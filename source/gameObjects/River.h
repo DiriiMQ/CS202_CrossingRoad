@@ -21,6 +21,7 @@ private:
 
 
 public:
+    River() : BaseGameObject(0., 0.), mainChar(nullptr) {}
     River(float x, float y, int num_boats = 5, MainChar *mainChar = nullptr);
     void draw() override;
     void handleInput() override;
@@ -30,6 +31,21 @@ public:
     void updateMainPos(Rectangle mainPosRect) override;
     void updateMessage(const Message message) override;
     void moveY(double offset) override;
+
+    json toJson() override;
+    void fromJson(json saveData) override;
+
+    void setMainChar(MainChar *mainChar) {
+
+        this->mainChar = mainChar;
+        for(Boat *boat: boats) {
+            boat->setMainChar(mainChar);
+        }
+    };
+
+    string getClassName() override {
+        return "River";
+    }
 };
 
 

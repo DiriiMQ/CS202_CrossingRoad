@@ -66,6 +66,25 @@ public:
         isGamePause=!isGamePause;
     }
 
+    virtual json toJson() {
+        json saveData;
+        saveData["x"] = x;
+        saveData["y"] = y;
+        saveData["isMainCharDead"] = isMainCharDead;
+        saveData["isGamePause"] = isGamePause;
+        return saveData;
+    };
+    virtual void fromJson(json saveData) {
+        this->x = saveData["x"];
+        this->y = saveData["y"];
+        this->isMainCharDead = saveData["isMainCharDead"];
+        this->isGamePause = saveData["isGamePause"];
+    };
+
+    virtual string getClassName() {
+        return "BaseGameObject";
+    }
+
 };
 
 

@@ -1,7 +1,7 @@
 //
 // Created by LENOVO on 11/17/2023.
 //
-
+#include <cstdio> // or #include <stdio.h>
 #include "NonRoad.h"
 
 NonRoad::NonRoad(float x, float y, int numStatic, MainChar *mainChar) : BaseGameObject(x, y), mainChar(mainChar) {
@@ -60,5 +60,35 @@ void NonRoad::moveY(double offset) {
     y += offset;
     for(Obstacle *obs: staticObs) {
         obs->moveY(offset);
+    }
+}
+
+json NonRoad::toJson() {
+    json saveData = BaseGameObject::toJson();
+    json staticObsJson;
+    for (Obstacle *obs: staticObs) {
+        staticObsJson.push_back(obs->toJson());
+    }
+    saveData["static_obs"] = staticObsJson;
+    return saveData;
+}
+
+void NonRoad::fromJson(json saveData) {
+
+    BaseGameObject::fromJson(saveData);
+    vector<Obstacle*> staticObs;
+    for(const auto& staticObsJson: saveData["static_obs"]) {
+        Obstacle *obs = new Obstacle;
+        obs->fromJson(staticObsJson);
+        staticObs.push_back(obs);
+    }
+    this->staticObs = staticObs;
+
+}
+
+void NonRoad::setMainChar(MainChar *mainChar) {
+    this->mainChar = mainChar;
+    for(Obstacle *obs: staticObs) {
+        obs->setMainChar(mainChar);
     }
 }

@@ -62,6 +62,14 @@ void GameScreen::updateMessage(const Message message) {
     }
     else if (message == Message::COLLISION) {
         mainChar->setDead();
+        const char* filename = "../data/save_game.json";
+
+        // Delete the file
+        if (remove(filename) != 0) {
+            perror("Error deleting file");
+        } else {
+            printf("File successfully deleted");
+        }
     }
 
 }
@@ -96,11 +104,17 @@ void GameScreen::draw() {
             this->isGamePause=!(this->isGamePause);
             NotifyPauseGame();
         }
-        Rectangle backButton {450, 450, 500, 100};
-        if (GuiButton(backButton, "Back"))
-        {
+        Rectangle backButton {450, 400, 500, 100};
+        if (GuiButton(backButton, "Back")) {
             screenManager->backScreen();
         }
+        Rectangle saveGameButton { 450, 500, 500, 100};
+        if (GuiButton(saveGameButton, "Save")) {
+            saveScreen();
+            screenManager->backScreen();
+
+        }
+
         DrawText("Game Pause!", 580, 200, 40, RED);
     }
     if (mainChar->getDead()) 
@@ -121,6 +135,77 @@ void GameScreen::draw() {
 //    mainChar->moveY(0.1);
 
 }
+
+void GameScreen::saveScreen() {
+    json saveData;
+    saveData["mainChar"] = mainChar->toJson();
+    saveData["score"] = score;
+    saveData["screenSpeed"] = screenSpeed;
+    json mapJson;
+    for(BaseGameObject* instance: map) {
+        json mapInstanceJson;
+        mapInstanceJson["type"] = instance->getClassName();
+        mapInstanceJson["obj"] = instance->toJson();
+        mapJson.push_back(mapInstanceJson);
+    }
+    saveData["map"] = mapJson;
+
+    // Open a file stream to write
+    std::ofstream file("../data/save_game.json");
+
+    // Check if the file is open
+    if (file.is_open()) {
+        // Dump the JSON object to the file with pretty printing
+        file << saveData.dump(4);
+        file.close();  // Close the file stream
+    } else {
+        std::cerr << "Unable to open file" << std::endl;
+    }
+}
+
+
+void GameScreen::loadScreen() {
+    json saveData;
+    std::ifstream file("../data/save_game.json");
+
+    if(file.is_open()) {
+        file >> saveData;
+        file.close();
+        if(mainChar != nullptr)
+            delete mainChar;
+        mainChar = new MainChar;
+        mainChar->fromJson(saveData["mainChar"]);
+
+        score = saveData["score"];
+        screenSpeed = saveData["screenSpeed"];
+        this->map.clear();
+
+        for(const auto &jsonInstance: saveData["map"]) {
+            if(jsonInstance["type"] == "Road") {
+                Road *road = new Road;
+                road->fromJson(jsonInstance["obj"]);
+                road->setMainChar(mainChar);
+                map.push_back(road);
+            }
+            else if(jsonInstance["type"] == "River") {
+                River *river = new River;
+                river->fromJson(jsonInstance["obj"]);
+                river->setMainChar(mainChar);
+                map.push_back(river);
+            }
+            else if(jsonInstance["type"] == "NonRoad") {
+                NonRoad *nonRoad = new NonRoad;
+                nonRoad->fromJson(jsonInstance["obj"]);
+                nonRoad->setMainChar(mainChar);
+                map.push_back(nonRoad);
+            }
+        }
+        Observe();
+    } else {
+        std::cerr << "Could not open the file." << std::endl;
+    }
+}
+
 
 void GameScreen::handleScreenSpeed() {
     double charY = mainChar->getY();
@@ -156,41 +241,7 @@ void GameScreen::unload() {
 }
 
 void GameScreen::init() {
-//    cout << "Test Screen init Called" << endl;
-//    double stepSize = BasicConfigInstance::getData(ConfigType::BASIC)["GAME"]["STEP_SIZE"];
-//
-//    mainChar = new MainChar();
-//    for (int i = 0; i < 20; i++) {
-//        int randnum = rand();
-//        double x_direction = -100;
-//        double y_direction = stepSize * (19. - i);
-//        if ((randnum % 100 > 60 && i > 10) || i == 10) {
-//            Road *roadBlock = new Road(x_direction, y_direction, 5);
-//            map.push_back(roadBlock);
-//        }
-//        else if (randnum % 100 > 40 && i > 10) {
-//            River *riverBlock = new River(x_direction, y_direction);
-//            map.push_back(riverBlock);
-//        }
-//        else {
-//            NonRoad *nonRoadBlock = new NonRoad(x_direction, y_direction, 15);
-//            map.push_back(nonRoadBlock);
-//        }
-//    }
-//    Observe();
     this->newGameScreen();
-}
-
-void GameScreen::loadScreen(GameScreen* A)
-{
-    this->test=A->test;
-    int sizemap=map.size();
-    for (int i=0;i<sizemap;i++) {
-        this->map[i] = A->map[i];
-    }
-    this->mainChar = A->mainChar;
-    this->score = 0;
-    this->isGamePause = false;
 }
 
 void GameScreen::newGameScreen() {
@@ -229,7 +280,6 @@ void GameScreen::newGameScreen() {
         }
         //map.erase(map.begin());
         mainChar->mainCharRevive();
-        //delete test;
         //map[i]->Notify(Message::NEW_GAME);
     }
 
@@ -248,5 +298,4 @@ GameScreen::~GameScreen() {
         delete road;
 
     delete mainChar;
-    delete test;
 }

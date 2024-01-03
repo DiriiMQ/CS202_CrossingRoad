@@ -18,6 +18,8 @@ bool eventTriggeredLight(double interval)
     return false;
 }
 
+Road::Road() : BaseGameObject(0., 0.), mainChar(nullptr) {}
+
 Road::Road(float x, float y, int numObstacles, MainChar *mainChar) : BaseGameObject(x, y), mainChar(mainChar) {
     // TODO: Load from config file.
     roadSprite = LoadAseprite("../assets/trafficEnvironment/2_lane.aseprite");
@@ -163,7 +165,7 @@ void Road::randomLight()
     int r = RandomNumber::getInstance().getRandomNumber(0, 100);
     if (r < randomPercentage)
     {
-        hasLight=true;
+        hasLight = true;
         light= new TrafficLight(x, y, mainChar);
     }
     else hasLight=false;
@@ -175,6 +177,46 @@ void Road::randomLight()
 //        obs->setScreenSpeed(speed);
 //    }
 //}
+
+json Road::toJson() {
+    json saveData = BaseGameObject::toJson();
+    json obstaclesJson;
+    for(Obstacle *obs: obstacles) {
+        obstaclesJson.push_back(obs->toJson());
+    }
+    saveData["obstacles"] = obstaclesJson;
+    saveData["direction"] = direction;
+    saveData["numObstacles"] = numObstacles;
+    saveData["speed"] = speed;
+    saveData["hasLight"] = hasLight;
+    if(hasLight) {
+        saveData["light"] = light->toJson();
+    }
+
+    return saveData;
+}
+
+void Road::fromJson(json saveData) {
+    roadSprite = LoadAseprite("../assets/trafficEnvironment/2_lane.aseprite");
+
+    BaseGameObject::fromJson(saveData);
+    vector<Obstacle*> obstacles;
+    for(auto const &obsData: saveData["obstacles"]) {
+        Obstacle *obs = new Obstacle;
+        obs->fromJson(obsData);
+        obs->Attach(this);
+        obstacles.push_back(obs);
+    }
+    this->obstacles = obstacles;
+    direction = saveData["direction"];
+    numObstacles = saveData["numObstacles"];
+    speed = saveData["speed"];
+    hasLight = saveData["hasLight"];
+    if(hasLight) {
+        light = new TrafficLight;
+        light->fromJson(saveData["light"]);
+    }
+}
 
 void Road::lightHandle()
 {

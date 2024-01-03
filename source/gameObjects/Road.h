@@ -26,6 +26,7 @@ private:
     MainChar *mainChar;
 
 public:
+    Road();
     Road(float x, float y, int numObstacles = 5, MainChar *mainChar = nullptr);
     ~Road() override;
     void draw() override;
@@ -40,6 +41,22 @@ public:
     void lightHandle();
 //    void setScreenSpeed(double speed) override;
     void moveY(double offset) override;
+
+    json toJson() override;
+    void fromJson(json saveData) override;
+
+    void setMainChar(MainChar *mainChar) {
+        this->mainChar = mainChar;
+        for(Obstacle *obs: obstacles) {
+            obs->setMainChar(mainChar);
+        }
+        if(hasLight)
+            light->setMainChar(mainChar);
+    };
+
+    string getClassName() override {
+        return "Road";
+    }
 };
 
 

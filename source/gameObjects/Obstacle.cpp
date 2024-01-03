@@ -42,7 +42,7 @@ void Obstacle::initObstacle() {
     string obstacleField = direction == 0 ? "STATIC_OBSTACLES" : "OBSTACLES";
 
     vector<string> tagList = BasicConfigInstance::getData(ConfigType::BASIC)["TEXTURES"][obstacleField + "_TAG"];
-    int randIndex = 0;
+    int randIndex = -1;
 
 //    sprite = LoadAseprite(textureList[randIndex].c_str());
     sprite = AsepriteInstance::getAseprite(direction == 0 ? AsepriteType::STATIC : AsepriteType::ANIMATED, randIndex);
@@ -53,6 +53,7 @@ void Obstacle::initObstacle() {
         spriteTag = LoadAsepriteTag(sprite, tag.c_str());
     width = GetAsepriteWidth(sprite) * 1.5;
     height = GetAsepriteHeight(sprite) * 1.5;
+    this->objectIndex = randIndex;
 }
 
 void Obstacle::updateMainPos(Rectangle mainPosRect)
@@ -61,7 +62,7 @@ void Obstacle::updateMainPos(Rectangle mainPosRect)
 }
 
 void Obstacle::handleCollision() {
-    if (checkCollision()) {
+    if (checkCollision() && isMoving) {
         cout << "COLLISION with object at position: (" << x << ", " << y << ")" << endl;
         cout << "Main Char position: (" << mainPosRect.x << ", " << mainPosRect.y << ")" << endl;
         BaseGameObject::Notify(Message::COLLISION);
@@ -79,16 +80,21 @@ void Obstacle::handleBlockMove() {
         Rectangle rectUp = mainPosRect;
         Rectangle rectLeft = mainPosRect;
         Rectangle rectRight = mainPosRect;
+        Rectangle rectDown = mainPosRect;
 
         rectUp.y -= blockSize;
+        rectDown.y += blockSize;
         rectLeft.x -= blockSize;
         rectRight.x += blockSize;
+
         if (CheckCollisionRecs(blockRect, rectUp))
             mainChar->canMoveUp = false;
         else if (CheckCollisionRecs(blockRect, rectLeft))
             mainChar->canMoveLeft = false;
         else if (CheckCollisionRecs(blockRect, rectRight))
             mainChar->canMoveRight = false;
+        else if (CheckCollisionRecs(blockRect, rectDown))
+            mainChar->canMoveDown = false;
 //        else {
 //            mainChar->canMoveUp = true;
 //            mainChar->canMoveLeft = true;
@@ -108,12 +114,44 @@ void Obstacle::setMove(bool move) {
     isMoving = move;
 }
 
-int Obstacle::getWidth() const
-{
+int Obstacle::getWidth() const {
     return width;
 }
 
-int Obstacle::getHeight() const
-{
+int Obstacle::getHeight() const {
     return height;
 }
+
+json Obstacle::toJson() {
+    json saveData = BaseGameObject::toJson();
+    saveData["width"] = this->width;
+    saveData["height"] = this->height;
+    saveData["direction"] = this->direction;
+    saveData["objectIndex"] = this->objectIndex;
+    saveData["isMoving"] = this->isMoving;
+
+    return saveData;
+}
+
+void Obstacle::fromJson(json saveData) {
+    BaseGameObject::fromJson(saveData);
+    this->width = saveData["width"];
+    this->height = saveData["height"];
+    this->direction = saveData["direction"];
+    this->isMoving = saveData["isMoving"];
+    this->objectIndex = saveData["objectIndex"];
+
+    string obstacleField = direction == 0 ? "STATIC_OBSTACLES" : "OBSTACLES";
+
+    vector<string> tagList = BasicConfigInstance::getData(ConfigType::BASIC)["TEXTURES"][obstacleField + "_TAG"];
+
+//    sprite = LoadAseprite(textureList[randIndex].c_str());
+    sprite = AsepriteInstance::getAseprite(direction == 0 ? AsepriteType::STATIC : AsepriteType::ANIMATED, objectIndex);
+
+    string tag = direction != 1 ? tagList[objectIndex] : "l2r";
+
+    if (direction != 0)
+        spriteTag = LoadAsepriteTag(sprite, tag.c_str());
+
+}
+

@@ -17,12 +17,22 @@ private:
     std::vector<Obstacle*> staticObs;
     MainChar *mainChar;
 public:
+    NonRoad() : BaseGameObject(0.0, 0.0), mainChar(nullptr) {};
     NonRoad(float x, float y, int numStatic = 5, MainChar *mainChar = nullptr);
     void draw() override;
     void handleInput() override;
     void updateMainPos(Rectangle mainPosRect) override {};
 //    void setScreenSpeed(double speed) override;
     void moveY(double offset) override;
+
+    json toJson() override;
+    void fromJson(json saveData) override;
+    void setMainChar(MainChar *mainChar);
+
+    string getClassName() override {
+        return "NonRoad";
+    }
+
 };
 
 
