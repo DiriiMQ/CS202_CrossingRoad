@@ -15,7 +15,7 @@
 #include "MainChar.h"
 
 class Obstacle : public BaseGameObject {
-private:
+protected:
     int width = 0, height = 0;
     int direction; // 1 for right -1 for left
     Aseprite sprite;
@@ -32,10 +32,9 @@ public:
 
     void initObstacle();
     void draw();
-    void handleInput();
-    void handleCollision();
-    void handleBlockMove();
-
+    void handleInput() override;
+    virtual void handleCollision();
+    virtual void handleBlockMove();
     bool checkCollision();
 
     //void getPos(Vector2 mainPos,Vector2 mainSize);

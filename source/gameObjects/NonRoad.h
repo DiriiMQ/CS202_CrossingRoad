@@ -11,11 +11,14 @@
 #include <vector>
 #include "assetsLib/ConfigIO.h"
 #include "MainChar.h"
+#include "Animal.h"
 
 class NonRoad : public BaseGameObject {
 private:
     std::vector<Obstacle*> staticObs;
+    Obstacle* nonStaticObs;
     MainChar *mainChar;
+    bool hasAnimal;
 public:
     NonRoad(float x, float y, int numStatic = 5, MainChar *mainChar = nullptr);
     void draw() override;
@@ -23,6 +26,8 @@ public:
     void updateMainPos(Rectangle mainPosRect) override {};
 //    void setScreenSpeed(double speed) override;
     void moveY(double offset) override;
+    ~NonRoad();
+   
 };
 
 

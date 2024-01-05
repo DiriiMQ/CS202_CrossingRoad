@@ -63,6 +63,7 @@ void GameScreen::updateMessage(const Message message) {
     else if (message == Message::COLLISION) {
         mainChar->setDead();
     }
+    
 
 }
 

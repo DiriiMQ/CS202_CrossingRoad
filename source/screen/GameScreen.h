@@ -25,7 +25,7 @@ private:
     int score = 0;
     bool isGamePause=false;
     double screenSpeed = 0.25;
-
+   
 public:
     GameScreen() = default;
     ~GameScreen();
