@@ -1,5 +1,6 @@
 {
     "BACKGROUND": {
+        "LEADERBOARD": "../assets/leaderboard_screen/leaderboard.png",
         "MENU": "../assets/welcome_screen/menu_nobutton.png"
     },
     "GAME": {
