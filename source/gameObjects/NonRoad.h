@@ -11,11 +11,14 @@
 #include <vector>
 #include "assetsLib/ConfigIO.h"
 #include "MainChar.h"
+#include "Animal.h"
 
 class NonRoad : public BaseGameObject {
 private:
     std::vector<Obstacle*> staticObs;
+    Obstacle* nonStaticObs;
     MainChar *mainChar;
+    bool hasAnimal;
 public:
     NonRoad() : BaseGameObject(0.0, 0.0), mainChar(nullptr) {};
     NonRoad(float x, float y, int numStatic = 5, MainChar *mainChar = nullptr);
@@ -33,6 +36,8 @@ public:
         return "NonRoad";
     }
 
+    ~NonRoad();
+   
 };
 
 

@@ -18,6 +18,12 @@
         "TITLE": "Crosy Road"
     },
     "TEXTURES": {
+        "ANIMAL": [
+            "../assets/animal/Cat.aseprite",
+            "../assets/animal/Dinosaur.aseprite",
+            "../assets/animal/Dog.aseprite",
+            "../assets/animal/Duck.aseprite"
+        ],
         "BOAT": [
             "../assets/vehicle/log.aseprite"
         ],

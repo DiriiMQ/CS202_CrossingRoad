@@ -71,6 +71,7 @@ void GameScreen::updateMessage(const Message message) {
             printf("File successfully deleted");
         }
     }
+    
 
 }
 

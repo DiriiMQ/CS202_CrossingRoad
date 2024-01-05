@@ -21,6 +21,23 @@ NonRoad::NonRoad(float x, float y, int numStatic, MainChar *mainChar) : BaseGame
                 obs->getWidth() * 2
         );
     }
+    int randNum = RandomNumber::getInstance().getRandomNumber(0, 1);
+    if (randNum) hasAnimal=true;
+    else hasAnimal = false;
+    if (hasAnimal)
+    {
+        int randNum1 = RandomNumber::getInstance().getRandomNumber(0, 1);
+         if (randNum1) direction = 1;
+        else direction = -1;
+        nonStaticObs = new Animal(0 /*originX*/, y, 1, mainChar);
+        
+    }
+    
+    else
+    {
+        nonStaticObs=nullptr;
+    }
+
 }
 
 void NonRoad::handleInput() {
@@ -31,6 +48,7 @@ void NonRoad::handleInput() {
     for (Obstacle *obs: staticObs) {
         obs->handleInput();
     }
+    if (nonStaticObs) nonStaticObs->handleInput();
 }
 
 //void NonRoad::setScreenSpeed(double speed) {
@@ -54,6 +72,14 @@ void NonRoad::draw() {
         cout << "UPDATE CALLED!" << endl;
         BaseGameObject::Notify();
     }
+    if (nonStaticObs)
+    {
+         nonStaticObs->draw();
+    
+        if (isMainCharDead || isGamePause) nonStaticObs->setMove(false);
+        else  nonStaticObs->setMove(true);
+    }
+   
 }
 
 void NonRoad::moveY(double offset) {
@@ -61,6 +87,9 @@ void NonRoad::moveY(double offset) {
     for(Obstacle *obs: staticObs) {
         obs->moveY(offset);
     }
+    if (nonStaticObs)
+        nonStaticObs->moveY(offset);
+
 }
 
 json NonRoad::toJson() {
@@ -91,4 +120,11 @@ void NonRoad::setMainChar(MainChar *mainChar) {
     for(Obstacle *obs: staticObs) {
         obs->setMainChar(mainChar);
     }
+}
+
+NonRoad::~NonRoad() {
+    for (Obstacle *obs: staticObs) {
+        delete obs;
+    }
+    delete nonStaticObs;
 }

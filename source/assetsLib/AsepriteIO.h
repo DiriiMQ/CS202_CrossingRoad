@@ -46,13 +46,14 @@ namespace AsepriteType {
     enum AsepriteType {
         ANIMATED,
         STATIC,
-        BOAT
+        BOAT,
+        ANIMAL
     };
 }
 
 class AsepriteInstance {
 private:
-    static AsepriteInstance* instance[3];
+    static AsepriteInstance* instance[4];
     static std::mutex _mutex;
     std::vector<AnimatedAsepriteConfig> aseprite;
 protected:

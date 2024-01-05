@@ -55,6 +55,7 @@ void MenuScreen::buttonsProcess() {
             this->buttonOptionMenuSize.y
     };
     if(GuiButtonRounded(buttonRect, "New Game")) {
+        gameScreen.init();
         screenManager->setScreen(&gameScreen);
     }
 
