@@ -28,7 +28,7 @@ private:
    
 public:
     GameScreen() = default;
-    ~GameScreen();
+    ~GameScreen() override;
     void init();
 
     void handleInput() override;

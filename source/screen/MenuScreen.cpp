@@ -41,6 +41,7 @@ void MenuScreen::init() {
     this->screenHeight = BasicConfigInstance::getData(ConfigType::BASIC)["SCREEN"]["SIZE"]["HEIGHT"];
     this->screenWidth = BasicConfigInstance::getData(ConfigType::BASIC)["SCREEN"]["SIZE"]["WIDTH"];
     this->gameScreen.setScreenManager(this->screenManager);
+    this->rankingScreen.setScreenManager(this->screenManager);
 }
 
 MenuScreen::~MenuScreen() {
@@ -70,6 +71,6 @@ void MenuScreen::buttonsProcess() {
 
     buttonRect.y += this->buttonOptionMenuSize.y + 28;
     if(GuiButtonRounded(buttonRect, "Leaderboard")) {
-
+        screenManager->setScreen(&rankingScreen);
     }
 }
