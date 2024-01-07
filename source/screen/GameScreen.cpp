@@ -62,6 +62,8 @@ void GameScreen::updateMessage(const Message message) {
     }
     else if (message == Message::COLLISION) {
         mainChar->setDead();
+        RankingScreen::addScore(score);
+
         const char* filename = "../data/save_game.json";
 
         // Delete the file
@@ -70,6 +72,8 @@ void GameScreen::updateMessage(const Message message) {
         } else {
             printf("File successfully deleted");
         }
+
+
     }
     
 
@@ -131,6 +135,7 @@ void GameScreen::draw() {
            this->newGameScreen();
 
         }
+
     }
     DrawText(to_string(score).c_str(), 722, 50, 36, GRAY);
 //    mainChar->moveY(0.1);

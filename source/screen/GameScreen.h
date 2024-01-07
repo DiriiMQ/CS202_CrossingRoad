@@ -15,6 +15,7 @@
 #include "gameObjects/MainChar.h"
 #include "Position.h"
 #include <fstream>
+#include "RankingScreen.h"
 
 class GameScreen : public BaseScreen, public IObserver {
 private:
