@@ -20,7 +20,7 @@ void GameScreen::handleInput() {
         for (BaseGameObject *block: map) {
             block->handleInput();
         }
-        if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && !mainChar->getDead()) {
+        if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && !mainChar->getDead() && mainChar->canMoveUp) {
             score += 1;
         }
         mainChar->handleInput();

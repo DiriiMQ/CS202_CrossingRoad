@@ -117,15 +117,16 @@ void NonRoad::draw() {
     else if(weather == Weather::SUMMER)
         grassColor = Color{205, 223, 108, 255};
     else if(weather == Weather::FALL)
-        grassColor = Color{140, 170, 101, 255};
+        grassColor = Color{166, 163, 84, 255};
     else if(weather == Weather::WINTER)
-        grassColor = Color{129, 137, 97, 255};
+        grassColor = Color{214, 214, 214, 255};
 
     DrawRectangle(x, y, 1500, (float) stepSize * 2,  grassColor);
 
     for(Obstacle *obs: staticObs) {
         if(isMainCharDead || isGamePause)
             obs->setMove(false);
+        else obs->setMove(true);
         obs->draw();
     }
     json cfg = BasicConfigInstance::getData(ConfigType::BASIC);

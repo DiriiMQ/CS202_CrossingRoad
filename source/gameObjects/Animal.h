@@ -27,5 +27,6 @@ public:
     void draw();
     void handleBlockMove() override;
     void handleInput() override;
+    void handleCollision() override;
 };
 #endif 
