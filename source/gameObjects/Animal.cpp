@@ -4,20 +4,35 @@
 
 
 void Animal::handleInput() {
+    Rectangle blockRect = {float(x), float(y), (float) width, (float) height};
+    float blockSize = stepSize ;
+    Rectangle rectUp = mainPosRect;
+    rectUp.y -= blockSize;
     UpdateAsepriteTag(&spriteTag);
     if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && mainChar->canMoveUp) {
-        if (!checkCollision()) {
+        if (!CheckCollisionRecs(blockRect, rectUp)) {
             y += stepSize;
         }
     }
 }
-
+void Animal::handleCollision() {
+    if (checkCollision() && isMoving) {
+        cout << "COLLISION with object at position: (" << x << ", " << y << ")" << endl;
+        cout << "Main Char position: (" << mainPosRect.x << ", " << mainPosRect.y << ")" << endl;
+        BaseGameObject::Notify(Message::COLLISION);
+        mainChar->moveX(direction);
+    }
+    else if (isMoving){
+        x += direction;
+    }
+}
 void Animal::draw() { 
     handleCollision();
     handleBlockMove();
     Rectangle boxRect{x,  y, (float) width, (float) height};
 //    DrawAsepritePro(sprite, 0, boxRect, {0., 0.}, 0, WHITE);
     DrawAsepriteTagPro(spriteTag, boxRect, {0, 0}, 0, WHITE);
+    
 }
 
 void Animal::handleBlockMove() {
