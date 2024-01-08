@@ -126,6 +126,7 @@ void NonRoad::draw() {
     for(Obstacle *obs: staticObs) {
         if(isMainCharDead || isGamePause)
             obs->setMove(false);
+        else obs->setMove(true);
         obs->draw();
     }
     json cfg = BasicConfigInstance::getData(ConfigType::BASIC);
