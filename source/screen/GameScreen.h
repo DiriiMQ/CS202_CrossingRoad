@@ -26,6 +26,7 @@ private:
     int score = 0;
     bool isGamePause=false;
     double screenSpeed = 0.25;
+    int weather = 0;
    
 public:
     GameScreen() = default;

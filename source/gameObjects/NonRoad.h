@@ -13,15 +13,26 @@
 #include "MainChar.h"
 #include "Animal.h"
 
-class NonRoad : public BaseGameObject {
+namespace Weather {
+    enum Weather {
+        SPRING,
+        SUMMER,
+        FALL,
+        WINTER
+    };
+}
+
+class NonRoad : public BaseGameObject, public IObserver {
 private:
+    int direction;
     std::vector<Obstacle*> staticObs;
-    Obstacle* nonStaticObs;
+//    Obstacle* nonStaticObs;
     MainChar *mainChar;
     bool hasAnimal;
+    int weather;
 public:
     NonRoad() : BaseGameObject(0.0, 0.0), mainChar(nullptr) {};
-    NonRoad(float x, float y, int numStatic = 5, MainChar *mainChar = nullptr);
+    NonRoad(float x, float y, int numStatic = 5, MainChar *mainChar = nullptr, int weather = Weather::SPRING);
     void draw() override;
     void handleInput() override;
     void updateMainPos(Rectangle mainPosRect) override {};
@@ -31,6 +42,8 @@ public:
     json toJson() override;
     void fromJson(json saveData) override;
     void setMainChar(MainChar *mainChar);
+    void handleBlockOutOfScreen();
+    void updateMessage(const Message message) override;
 
     string getClassName() override {
         return "NonRoad";

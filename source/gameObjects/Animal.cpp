@@ -4,7 +4,7 @@
 
 
 void Animal::handleInput() {
-
+    UpdateAsepriteTag(&spriteTag);
     if ((IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) && mainChar->canMoveUp) {
         if (!checkCollision()) {
             y += stepSize;
@@ -16,8 +16,8 @@ void Animal::draw() {
     handleCollision();
     handleBlockMove();
     Rectangle boxRect{x,  y, (float) width, (float) height};
-    DrawAsepritePro(sprite, 0, boxRect, {0., 0.}, 0, WHITE);
-
+//    DrawAsepritePro(sprite, 0, boxRect, {0., 0.}, 0, WHITE);
+    DrawAsepriteTagPro(spriteTag, boxRect, {0, 0}, 0, WHITE);
 }
 
 void Animal::handleBlockMove() {

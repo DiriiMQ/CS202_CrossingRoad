@@ -63,7 +63,7 @@ public:
         isMainCharDead = isDead;
     }
     void pauseGame() {
-        isGamePause=!isGamePause;
+        isGamePause = !isGamePause;
     }
 
     virtual json toJson() {
