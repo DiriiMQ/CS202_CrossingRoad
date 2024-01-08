@@ -5,7 +5,7 @@
 
 void Animal::handleInput() {
     Rectangle blockRect = {float(x), float(y), (float) width, (float) height};
-    float blockSize = stepSize ;
+    float blockSize = stepSize;
     Rectangle rectUp = mainPosRect;
     rectUp.y -= blockSize;
     UpdateAsepriteTag(&spriteTag);
@@ -44,7 +44,7 @@ void Animal::handleBlockMove() {
         Rectangle rectLeft = mainPosRect;
         Rectangle rectRight = mainPosRect;
 
-        rectUp.y -= blockSize;
+        rectUp.y -= blockSize*1.5;
         rectLeft.x -= blockSize;
         rectRight.x += blockSize;
         if (CheckCollisionRecs(blockRect, rectUp))
