@@ -95,17 +95,6 @@ void Road::draw() {
 }
 
 void Road::handleBlockOutOfScreen() {
-    // double newPositionX;
-    // if (direction == -1)
-    //     newPositionX = 1336 + 50;
-    // else
-    //     newPositionX = obstacles.back()->getX() - 1366 - 50;
-
-    // Obstacle *obs = new Obstacle( newPositionX, y, direction);
-    // obs->Attach(this);
-    // obs->initObstacle();
-    // obstacles.push_back(obs);
-    // obstacles.erase(obstacles.begin());
 
     int screenW = BasicConfigInstance::getData(ConfigType::BASIC)["SCREEN"]["SIZE"]["WIDTH"];
     int newX = obstacles[0]->getX();

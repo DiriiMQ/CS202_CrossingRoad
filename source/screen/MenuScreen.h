@@ -8,6 +8,7 @@
 #include "BaseScreen.h"
 #include "assetsLib/TexturesIO.h"
 #include "GameScreen.h"
+#include "RankingScreen.h"
 #include <string>
 #include "raylib-aseprite.h"
 
@@ -17,6 +18,7 @@ private:
 
     bool hasInit = false;
     GameScreen gameScreen;
+    RankingScreen rankingScreen;
 
     Vector2 buttonOptionMenuSize {344, 77};
 

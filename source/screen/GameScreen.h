@@ -15,6 +15,7 @@
 #include "gameObjects/MainChar.h"
 #include "Position.h"
 #include <fstream>
+#include "RankingScreen.h"
 
 class GameScreen : public BaseScreen, public IObserver {
 private:
@@ -25,10 +26,11 @@ private:
     int score = 0;
     bool isGamePause=false;
     double screenSpeed = 0.25;
-
+    int weather = 0;
+   
 public:
     GameScreen() = default;
-    ~GameScreen();
+    ~GameScreen() override;
     void init();
 
     void handleInput() override;

@@ -31,6 +31,10 @@ void GameScreen::handleInput() {
 
 void GameScreen::update() {
     NotifyMainPos();
+    if(score % 40 == 0) {
+        weather += 1;
+        weather %= 4;
+    }
 }
 
 void GameScreen::randomNewBlock() {
@@ -46,7 +50,7 @@ void GameScreen::randomNewBlock() {
         block = new River(-100.0, newY, 5, mainChar);
     }
     else {
-        block = new NonRoad(-100.0, newY, 5, mainChar);
+        block = new NonRoad(-100.0, newY, 5, mainChar, weather);
     }
     block->Attach(this);
     //block->setScreenSpeed(screenSpeed);
@@ -62,6 +66,8 @@ void GameScreen::updateMessage(const Message message) {
     }
     else if (message == Message::COLLISION) {
         mainChar->setDead();
+        RankingScreen::addScore(score);
+
         const char* filename = "../data/save_game.json";
 
         // Delete the file
@@ -70,7 +76,10 @@ void GameScreen::updateMessage(const Message message) {
         } else {
             printf("File successfully deleted");
         }
+
+
     }
+    
 
 }
 
@@ -130,6 +139,7 @@ void GameScreen::draw() {
            this->newGameScreen();
 
         }
+
     }
     DrawText(to_string(score).c_str(), 722, 50, 36, GRAY);
 //    mainChar->moveY(0.1);
@@ -246,6 +256,7 @@ void GameScreen::init() {
 
 void GameScreen::newGameScreen() {
     this->score=0;
+    this->weather = 0;
     this->isGamePause=false;
 
     if (mainChar) {
@@ -274,7 +285,7 @@ void GameScreen::newGameScreen() {
             //map.erase(map.begin());
         }
         else {
-            NonRoad *nonRoadBlock = new NonRoad(x_direction, y_direction, 5, mainChar);
+            NonRoad *nonRoadBlock = new NonRoad(x_direction, y_direction, 5, mainChar, weather);
             map.push_back(nonRoadBlock);
             //map.erase(map.begin());
         }

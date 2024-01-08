@@ -26,7 +26,7 @@ AnimatedAsepriteConfig::~AnimatedAsepriteConfig() {
     std::cout << "AnimatedAsepriteConfig::~AnimatedAsepriteConfig() called!" << std::endl;
 }
 
-AsepriteInstance* AsepriteInstance::instance[3] = {nullptr, nullptr, nullptr};
+AsepriteInstance* AsepriteInstance::instance[4] = {nullptr, nullptr, nullptr, nullptr};
 std::mutex AsepriteInstance::_mutex;
 
 void AsepriteInstance::initInstance() {
@@ -50,6 +50,13 @@ void AsepriteInstance::initInstance() {
             std::vector<std::string> textureList = BasicConfigInstance::getData(ConfigType::BASIC)["TEXTURES"]["BOAT"];
             for (const auto &texture_path : textureList) {
                 instance[2]->aseprite.emplace_back(AnimatedAsepriteConfig(texture_path));
+            }
+        }
+        if(AsepriteInstance::instance[3] == nullptr) {
+            AsepriteInstance::instance[3] = new AsepriteInstance();
+            std::vector<std::string> textureList = BasicConfigInstance::getData(ConfigType::BASIC)["TEXTURES"]["ANIMAL"];
+            for (const auto &texture_path : textureList) {
+                instance[3]->aseprite.emplace_back(AnimatedAsepriteConfig(texture_path));
             }
         }
 }

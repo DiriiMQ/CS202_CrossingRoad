@@ -1,5 +1,6 @@
 {
     "BACKGROUND": {
+        "LEADERBOARD": "../assets/leaderboard_screen/leaderboard.png",
         "MENU": "../assets/welcome_screen/menu_nobutton.png"
     },
     "GAME": {
@@ -18,6 +19,18 @@
         "TITLE": "Crosy Road"
     },
     "TEXTURES": {
+        "ANIMAL": [
+            "../assets/animal/Cat.aseprite",
+            "../assets/animal/Dinosaur.aseprite",
+            "../assets/animal/Dog.aseprite",
+            "../assets/animal/Duck.aseprite"
+        ],
+        "ANIMAL_TAG": [
+            "cat",
+            "dinosaur",
+            "dog",
+            "duck"
+        ],
         "BOAT": [
             "../assets/vehicle/log.aseprite"
         ],
@@ -41,9 +54,9 @@
             }
         },
         "STATIC_OBSTACLES": [
+            "../assets/staticObstacle/sakuraTree.aseprite",
             "../assets/staticObstacle/greenTree.aseprite",
             "../assets/staticObstacle/autumnTree.aseprite",
-            "../assets/staticObstacle/sakuraTree.aseprite",
             "../assets/staticObstacle/winterTree.aseprite"
         ],
         "STATIC_OBSTACLES_TAG": [

@@ -42,7 +42,10 @@ void Obstacle::initObstacle() {
     string obstacleField = direction == 0 ? "STATIC_OBSTACLES" : "OBSTACLES";
 
     vector<string> tagList = BasicConfigInstance::getData(ConfigType::BASIC)["TEXTURES"][obstacleField + "_TAG"];
+
     int randIndex = -1;
+    if(direction == 0)
+        randIndex = weather;
 
 //    sprite = LoadAseprite(textureList[randIndex].c_str());
     sprite = AsepriteInstance::getAseprite(direction == 0 ? AsepriteType::STATIC : AsepriteType::ANIMATED, randIndex);

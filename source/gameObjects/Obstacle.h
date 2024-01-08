@@ -15,8 +15,9 @@
 #include "MainChar.h"
 
 class Obstacle : public BaseGameObject {
-private:
+protected:
     int objectIndex;
+
     int width = 0, height = 0;
     int direction; // 1 for right -1 for left
     Aseprite sprite;
@@ -26,18 +27,20 @@ private:
     Rectangle mainPosRect;
     bool isMoving;
     MainChar *mainChar;
+    int weather;
 
 public:
 
     Obstacle() : BaseGameObject(0.0, 0.0), isMoving(true), direction(1), mainChar(nullptr) {}
-    Obstacle(float x, float y, int direction, MainChar *mainChar)
-        : BaseGameObject(x, y), isMoving(true), direction(direction), mainChar(mainChar) {}
+    Obstacle(float x, float y, int direction, MainChar *mainChar, int weather = 0)
+        : BaseGameObject(x, y), isMoving(true), direction(direction), mainChar(mainChar), weather(weather) {}
 
     void initObstacle();
+
     void draw() override;
     void handleInput() override;
-    void handleCollision();
-    void handleBlockMove();
+    virtual void handleCollision();
+    virtual void handleBlockMove();
 
     bool checkCollision();
 
@@ -51,7 +54,7 @@ public:
     int getHeight() const;
 
     json toJson() override;
-    void fromJson(json saveData) override;
+    virtual void fromJson(json saveData) override;
 
     void setMainChar(MainChar *mainChar) {
         this->mainChar = mainChar;
