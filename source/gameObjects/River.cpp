@@ -55,7 +55,7 @@ void River::handleMainCharCondition() {
 void River::draw() {
 //    y += screenSpeed;
 
-    DrawRectangle(x, y, 1500, (float) stepSize * 2, Color{134, 180, 188, 255});
+    DrawRectangle(x, y, 1500, (float) stepSize * 2, Color{121, 216, 242, 255});
     for(Boat *boat: boats) {
         if(isMainCharDead || isGamePause)
             boat->setMove(false);
